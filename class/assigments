@@ -1,1 +1,1235 @@
+-- Single Line Comment
+
+/*
+Multi 
+Line 
+Comment
+*/
+
+-- ------------------------------------------------------ Database Queries ---------------------------------------------------------------------------------------
+-- create datbase isro  ---------------
+create database isro ;
+
+
+drop database isro ;
+
+
+use isro;
+-- ------------------------ database anylsis-------------------
+/*
+
+T1 : Missions (MissionID, MissionName, Type, Objective, LaunchDate, Status, VehicleID, Duration, Budget, Outcome),
+T2 : Satellites	(SatelliteID, Name, Type, LaunchDate, OrbitType, Operator, Purpose, Mass, MissionID, Status),
+T3 : LaunchVehicles	(VehicleID, Name, Stages, MaxPayload, RangeKM, FuelType, HeightM, ThrustKN, Status, Manufacturer),
+T4 : LaunchSites	(SiteID, Name, Location, Capacity, EstablishedYear, Country, Latitude, Longitude, Area, Status),
+T5 : LaunchEvents	(EventID, MissionID, VehicleID, SiteID, LaunchDate, Success, Duration, AltitudeKM, Notes, Status),
+T6 : Scientists	(ScientistID, FullName, DOB, Gender, Specialization, Designation, Department, Email, CenterID, Status),
+T7	: ResearchCenters	(CenterID, Name, Location, EstablishedYear, Head, Departments, Area, Contact, Type, Status),
+T8	: TelemetryStations	(StationID, Name, Location, FrequencyBand, SupportedVehicles, Country, Contact, CoverageArea, Operator, Status),
+T9	: GroundControl	(ControlID, MissionID, CenterID, ContactPerson, Phone, Email, UplinkFreq, DownlinkFreq, Location, Status),
+T10	: SpacecraftComponents	(ComponentID, Name, Type, Manufacturer, Weight, PowerUsage, Material, MissionID, LaunchDate, Status),
+T11	: Experiments	(ExperimentID, Name, MissionID, Objective, Type, PrincipalInvestigator, Institution, Results, Duration, Status),
+T12	: Departments	(DepartmentID, Name, CenterID, Head, Employees, Budget, Projects, Field, Contact, Status),
+T13	: ISROEmployees	(EmployeeID, Name, Gender, DOB, DepartmentID, Designation, Salary, CenterID, Contact, Status),
+T14	: Collaborations	(CollabID, PartnerName, Country, MissionID, Purpose, AgreementDate, EndDate, Contact, BudgetShare, Status),
+T15	: SatellitesInOrbit	(OrbitID, SatelliteID, OrbitType, Inclination, AltitudeKM, PeriodMinutes, Coverage, SpeedKMPS, LaunchDate, Status),
+T16	: Payloads	(PayloadID, Name, SatelliteID, Type, Weight, PowerConsumption, Manufacturer, Objective, CenterID, Status),
+T17	: RocketTests	(TestID, VehicleID, Date, Location, Result, FuelUsed, Stage, MaxAltitude, Temperature, Status),
+T18	: WeatherMonitoring	(RecordID, StationID, DateTime, Temperature, Humidity, WindSpeed, Pressure, DataQuality, Location, Status),
+T19	: DataCenters	(DataCenterID, Name, Location, CapacityTB, EstablishedYear, Head, Services, Contact, Type, Status),
+T20	: FundingRecords	(FundID, MissionID, Source, Amount, ReleaseDate, Purpose, DepartmentID, ApprovedBy, Utilization, Status),
+T21	: TrainingPrograms (ProgramID, Name, Type, DurationDays, DepartmentID, StartDate, EndDate, Trainer, Location, Status),
+T22	: InternationalProjects	(ProjectID, Name, PartnerAgency, Country, Objective, StartDate, EndDate, Budget, Output, Status),
+T23	: SatelliteOperations (OperationID, SatelliteID, OperationType, Date, Duration, SignalStrength, Anomaly, FixApplied, ControllerID, Status),
+T24	: MissionReports	(ReportID, MissionID, Title, Date, Summary, Author, DocumentURL, PageCount, ApprovalStatus, Status),
+T25	: Anomalies	(AnomalyID, MissionID, Description, DateDetected, Severity, Impact, ResolvedBy, ResolutionDate, Notes, Status),
+T26	: AcademicPartners	(PartnerID, UniversityName, ContactPerson, Country, MOUDate, AreaOfWork, Projects, Budget, Duration, Status),
+T27	: Patents	(PatentID, Title, Inventor, FilingDate, GrantDate, Country, CenterID, ApplicationNo, Status, Field),
+T28	: InnovationProjects	(InnovationID, Title, Description, Initiator, StartDate, EndDate, Budget, DepartmentID, CenterID, Status),
+T29	: Astronauts	(AstronautID, Name, DOB, Gender, Nationality, SelectionDate, Missions, TrainingCenter, Status, Background),
+T30	: SafetyInspections(InspectionID, SiteID, Date, Inspector, Department, Findings, Recommendations, ComplianceDate, Score, Status)
+*/
+--   ------------------------------------ tables Queires ----------------------------
+-- table 1 Missions
+create table Missions (
+MissionID int primary key ,
+MissionName varchar (100),
+Type varchar(50),
+Objective varchar(100),
+LaunchDate date, 
+Status varchar (100),
+VehicleID int ,
+Duration datetime, 
+Budget varchar (100), 
+Outcome varchar(100),
+foreign key (VehicleID) references LaunchVehicles (VehicleID)
+);
+-- insert in values Mission table
+insert into Missions
+values 
+(1, 'Chandrayaan-1', 'Lunar', 'Explore Moon surface', '2008-10-22', 'Completed', 101, '2008-10-22 00:00:00', 386000000, 'Successful'),
+
+(2, 'Mangalyaan', 'Mars Orbiter', 'Mars atmospheric study', '2013-11-05', 'Completed', 102, '2014-09-24 00:00:00', 450000000, 'Successful'),
+
+(3, 'Chandrayaan-2', 'Lunar', 'Soft landing on Moon', '2019-07-22', 'Partial Success', 103, '2019-09-07 00:00:00', 978000000, 'Orbiter Successful'),
+
+(4, 'Gaganyaan', 'Crewed', 'Manned spaceflight mission', '2025-01-01', 'Planned', 104, NULL, 9020000000, 'In Progress'),
+
+(5, 'RISAT-1', 'Earth Observation', 'All-weather surveillance', '2012-04-26', 'Completed', 105, '2012-04-26 00:00:00', 600000000, 'Successful'),
+
+(6, 'INSAT-3DR', 'Meteorological', 'Weather monitoring', '2016-09-08', 'Active', 106, '2016-09-08 00:00:00', 950000000, 'Operational'),
+
+(7, 'GSAT-29', 'Communication', 'High-throughput satellite', '2018-11-14', 'Active', 107, '2018-11-14 00:00:00', 790000000, 'Operational'),
+
+(8, 'PSLV-C51', 'Launch Service', 'Commercial satellite deployment', '2021-02-28', 'Completed', 108, '2021-02-28 00:00:00', 320000000, 'Successful'),
+
+(9, 'Aditya-L1', 'Solar', 'Solar corona observation', '2023-09-02', 'Active', 109, '2023-09-02 00:00:00', 378000000, 'Operational'),
+
+(10, 'Shukrayaan-1', 'Venus Orbiter', 'Study Venus atmosphere', '2028-12-01', 'Planned', 110, NULL, 5000000000, 'Scheduled');
+-- All table delete queries --
+drop table Missions;
+-- all data delete Queries--
+truncate table Missions;
+-- show the table 
+select *from Missions;
+
+-- table 2 Satellites
+create table Satellites	(
+SatelliteID int primary key ,
+Name varchar(50),
+Type varchar(50), 
+LaunchDate date , 
+OrbitType varchar(100), 
+Operator varchar (100), 
+Purpose varchar (100), 
+Mass varchar (100), 
+MissionID int ,
+Status varchar(100),
+foreign key (MissionId) references Missions(MissionId)
+);
+-- insert in values Satellites table
+insert into Satellites
+values
+(1, 'Chandrayaan-1', 'Lunar Probe', '2008-10-22', 'Polar Orbit', 'ISRO', 'Lunar Surface Mapping', '1380 kg', 1, 'Decommissioned'),
+
+(2, 'Mars Orbiter', 'Mars Probe', '2013-11-05', 'Heliocentric', 'ISRO', 'Mars Atmosphere Study', '1337 kg', 2, 'Operational'),
+
+(3, 'Chandrayaan-2 Orbiter', 'Lunar Orbiter', '2019-07-22', 'Lunar Orbit', 'ISRO', 'High-resolution lunar imaging', '2379 kg', 3, 'Active'),
+
+(4, 'Gaganyaan Module', 'Crew Module', '2025-01-01', 'LEO', 'ISRO', 'Manned Mission', '8000 kg', 4, 'Planned'),
+
+(5, 'RISAT-1', 'Radar Imaging', '2012-04-26', 'SSO', 'ISRO', 'Surveillance', '1858 kg', 5, 'Inactive'),
+
+(6, 'INSAT-3DR', 'Weather Satellite', '2016-09-08', 'GEO', 'ISRO', 'Meteorological Imaging', '2211 kg', 6, 'Active'),
+
+(7, 'GSAT-29', 'Communication', '2018-11-14', 'GEO', 'ISRO', 'High Throughput Internet', '3423 kg', 7, 'Active'),
+
+(8, 'Amazonia-1', 'Earth Observation', '2021-02-28', 'SSO', 'INPE/ISRO', 'Forest Monitoring', '637 kg', 8, 'Operational'),
+
+(9, 'Aditya-L1', 'Solar Observatory', '2023-09-02', 'Halo Orbit (L1)', 'ISRO', 'Solar Corona Observation', '1500 kg', 9, 'Active'),
+
+(10, 'Shukrayaan-1', 'Venus Orbiter', '2028-12-01', 'Elliptical Venus Orbit', 'ISRO', 'Venus Atmospheric Study', '2500 kg', 10, 'Planned');
+
+-- All table delete queries --
+drop table Satellites;
+-- all data delete Queries--
+truncate table Satellites;
+-- show the table 
+select *from Satellites;
+
+-- table 3 LaunchVehicles
+create table LaunchVehicles	(
+VehicleID int  primary key , 
+Name varchar(100), 
+Stages int, 
+MaxPayload  int , 
+RangeKM int , 
+FuelType varchar(100), 
+HeightM varchar(100), 
+ThrustKN int, 
+Status varchar(100), 
+Manufacturer varchar(100)
+);
+-- insert in values LaunchVehicles  table
+insert into LaunchVehicles
+values
+(101, 'PSLV-C11', 4, 1300, 7200, 'Solid + Liquid', '44.00', 4800, 'Retired', 'ISRO'),
+
+(102, 'PSLV-XL', 4, 1425, 7250, 'Solid + Liquid', '44.00', 5100, 'Retired', 'ISRO'),
+
+(103, 'GSLV Mk II', 3, 2500, 10000, 'Solid + Liquid + Cryogenic', '49.13', 4700, 'Active', 'ISRO'),
+
+(104, 'GSLV Mk III', 3, 4000, 15000, 'Solid + Liquid + Cryogenic', '43.43', 7000, 'Active', 'ISRO'),
+
+(105, 'PSLV-C19', 4, 1858, 7000, 'Solid + Liquid', '44.00', 4800, 'Retired', 'ISRO'),
+
+(106, 'GSLV-F05', 3, 2211, 10000, 'Solid + Liquid + Cryogenic', '49.13', 4700, 'Active', 'ISRO'),
+
+(107, 'GSLV-MkIII D2', 3, 3423, 15000, 'Solid + Liquid + Cryogenic', '43.43', 7000, 'Active', 'ISRO'),
+
+(108, 'PSLV-C51', 4, 637, 7200, 'Solid + Liquid', '44.00', 4800, 'Active', 'ISRO'),
+
+(109, 'PSLV-C57', 4, 1500, 7250, 'Solid + Liquid', '44.00', 4800, 'Active', 'ISRO'),
+
+(110, 'Venus Mission LVM3', 3, 2500, 20000, 'Solid + Liquid + Cryogenic', '43.43', 7000, 'Planned', 'ISRO');
+
+ -- All table delete queries --
+drop table LaunchVehicles;
+-- all data delete Queries--
+truncate table  LaunchVehicles;
+-- show the table 
+select *from  LaunchVehicles;
+
+-- table 4 LaunchSites
+create table LaunchSites(
+SiteID int primary key , 
+Name varchar(100), 
+Location varchar(120), 
+Capacity int , 
+EstablishedYear year , 
+Country varchar(100), 
+Latitude  decimal(10,2), 
+Longitude decimal(10,2), 
+Area int , 
+Status varchar (100)
+);
+-- insert in values LaunchSites table
+insert into LaunchSites
+values
+(1, 'Satish Dhawan Space Centre', 'Sriharikota, Andhra Pradesh', 10, 1971, 'India', 13.72, 80.23, 14500, 'Operational'),
+
+(2, 'Thumba Equatorial Rocket Launching Station', 'Thiruvananthapuram, Kerala', 5, 1963, 'India', 8.53, 76.87, 300, 'Operational'),
+
+(3, 'ISRO Propulsion Complex', 'Mahendragiri, Tamil Nadu', 3, 1972, 'India', 8.43, 77.65, 2000, 'Operational'),
+
+(4, 'Chitradurga Test Range', 'Challakere, Karnataka', 2, 2010, 'India', 14.20, 76.40, 1000, 'Testing'),
+
+(5, 'Kulasekarapattinam Spaceport', 'Thoothukudi, Tamil Nadu', 5, 2025, 'India', 8.38, 78.13, 2500, 'Under Construction'),
+
+(6, 'Vikram Sarabhai Space Centre', 'Thiruvananthapuram, Kerala', 4, 1963, 'India', 8.51, 76.95, 1000, 'Operational'),
+
+(7, 'Balasore Missile Launch Site', 'Balasore, Odisha', 2, 1990, 'India', 21.50, 87.20, 500, 'Defense Only'),
+
+(8, 'Uchinatham Launch Site', 'Ramanathapuram, Tamil Nadu', 1, 2018, 'India', 9.38, 78.83, 200, 'Experimental'),
+
+(9, 'ISRO Test Facility', 'Nagpur, Maharashtra', 1, 2022, 'India', 21.15, 79.09, 300, 'Testing'),
+
+(10, 'New Spaceport Site', 'Andhra Pradesh Coastline', 3, 2026, 'India', 14.45, 81.12, 3500, 'Planned');
+
+ -- All table delete queries --
+drop table LaunchSites;
+-- all data delete Queries--
+truncate table  LaunchSites;
+-- show the table 
+select *from  LaunchSites;
+
+-- table 5 Scientists
+create table Scientists	(
+ScientistID int , 
+FullName varchar(100), 
+DOB date, 
+Gender varchar(100), 
+Specialization varchar(100), 
+Designation varchar(100), 
+Department varchar(100), 
+Email varchar(100),
+CenterID int primary key ,
+Status varchar(100)
+ );
+ 
+ -- insert in values  Scientists table
+insert into  Scientists
+values 
+(1, 'Dr. K. Sivan', '1957-04-14', 'Male', 'Aerospace Engineering', 'Former Chairman', 'Launch Vehicles', 'sivan@isro.gov.in', 101, 'Retired'),
+
+(2, 'Dr. Ritu Karidhal', '1975-05-04', 'Female', 'Spacecraft Systems', 'Scientist-F', 'Satellite Systems', 'ritu@isro.gov.in', 102, 'Active'),
+
+(3, 'Dr. Tapan Misra', '1961-02-01', 'Male', 'Microwave Remote Sensing', 'Director', 'SAC', 'tapan@isro.gov.in', 103, 'Retired'),
+
+(4, 'Dr. M. Annadurai', '1958-07-02', 'Male', 'Mission Planning', 'Project Director', 'Lunar Missions', 'anna@isro.gov.in', 104, 'Retired'),
+
+(5, 'Dr. Tessy Thomas', '1963-04-25', 'Female', 'Missile Technology', 'Director', 'DRDO (attached)', 'tessy@isro.gov.in', 105, 'Active'),
+
+(6, 'Dr. S. Somnath', '1963-07-20', 'Male', 'Structural Dynamics', 'Chairman', 'ISRO HQ', 'somnath@isro.gov.in', 106, 'Active'),
+
+(7, 'Dr. Anuradha TK', '1961-11-15', 'Female', 'Communication Satellites', 'Senior Scientist', 'Spacecraft Operations', 'anuradha@isro.gov.in', 107, 'Active'),
+
+(8, 'Dr. V. Radhakrishnan', '1950-10-02', 'Male', 'Astrophysics', 'Advisor', 'Space Science', 'vrk@isro.gov.in', 108, 'Retired'),
+
+(9, 'Dr. M.Y.S. Prasad', '1951-06-10', 'Male', 'Launch Systems', 'Director', 'SHAR Centre', 'prasad@isro.gov.in', 109, 'Retired'),
+
+(10, 'Dr. Nigar Shaji', '1970-08-12', 'Female', 'Solar Missions', 'Project Director', 'Aditya-L1', 'nigar@isro.gov.in', 110, 'Active');
+
+ -- All table delete queries --
+drop table Scientists;
+-- all data delete Queries--
+truncate table  Scientists;
+-- show the table 
+select *from  Scientists;
+
+-- table 7  ResearchCenters	
+create table  ResearchCenters	(
+CenterID int primary key , 
+Name varchar(200), 
+Location varchar(100), 
+EstablishedYear year, 
+Head varchar(100), 
+Departments varchar (100), 
+Area int , 
+Contact varchar(15), 
+Type varchar(100), 
+Status varchar(100),
+foreign key (CenterID) references Scientists  (CenterID)
+);
+
+ -- insert in values ResearchCenters table
+insert into ResearchCenters 
+values
+(101, 'Vikram Sarabhai Space Centre (VSSC)', 'Thiruvananthapuram', 1963, 'Dr. S. Somnath', 'Launch Vehicles', 550, '0471-2564567', 'R&D', 'Operational'),
+
+(102, 'ISRO Satellite Centre (URSC)', 'Bangalore', 1972, 'Dr. Ritu Karidhal', 'Satellite Design', 400, '080-25084000', 'Satellite Tech', 'Operational'),
+
+(103, 'Space Applications Centre (SAC)', 'Ahmedabad', 1972, 'Dr. Tapan Misra', 'Remote Sensing', 380, '079-26913000', 'Applications', 'Operational'),
+
+(104, 'ISRO Telemetry, Tracking and Command Network (ISTRAC)', 'Bangalore', 1975, 'Dr. M. Annadurai', 'Mission Control', 250, '080-23415275', 'Tracking', 'Operational'),
+
+(105, 'ISRO Propulsion Complex (IPRC)', 'Mahendragiri', 1974, 'Dr. Tessy Thomas', 'Rocket Engines', 200, '04637-281900', 'Propulsion', 'Operational'),
+
+(106, 'ISRO Headquarters', 'Bangalore', 1969, 'Dr. S. Somnath', 'Admin & Policy', 120, '080-22172294', 'Admin', 'Operational'),
+
+(107, 'Master Control Facility', 'Hassan', 1982, 'Dr. Anuradha TK', 'Satellite Operations', 300, '08172-220202', 'Control Center', 'Operational'),
+
+(108, 'Development and Educational Communication Unit (DECU)', 'Ahmedabad', 1980, 'Dr. V. Radhakrishnan', 'Education', 150, '079-26913001', 'Outreach', 'Operational'),
+
+(109, 'Satish Dhawan Space Centre (SDSC SHAR)', 'Sriharikota', 1971, 'Dr. M.Y.S. Prasad', 'Launch Site', 14500, '08623-225600', 'Launch Facility', 'Operational'),
+
+(110, 'Solar Mission Center', 'Bangalore', 2021, 'Dr. Nigar Shaji', 'Heliophysics', 220, '080-25084050', 'Space Science', 'Operational');
+
+
+ -- All table delete queries --
+drop table ResearchCenters;
+-- all data delete Queries--
+truncate table  ResearchCenters;
+-- show the table 
+select *from  ResearchCenters;
+
+-- table 8 TelemetryStations	
+create table TelemetryStations	(
+StationID int primary key , 
+Name  varchar(100),  
+Location varchar(100), 
+FrequencyBand int, 
+SupportedVehicles varchar(100), 
+Country varchar(100), 
+Contact varchar(10), 
+CoverageArea int , 
+Operator varchar(100), 
+Status varchar(100)
+);
+ -- insert in values TelemetryStations table
+ insert into TelemetryStations
+ values
+(1, 'ISTRAC Bangalore', 'Bangalore, Karnataka', 2200, 'PSLV, GSLV, LVM3', 'India', '0802341527', 1200, 'ISRO', 'Operational'),
+
+(2, 'SHAR Telemetry Station', 'Sriharikota, AP', 2100, 'PSLV, GSLV', 'India', '0862322560', 1500, 'ISRO', 'Operational'),
+
+(3, 'Port Blair Ground Station', 'Port Blair', 2200, 'PSLV, GSLV', 'India', '0319224532', 800, 'ISRO', 'Operational'),
+
+(4, 'Lucknow Ground Station', 'Lucknow, UP', 2100, 'GSLV, LVM3', 'India', '0522234561', 1000, 'ISRO', 'Operational'),
+
+(5, 'Mauritius Station', 'Mauritius', 2200, 'PSLV', 'Mauritius', '2306748000', 700, 'ISRO', 'Operational'),
+
+(6, 'Brunei Station', 'Brunei Darussalam', 2100, 'GSLV', 'Brunei', '6732234567', 600, 'ISRO', 'Operational'),
+
+(7, 'Biak Station', 'Biak, Indonesia', 2200, 'PSLV, GSLV', 'Indonesia', '629861234', 750, 'ISRO', 'Operational'),
+
+(8, 'Thiruvananthapuram Station', 'Thiruvananthapuram', 2100, 'PSLV', 'India', '0471267890', 900, 'ISRO', 'Operational'),
+
+(9, 'Nagpur Station', 'Nagpur, Maharashtra', 2300, 'LVM3', 'India', '0712256987', 950, 'ISRO', 'Planned'),
+
+(10, 'Antarctica Station', 'Maitri Base, Antarctica', 2200, 'Deep Space Missions', 'India', '0000000000', 300, 'ISRO', 'Experimental');
+
+  -- All table delete queries --
+drop table TelemetryStations;
+-- all data delete Queries--
+truncate table TelemetryStations;
+-- show the table 
+select *from TelemetryStations;
+
+-- table 9 GroundControl
+create table GroundControl	( 
+ControlID int primary key, 
+MissionID int , 
+CenterID int , 
+ContactPerson varchar(200), 
+Phone varchar(10), 
+Email varchar (100), 
+UplinkFreq int , 
+DownlinkFreq int, 
+Location varchar(100), 
+Status varchar(100),
+foreign key (MissionID) references Missions (MissionID),
+foreign key (CenterID) references Scientists  (CenterID)
+);
+-- insert in values  GroundControl table
+insert into  GroundControl
+values
+(201, 1, 101, 'Dr. S. Somnath', 9123456780, 'somnath@isro.gov.in', 2110, 2210, 'VSSC, Thiruvananthapuram', 'Operational'),
+
+(202, 2, 102, 'Dr. Ritu Karidhal', 9123456781, 'ritu@isro.gov.in', 2120, 2220, 'URSC, Bangalore', 'Operational'),
+
+(203, 3, 103, 'Dr. Tapan Misra', 9123456782, 'tapan@isro.gov.in', 2130, 2230, 'SAC, Ahmedabad', 'Operational'),
+
+(204, 4, 104, 'Dr. M. Annadurai', 9123456783, 'annadurai@isro.gov.in', 2140, 2240, 'ISTRAC, Bangalore', 'Operational'),
+
+(205, 5, 105, 'Dr. Tessy Thomas', 9123456784, 'tessy@isro.gov.in', 2150, 2250, 'IPRC, Tamil Nadu', 'Operational'),
+
+(206, 6, 106, 'Dr. S. Somnath', 9123456785, 'somnath@isro.gov.in', 2160, 2260, 'ISRO HQ, Bangalore', 'Active'),
+
+(207, 7, 107, 'Dr. Anuradha TK', 9123456786, 'anuradha@isro.gov.in', 2170, 2270, 'MCF, Hassan', 'Active'),
+
+(208, 8, 108, 'Dr. V. Radhakrishnan', 9123456787, 'vrk@isro.gov.in', 2180, 2280, 'DECU, Ahmedabad', 'Retired'),
+
+(209, 9, 109, 'Dr. M.Y.S. Prasad', 9123456788, 'prasad@isro.gov.in', 2190, 2290, 'SDSC SHAR, Sriharikota', 'Operational'),
+
+(210, 10, 110, 'Dr. Nigar Shaji', 9123456789, 'nigar@isro.gov.in', 2200, 2300, 'Solar Mission Center, Bangalore', 'Active');
+
+  -- All table delete queries --
+drop table GroundControl ;
+-- all data delete Queries--
+truncate table GroundControl;
+-- show the table 
+select *from GroundControl;
+
+
+-- table 10 SpacecraftComponents
+create table SpacecraftComponents(
+ComponentID int primary key , 
+Name varchar (100), 
+Type varchar(100),
+Manufacturer varchar(100), 
+Weight int , 
+PowerUsage varchar(100),
+Material varchar(100), 
+MissionID int , 
+LaunchDate date , 
+Status varchar(100),
+foreign key (MissionID) references Missions (MissionID)
+);
+
+-- insert in values SpacecraftComponents table
+insert into SpacecraftComponents 
+values
+(1, 'Solar Panel A', 'Power Generation', 'ISRO-VSSC', 80, '300W', 'Silicon', 1, '2019-07-22', 'Operational'),
+
+(2, 'Antenna X', 'Communication', 'ISRO-URSC', 25, '50W', 'Aluminum', 2, '2014-11-05', 'Operational'),
+
+(3, 'Onboard Computer', 'Control System', 'BEL', 12, '100W', 'Composite', 3, '2008-10-22', 'Retired'),
+
+(4, 'Reaction Wheel Assembly', 'Attitude Control', 'ISRO-SAC', 18, '80W', 'Titanium', 4, '2013-11-05', 'Operational'),
+
+(5, 'Battery Pack', 'Power Storage', 'ISRO-IPRC', 30, '0W', 'Lithium-Ion', 5, '2017-06-05', 'Operational'),
+
+(6, 'Thermal Blanket', 'Thermal Protection', 'ISRO-VSSC', 10, '0W', 'Multi-layer Insulation', 6, '2022-08-22', 'Operational'),
+
+(7, 'Star Tracker', 'Navigation', 'ISRO-URSC', 5, '20W', 'Carbon Fiber', 7, '2023-09-02', 'Active'),
+
+(8, 'Gyroscope Set', 'Inertial Navigation', 'ISRO-SAC', 7, '40W', 'Steel-Alloy', 8, '2020-11-07', 'Operational'),
+
+(9, 'Payload Adapter', 'Structural', 'ISRO-HQ', 50, '0W', 'Aluminum Alloy', 9, '2021-03-28', 'Active'),
+
+(10, 'Camera Module', 'Remote Sensing', 'ISRO-URSC', 15, '60W', 'Composite', 10, '2023-07-14', 'Operational');
+
+  -- All table delete queries --
+drop table SpacecraftComponents ;
+-- all data delete Queries--
+truncate table SpacecraftComponents ;
+-- show the table 
+select *from SpacecraftComponents ;
+
+-- table 11  Experiments
+create table  Experiments(
+ExperimentID int primary key , 
+Name varchar (100), 
+MissionID int, 
+Objective varchar(100), 
+Type varchar(100), 
+PrincipalInvestigator varchar(100),
+Institution varchar (100), 
+Results varchar(100),
+Duration datetime , 
+Status varchar(100),
+foreign key (MissionID) references Missions (MissionID)
+);
+
+-- insert in values  Experiments table
+insert into  Experiments
+values 
+(1, 'CHACE', 1, 'Analyze lunar exosphere', 'Mass Spectrometry', 'Dr. M. Annadurai', 'ISRO-VSSC', 'Detected water molecules', '2008-11-14 00:00:00', 'Completed'),
+
+(2, 'MOM Methane Sensor', 2, 'Detect methane on Mars', 'Gas Detection', 'Dr. Ritu Karidhal', 'ISRO-URSC', 'No methane detected', '2014-09-24 00:00:00', 'Completed'),
+
+(3, 'SAR Imaging', 3, 'Radar surface mapping', 'Radar Imaging', 'Dr. Tapan Misra', 'ISRO-SAC', 'High-res terrain data', '2016-04-28 00:00:00', 'Completed'),
+
+(4, 'Solar X-ray Spectrometer', 4, 'Study solar flares', 'X-ray Spectrometry', 'Dr. Anuradha TK', 'ISRO-HQ', 'Ongoing solar data', '2023-09-02 00:00:00', 'Ongoing'),
+
+(5, 'Langmuir Probe', 5, 'Measure plasma density', 'Plasma Physics', 'Dr. Nigar Shaji', 'VSSC', 'Plasma variation mapped', '2023-07-14 00:00:00', 'Completed'),
+
+(6, 'Miniature Radar Altimeter', 6, 'Terrain mapping', 'Microwave Remote Sensing', 'Dr. Tessy Thomas', 'SAC', 'Data being processed', '2022-08-22 00:00:00', 'Ongoing'),
+
+(7, 'BioMicrogravity Cell Growth', 7, 'Cell behavior in microgravity', 'Biological', 'Dr. Sudha Rajan', 'IISc Bangalore', 'Enhanced growth rate', '2019-12-18 00:00:00', 'Completed'),
+
+(8, 'Gamma-ray Burst Detector', 8, 'Detect cosmic gamma bursts', 'High-energy Astrophysics', 'Dr. V. Radhakrishnan', 'ISRO-HQ', '2 GRBs detected', '2020-11-07 00:00:00', 'Completed'),
+
+(9, 'Vegetation Health Sensor', 9, 'Monitor crop stress', 'Optical Imaging', 'Dr. M.Y.S. Prasad', 'ISRO-DECU', 'Drought data generated', '2021-03-28 00:00:00', 'Completed'),
+
+(10, 'UV Telescope Observations', 10, 'Observe ultraviolet sources', 'Ultraviolet Imaging', 'Dr. K. Kasturirangan', 'IIA Bangalore', 'Detected high-UV stars', '2023-07-14 00:00:00', 'Ongoing');
+
+  -- All table delete queries --
+drop table   Experiments;
+-- all data delete Queries--
+truncate table   Experiments ;
+-- show the table 
+select *from   Experiments ;
+
+-- table 12 Departments	
+create table Departments (
+DepartmentID int  primary key , 
+Name varchar(100), 
+CenterID int, 
+Head varchar(100), 
+Employees varchar(100),  
+Budget varchar(255), 
+Projects varchar(100), 
+Field varchar(100), 
+Contact varchar(10),
+Status varchar(100),
+foreign key (CenterID) references Scientists  (CenterID)
+);
+
+-- insert in values  Departments table
+insert into  Departments	
+values 
+(1, 'Spacecraft Systems', 101, 'Dr. S. Natarajan', '120', '₹75 Cr', 'INSAT, GSAT', 'Avionics', '0802331122', 'Active'),
+
+(2, 'Propulsion Division', 102, 'Dr. R. Madhavan', '95', '₹60 Cr', 'GSLV Engines', 'Propulsion', '0802345678', 'Active'),
+
+(3, 'Control Systems', 103, 'Dr. R. Meenakshi', '88', '₹50 Cr', 'PSLV-Guidance', 'Navigation', '0802456891', 'Active'),
+
+(4, 'Communication Systems', 104, 'Dr. Ajay Desai', '105', '₹90 Cr', 'SATCOM', 'Telecommunication', '0802678098', 'Operational'),
+
+(5, 'Thermal Engineering', 105, 'Dr. Neha Joshi', '73', '₹45 Cr', 'Chandrayaan-3', 'Thermal Systems', '0802987345', 'Active'),
+
+(6, 'Structures and Materials', 106, 'Dr. Vinod Rao', '60', '₹40 Cr', 'LVM3 Frames', 'Aerospace Materials', '0802341287', 'Active'),
+
+(7, 'Remote Sensing', 107, 'Dr. K. Radhika', '102', '₹110 Cr', 'Resourcesat, RISAT', 'Earth Observation', '0802124569', 'Active'),
+
+(8, 'Data Processing', 108, 'Dr. Rajiv Menon', '70', '₹38 Cr', 'NRSC Analytics', 'Informatics', '0802567842', 'Operational'),
+
+(9, 'Launch Integration', 109, 'Dr. Pankaj Sinha', '80', '₹55 Cr', 'SDSC Ops', 'Mission Integration', '0802298471', 'Active'),
+
+(10, 'Astrophysics Research', 110, 'Dr. Asha Sharma', '45', '₹65 Cr', 'Aditya-L1', 'Space Science', '0802211987', 'Active');
+
+
+ -- All table delete queries --
+drop table   Departments;
+-- all data delete Queries--
+truncate table   Departments ;
+-- show the table 
+select *from   Departments;
+
+-- table 13 ISROEmployees
+create table ISROEmployees	(
+EmployeeID int primary key  , 
+Name varchar(100), 
+Gender varchar(100), 
+DOB date , 
+DepartmentID int, 
+Designation varchar(100), 
+Salary varchar(100), 
+CenterID int , 
+Contact varchar(100),
+Status varchar(100),
+foreign key (CenterID) references Scientists  (CenterID),
+foreign key (DepartmentID) references Departments (DepartmentID)
+);
+-- insert in values  ISROEmployees table
+insert into ISROEmployees
+values 
+(1, 'Anjali Deshmukh', 'Female', '1985-04-12', 1, 'Senior Engineer', '₹95,000', 101, '9812345670', 'Active'),
+
+(2, 'Ramesh Iyer', 'Male', '1979-07-08', 2, 'Propulsion Scientist', '₹1,10,000', 102, '9823456711', 'Active'),
+
+(3, 'Priya Nair', 'Female', '1990-01-15', 3, 'Control Systems Analyst', '₹88,000', 103, '9834567892', 'Active'),
+
+(4, 'Deepak Sharma', 'Male', '1982-12-22', 4, 'Communication Specialist', '₹92,500', 104, '9845678923', 'Active'),
+
+(5, 'Sneha Kulkarni', 'Female', '1988-06-19', 5, 'Thermal Engineer', '₹87,000', 105, '9856789054', 'Active'),
+
+(6, 'Arvind Rathi', 'Male', '1983-03-03', 6, 'Materials Scientist', '₹89,000', 106, '9867890185', 'Active'),
+
+(7, 'Rekha Menon', 'Female', '1987-09-30', 7, 'Remote Sensing Analyst', '₹90,000', 107, '9878901216', 'Active'),
+
+(8, 'Nikhil Bhosale', 'Male', '1992-11-11', 8, 'Data Engineer', '₹84,000', 108, '9889012347', 'Active'),
+
+(9, 'Kiran Thomas', 'Male', '1984-05-05', 9, 'Integration Manager', '₹96,000', 109, '9890123478', 'Active'),
+
+(10, 'Divya Rao', 'Female', '1991-08-25', 10, 'Astrophysics Researcher', '₹93,000', 110, '9901234589', 'Active');
+
+ -- All table delete queries --
+drop table   ISROEmployees;
+-- all data delete Queries--
+truncate table ISROEmployees ;
+-- show the table 
+select *from   ISROEmployees ;
+
+--  table 14 Collaborations	
+create table Collaborations	(
+CollabID int primary key , 
+PartnerName varchar(100), 
+Country varchar(100), 
+MissionID int , 
+Purpose varchar(100), 
+AgreementDate datetime, 
+EndDate date , 
+Contact varchar(100), 
+BudgetShare int, 
+Status varchar(100),
+foreign key(MissionID) references Missions (MissionID)
+);
+
+-- insert in values Collaborations table
+insert into Collaborations
+values 
+(1, 'NASA', 'USA', 1, 'Lunar data sharing', '2008-05-01 10:00:00', '2010-12-31', 'lunar@nasa.gov', 25000000, 'Completed'),
+
+(2, 'JAXA', 'Japan', 2, 'Mars atmospheric research', '2013-03-15 09:00:00', '2016-06-30', 'mars@jaxa.jp', 18000000, 'Completed'),
+
+(3, 'CNES', 'France', 3, 'Weather satellite payload', '2015-04-22 11:30:00', '2018-09-01', 'contact@cnes.fr', 21000000, 'Completed'),
+
+(4, 'DLR', 'Germany', 4, 'Solar instrumentation', '2022-01-10 14:45:00', '2026-12-31', 'dlr@space.de', 29000000, 'Active'),
+
+(5, 'Roscosmos', 'Russia', 5, 'Rocket engine test support', '2016-07-20 08:30:00', '2019-07-19', 'roscosmos@ru.gov', 17000000, 'Completed'),
+
+(6, 'ISRO-UKSA', 'United Kingdom', 6, 'Small satellite launch', '2021-05-05 13:20:00', '2023-12-31', 'ukspace@uk.gov', 10000000, 'Completed'),
+
+(7, 'ESA', 'Europe', 7, 'Earth Observation synergy', '2018-09-09 15:10:00', '2022-09-09', 'esa-collab@esa.int', 22000000, 'Completed'),
+
+(8, 'UAE Space Agency', 'UAE', 8, 'Joint satellite mission', '2020-11-11 10:00:00', '2025-11-10', 'space@uae.gov', 12000000, 'Active'),
+
+(9, 'SpaceX', 'USA', 9, 'Commercial launch sharing', '2021-03-03 12:00:00', '2026-03-03', 'collab@spacex.com', 30000000, 'Active'),
+
+(10, 'ANTRIX', 'India', 10, 'Payload marketing', '2023-02-02 16:30:00', '2026-02-01', 'contact@antrix.co.in', 5000000, 'Active');
+
+ -- All table delete queries --
+drop table Collaborations;
+-- all data delete Queries--
+truncate table Collaborations ;
+-- show the table 
+select *from   Collaborations ;
+
+-- table 15 SatellitesInOrbit-- table 15 SatellitesInOrbit
+create table SatellitesInOrbit	(
+OrbitID int primary key , 
+SatelliteID int , 
+OrbitType varchar (100), 
+Inclination varchar(100), 
+AltitudeKM int , 
+PeriodMinutes time , 
+Coverage varchar(100), 
+SpeedKMPS int, 
+LaunchDate datetime ,
+Status varchar(100),
+foreign key (SatelliteID) references Satellites (SatelliteID )
+);
+
+-- insert in values SatellitesInOrbit table
+insert into SatellitesInOrbit
+values 
+(1, 1, 'LEO', '97.6°', 628, '01:36:00', 'India', 7, '2018-02-12 10:30:00', 'Active'),
+
+(2, 2, 'GEO', '0°', 35786, '23:56:00', 'Pan-India', 3, '2015-08-05 18:00:00', 'Active'),
+
+(3, 3, 'SSO', '98.7°', 720, '01:40:00', 'Earth Imaging', 7, '2017-06-15 09:45:00', 'Active'),
+
+(4, 4, 'LEO', '98.0°', 650, '01:30:00', 'Agriculture Monitoring', 7, '2019-11-29 07:10:00', 'Active'),
+
+(5, 5, 'MEO', '55.0°', 20200, '12:00:00', 'NavIC Regional', 4, '2016-04-28 15:20:00', 'Active'),
+
+(6, 6, 'GEO', '0°', 35786, '23:56:00', 'Communication', 3, '2013-03-10 21:00:00', 'Inactive'),
+
+(7, 7, 'GTO', '18.5°', 25000, '10:30:00', 'Transfer Orbit', 5, '2020-12-18 13:30:00', 'Transferred'),
+
+(8, 8, 'LEO', '97.4°', 600, '01:34:00', 'Weather Monitoring', 8, '2021-09-23 11:15:00', 'Active'),
+
+(9, 9, 'HEO', '63.4°', 36000, '15:45:00', 'Deep Space', 4, '2014-10-24 14:00:00', 'Active'),
+
+(10, 10, 'LEO', '98.2°', 700, '01:32:00', 'Surveillance', 7, '2022-06-06 05:45:00', 'Active');
+
+
+-- All table delete queries --
+drop table SatellitesInOrbit;
+-- all data delete Queries--
+truncate table SatellitesInOrbit ;
+-- show the table 
+select *from   SatellitesInOrbit ;
+
+-- table 16 Payloads
+create table  Payloads	(
+PayloadID int primary key,
+ Name varchar(100),
+ SatelliteID int,
+ Type varchar(100),
+ Weight int, 
+ PowerConsumption varchar(100),
+ Manufacturer varchar(100),
+ Objective varchar(100),
+ CenterID int,
+ Status varchar  (100),
+foreign key (SatelliteID) references Satellites (SatelliteID ),
+foreign key (CenterID) references Scientists  (CenterID)
+);
+
+-- insert in values  Payloads table
+insert into  Payloads
+values 
+(1, 'HySIS Imager', 1, 'Imaging', 85, '120W', 'ISRO', 'Hyperspectral Earth Imaging', 101, 'Active'),
+
+(2, 'IRNSS Nav', 2, 'Navigation', 65, '100W', 'ISRO', 'Regional Positioning', 102, 'Active'),
+
+(3, 'INSAT-3DR Sounder', 3, 'Weather Monitoring', 120, '150W', 'BEL', 'Atmospheric Analysis', 103, 'Active'),
+
+(4, 'CartoSat-2 Camera', 4, 'Remote Sensing', 95, '110W', 'ISAC', 'High-resolution Mapping', 104, 'Active'),
+
+(5, 'GSAT-6A Transponder', 5, 'Communication', 130, '200W', 'HAL', 'S-Band Communication', 105, 'Inactive'),
+
+(6, 'RISAT Radar', 6, 'Surveillance', 90, '170W', 'ISRO', 'All-weather Imaging', 106, 'Active'),
+
+(7, 'GAGAN Payload', 7, 'Navigation Augmentation', 75, '80W', 'Raytheon', 'GPS Enhancement', 107, 'Active'),
+
+(8, 'SCATSAT Wind Monitor', 8, 'Oceanography', 50, '90W', 'ISRO', 'Weather Forecasting', 108, 'Active'),
+
+(9, 'AstroSat UV Telescope', 9, 'Astrophysics', 100, '250W', 'TIFR', 'Space-based Astronomy', 109, 'Active'),
+
+(10, 'GSAT-7A KU Transponder', 10, 'Defense Communication', 110, '220W', 'ISRO', 'IAF Link Systems', 110, 'Active');
+
+
+-- All table delete queries --
+drop table Payloads;
+-- all data delete Queries--
+truncate table Payloads ;
+-- show the table 
+select *from   Payloads ;
+
+-- table 17 RocketTests	
+create table  RocketTests	(
+TestID int primary key,
+ VehicleID int,
+ Date date,
+ Location varchar(100),
+ Result varchar(100),
+ FuelUsed varchar(100),
+ Stage varchar(100),
+ MaxAltitude varchar(100),
+ Temperature varchar(100),
+ Status varchar(100),
+foreign key (VehicleID) references LaunchVehicles (VehicleID)
+);
+-- insert in values    RocketTests table
+insert into    RocketTests
+values 
+(1, 101, '2015-01-12', 'Sriharikota', 'Success', 'Solid Fuel', 'Stage 1', '45 km', '3000°C', 'Passed'),
+(2, 102, '2016-03-22', 'Thumba', 'Failure', 'Liquid Fuel', 'Stage 2', '30 km', '2700°C', 'Failed'),
+(3, 103, '2017-06-18', 'Chandipur', 'Success', 'Solid Fuel', 'Booster', '50 km', '3200°C', 'Passed'),
+(4, 101, '2018-11-05', 'Sriharikota', 'Success', 'Solid + Liquid', 'Stage 3', '120 km', '3500°C', 'Passed'),
+(5, 104, '2019-07-09', 'Mahendragiri', 'Partial Success', 'Cryogenic', 'Stage 2', '95 km', '4000°C', 'Retest Needed'),
+(6, 105, '2020-02-10', 'Sriharikota', 'Success', 'Solid Fuel', 'Stage 1', '70 km', '2800°C', 'Passed'),
+(7, 106, '2021-10-15', 'Thumba', 'Success', 'Liquid Fuel', 'Stage 1', '60 km', '2900°C', 'Passed'),
+(8, 103, '2022-03-18', 'Chandipur', 'Success', 'Hybrid Fuel', 'Booster', '75 km', '3100°C', 'Passed'),
+(9, 101, '2023-05-20', 'Sriharikota', 'Failure', 'Cryogenic', 'Stage 2', '42 km', '3600°C', 'Failed'),
+(10, 104, '2024-01-30', 'Mahendragiri', 'Success', 'Cryogenic', 'Final Stage', '200 km', '4100°C', 'Passed');
+
+
+-- All table delete queries --
+drop table RocketTests;
+-- all data delete Queries--
+truncate table RocketTests ;
+-- show the table 
+select *from   RocketTests ;
+
+-- table 18 RocketTests	
+create table  WeatherMonitoring	(
+RecordID int primary key,
+ StationID int , 
+ DateTime date,
+ Temperature varchar(100),
+ Humidity varchar(100),
+ WindSpeed int,
+ Pressure int,
+ DataQuality varchar(100),
+ Location varchar(100),
+ Status varchar(100),
+ foreign key ( StationID) references TelemetryStations ( StationID)
+);
+
+-- insert in values WeatherMonitoring	 table
+insert into WeatherMonitoring
+values 
+(1, 1, '2024-01-01', '32°C', '45%', 12, 1012, 'Good', 'Sriharikota', 'Active'),
+(2, 2, '2024-01-01', '30°C', '50%', 14, 1010, 'Good', 'Thiruvananthapuram', 'Active'),
+(3, 3, '2024-01-01', '28°C', '60%', 9, 1008, 'Excellent', 'Port Blair', 'Active'),
+(4, 4, '2024-01-02', '35°C', '40%', 20, 1005, 'Moderate', 'Bangalore', 'Active'),
+(5, 5, '2024-01-02', '29°C', '55%', 11, 1015, 'Good', 'Nagpur', 'Active'),
+(6, 6, '2024-01-03', '27°C', '70%', 8, 1010, 'Good', 'Lucknow', 'Inactive'),
+(7, 7, '2024-01-03', '26°C', '75%', 6, 1009, 'Excellent', 'Shillong', 'Active'),
+(8, 8, '2024-01-04', '34°C', '38%', 17, 1003, 'Moderate', 'Hyderabad', 'Active'),
+(9, 9, '2024-01-04', '31°C', '48%', 10, 1012, 'Good', 'Chennai', 'Active'),
+(10, 10, '2024-01-05', '33°C', '42%', 13, 1011, 'Good', 'Ahmedabad', 'Active');
+
+
+-- All table delete queries --
+drop table WeatherMonitoring;
+-- all data delete Queries--
+truncate table WeatherMonitoring ;
+-- show the table 
+select *from   WeatherMonitoring ;
+
+-- table 19 DataCenters	
+create table  DataCenters(
+DataCenterID int primary key,
+ Name varchar(100),
+ Location varchar(100),
+ CapacityTB varchar(100),
+ EstablishedYear year,
+ Head varchar(100),
+ Services varchar(100),
+ Contact varchar(10),
+ Type varchar(100),
+ Status varchar(100)
+ );
+ -- insert in valuesDataCenters	 table
+insert into DataCenters
+values
+(1, 'National Remote Sensing Centre', 'Hyderabad', '5000TB', 1995, 'Dr. R. Suresh', 'Image Processing', '0402456789', 'Research', 'Active'),
+(2, 'Data Processing Centre - VSSC', 'Thiruvananthapuram', '3000TB', 2002, 'Dr. Anjali Rao', 'Telemetry Data', '0471251234', 'Telemetry', 'Active'),
+(3, 'Satellite Data Center', 'Bangalore', '4000TB', 2005, 'Dr. Naveen Das', 'Satellite Archives', '0802654321', 'Archival', 'Active'),
+(4, 'Space Science Data Centre', 'Ahmedabad', '3500TB', 2010, 'Dr. Preeti Nair', 'Astro Data Storage', '0792456781', 'Astrophysics', 'Active'),
+(5, 'South Regional Data Node', 'Chennai', '2500TB', 2015, 'Dr. Manoj Krishnan', 'Regional Distribution', '0442450009', 'Distribution', 'Active'),
+(6, 'Eastern Space Data Hub', 'Kolkata', '2800TB', 2013, 'Dr. S. Banerjee', 'Weather & GIS', '0332654322', 'Meteorology', 'Active'),
+(7, 'ISRO Central Storage', 'Sriharikota', '6000TB', 2008, 'Dr. Vinay Kumar', 'Mission Data Archive', '0862322110', 'Mission Data', 'Active'),
+(8, 'North Command Data Center', 'Delhi', '2000TB', 2017, 'Dr. Richa Sharma', 'Control Center Backup', '0112345678', 'Backup', 'Active'),
+(9, 'Payload Data Storage Unit', 'Bhopal', '3200TB', 2011, 'Dr. A. Ramesh', 'Payload Analysis', '0755256677', 'Analysis', 'Active'),
+(10, 'ISRO Cloud Data Centre', 'Nagpur', '7000TB', 2018, 'Dr. Rekha Joshi', 'Cloud & AI Services', '0712258899', 'Cloud Infra', 'Active');
+ 
+
+
+-- All table delete queries --
+drop table DataCenters;
+-- all data delete Queries--
+truncate table DataCenters ;
+-- show the table 
+select *from  DataCenters ;
+
+-- table 20 FundingRecords	
+create table  FundingRecords	(
+FundID int primary key,
+ MissionID int, 
+ Source varchar(100),
+ Amount varchar(100),
+ ReleaseDate date, 
+ Purpose varchar(100),
+ DepartmentID int, 
+ ApprovedBy varchar(100),
+ Utilization varchar(100),
+ Status varchar(100),
+ foreign key(MissionID) references Missions (MissionID),
+ foreign key (DepartmentID) references Departments (DepartmentID)
+ );
+ 
+ -- insert in values FundingRecords		 table
+insert into FundingRecords	
+values
+(1, 1, 'Government of India', '₹500 Cr', '2020-04-01', 'Satellite Launch', 1, 'Dr. S. Nair', 'Used 90%', 'Approved'),
+(2, 2, 'ISRO Internal', '₹150 Cr', '2021-06-15', 'Payload Development', 2, 'Dr. Meera Joshi', 'Used 100%', 'Approved'),
+(3, 3, 'DRDO', '₹200 Cr', '2019-03-20', 'Navigation System', 3, 'Dr. V.K. Singh', 'Used 85%', 'Approved'),
+(4, 4, 'Private Partner - L&T', '₹120 Cr', '2022-02-12', 'Propulsion R&D', 4, 'Dr. S. Banerjee', 'Used 100%', 'Completed'),
+(5, 5, 'World Bank', '₹80 Cr', '2021-12-01', 'Earth Observation', 5, 'Dr. Anjali Nair', 'Used 95%', 'Approved'),
+(6, 6, 'IN-SPACe', '₹90 Cr', '2023-05-10', 'Commercial Launch', 6, 'Dr. Ajay Mehta', 'Used 70%', 'In Progress'),
+(7, 7, 'ISRO HQ', '₹110 Cr', '2022-08-23', 'Thermal Tech', 7, 'Dr. Shalini Menon', 'Used 100%', 'Approved'),
+(8, 8, 'DST', '₹60 Cr', '2020-10-30', 'Remote Sensing', 8, 'Dr. Naveen Rao', 'Used 60%', 'Pending'),
+(9, 9, 'International Collab', '₹300 Cr', '2021-01-14', 'Deep Space Comm', 9, 'Dr. R. Subramaniam', 'Used 88%', 'Approved'),
+(10, 10, 'Private Sponsor', '₹40 Cr', '2024-03-18', 'Student Satellites', 10, 'Dr. Priya Desai', 'Used 100%', 'Approved');
+
+
+-- All table delete queries --
+drop table FundingRecords;	
+-- all data delete Queries--
+truncate table FundingRecords;
+-- show the table 
+select *from   FundingRecords ;
+
+-- table 21 TrainingPrograms 	
+create table TrainingPrograms (
+ProgramID int primary key,
+ Name varchar(100),
+ Type varchar(100),
+ DurationDays int,
+ DepartmentID int, 
+ StartDate date,
+ EndDate date,
+ Trainer varchar(100),
+ Location varchar(100),
+ Status varchar(100),
+ foreign key (DepartmentID) references Departments (DepartmentID)
+ );
+ 
+  -- insert in values TrainingPrograms		 table
+insert into TrainingPrograms
+values
+(1, 'Satellite Systems Overview', 'Technical', 15, 1, '2024-01-10', '2024-01-25', 'Dr. R. Nair', 'Bangalore', 'Completed'),
+(2, 'Cryogenics Fundamentals', 'Engineering', 10, 2, '2024-02-05', '2024-02-15', 'Dr. M. Iyer', 'Thiruvananthapuram', 'Completed'),
+(3, 'Mission Planning & Control', 'Operations', 20, 3, '2024-03-01', '2024-03-21', 'Dr. A. Mehta', 'Sriharikota', 'Ongoing'),
+(4, 'Telemetry & Tracking', 'Technical', 12, 4, '2024-03-15', '2024-03-27', 'Dr. S. Rajan', 'Hyderabad', 'Ongoing'),
+(5, 'Remote Sensing Applications', 'Scientific', 14, 5, '2024-04-10', '2024-04-24', 'Dr. P. Reddy', 'Ahmedabad', 'Scheduled'),
+(6, 'Space Law & Policy', 'Administrative', 8, 6, '2024-04-20', '2024-04-28', 'Dr. R. Deshpande', 'Delhi', 'Scheduled'),
+(7, 'AI in Space Research', 'Innovation', 18, 7, '2024-05-01', '2024-05-19', 'Dr. V. Sinha', 'Bangalore', 'Scheduled'),
+(8, 'Communication Systems', 'Technical', 16, 8, '2024-05-10', '2024-05-26', 'Dr. T. Nandakumar', 'Nagpur', 'Planned'),
+(9, 'Project Management for Missions', 'Managerial', 10, 9, '2024-06-01', '2024-06-11', 'Dr. L. Arora', 'Chennai', 'Planned'),
+(10, 'Satellite Payload Integration', 'Engineering', 13, 10, '2024-06-15', '2024-06-28', 'Dr. K. Bhaskar', 'Bhopal', 'Planned');
+
+ 
+ -- All table delete queries --
+drop table TrainingPrograms;
+-- all data delete Queries--
+truncate table TrainingPrograms;
+-- show the table 
+select *from   TrainingPrograms ;
+
+-- table 22  InternationalProjects	
+create table InternationalProjects	(
+ProjectID int primary key,
+ Name varchar(100),
+ PartnerAgency varchar(100),
+ Country varchar(100),
+ Objective varchar(100),
+ StartDate date,
+ EndDate date,
+ Budget varchar(100),
+ Output varchar(100),
+ Status varchar(100)
+ );
+ 
+ -- insert in values InternationalProjects		 table
+insert into InternationalProjects
+values
+(1, 'NISAR', 'NASA', 'USA', 'Earth observation using radar', '2021-05-01', '2025-12-31', '₹900 Cr', 'Dual-band radar satellite', 'Ongoing'),
+(2, 'Megha-Tropiques', 'CNES', 'France', 'Climate & weather monitoring', '2004-07-15', '2016-10-01', '₹400 Cr', 'Launched satellite', 'Completed'),
+(3, 'SARAL', 'CNES', 'France', 'Ocean altimetry', '2007-02-01', '2013-02-25', '₹300 Cr', 'Launched SARAL satellite', 'Completed'),
+(4, 'Chandrayaan-2 Collaboration', 'JAXA', 'Japan', 'Lunar surface analysis', '2018-01-01', '2020-08-10', '₹250 Cr', 'Shared payload data', 'Completed'),
+(5, 'Bhaskara Collaboration', 'USSR', 'Russia', 'Remote sensing', '1977-04-01', '1981-11-01', '₹200 Cr', 'Launched Bhaskara-I/II', 'Completed'),
+(6, 'VENUS Mission Support', 'Israel Space Agency', 'Israel', 'Earth imaging', '2013-06-01', '2017-08-02', '₹220 Cr', 'Imaging data collected', 'Completed'),
+(7, 'Lunar Polar Exploration', 'JAXA', 'Japan', 'Lunar polar region research', '2022-01-01', '2028-12-31', '₹1100 Cr', 'Rover + Orbiter', 'Planning'),
+(8, 'Climate Watch', 'ESA', 'EU', 'Joint climate monitoring', '2023-03-10', '2027-12-31', '₹800 Cr', 'Shared satellite system', 'Ongoing'),
+(9, 'CubeSat Research', 'MIT', 'USA', 'Miniature satellite R&D', '2021-06-01', '2024-06-01', '₹150 Cr', 'Prototype deployment', 'Ongoing'),
+(10, 'South Asia Satellite Program', 'SAARC Nations', 'Multiple', 'Communication services', '2016-01-01', '2017-05-05', '₹450 Cr', 'Launched GSAT-9', 'Completed');
+
+
+-- All table delete queries --
+drop table InternationalProjects;
+-- all data delete Queries--
+truncate table InternationalProjects;
+-- show the table 
+select *from   InternationalProjects ;
+
+-- table 23 tableSatelliteOperations 
+create table SatelliteOperations (
+OperationID int primary key,
+ SatelliteID int,
+ OperationType varchar(100),
+ Date date,
+ Duration time,
+ SignalStrength varchar(100),
+ Anomaly varchar(100),
+ FixApplied varchar(100),
+ ControllerID int,
+ Status varchar(100),
+ foreign key (SatelliteID) references Satellites (SatelliteID )
+ );
+ 
+  -- insert in values SatelliteOperations 	 table
+insert into SatelliteOperations 
+values
+(1, 1, 'Orbit Adjustment', '2024-01-10', '01:15:00', 'Strong', 'None', 'N/A', 101, 'Successful'),
+(2, 2, 'Payload Activation', '2024-02-05', '00:45:00', 'Moderate', 'Minor Glitch', 'Reboot Module', 102, 'Resolved'),
+(3, 3, 'Data Transmission', '2024-02-20', '02:00:00', 'Strong', 'None', 'N/A', 103, 'Successful'),
+(4, 4, 'Thermal Check', '2024-03-01', '00:30:00', 'Weak', 'Heater Failure', 'Switched to backup', 104, 'Resolved'),
+(5, 5, 'Battery Cycle', '2024-03-10', '01:20:00', 'Strong', 'None', 'N/A', 105, 'Successful'),
+(6, 6, 'Attitude Control', '2024-04-01', '01:00:00', 'Moderate', 'Gyro Drift', 'Calibration Run', 106, 'Under Observation'),
+(7, 7, 'Camera Activation', '2024-04-15', '00:40:00', 'Strong', 'Lens Delay', 'Firmware Update', 107, 'Resolved'),
+(8, 8, 'Telemetry Sync', '2024-05-01', '01:05:00', 'Strong', 'None', 'N/A', 108, 'Successful'),
+(9, 9, 'Orbit Reboost', '2024-05-20', '01:45:00', 'Moderate', 'Fuel Imbalance', 'Adjust Burn Time', 109, 'Resolved'),
+(10, 10, 'Solar Panel Check', '2024-06-05', '00:50:00', 'Strong', 'None', 'N/A', 110, 'Successful');
+
+ 
+ -- All table delete queries --
+drop table SatelliteOperations; 
+-- all data delete Queries--
+truncate table SatelliteOperations; 
+-- show the table 
+select *from   SatelliteOperations ;
+ 
+ -- table 24 table MissionReports	
+create table MissionReports	(
+ReportID int ,
+ MissionID int,
+ Title varchar(100),
+ Date date,
+ Summary varchar(100),
+ Author varchar(100),
+ DocumentURL varchar(100),
+ PageCount int,
+ ApprovalStatus varchar(100),
+ Status varchar(100),
+ foreign key (MissionId) references Missions(MissionId)
+ );
+  -- insert in values MissionReports 	 table
+insert into MissionReports
+values
+(1, 1, 'Chandrayaan-2 Final Report', '2021-01-15', 'Mission performance and lessons', 'Dr. R. Menon', 'http://isro.gov.in/docs/ch2-final.pdf', 120, 'Approved', 'Published'),
+(2, 2, 'Mars Orbiter Summary', '2020-06-10', 'Mission milestones overview', 'Dr. S. Patel', 'http://isro.gov.in/docs/mom-summary.pdf', 85, 'Approved', 'Published'),
+(3, 3, 'Gaganyaan Crew Safety', '2024-02-20', 'Safety protocols for crewed flight', 'Dr. A. Krishnan', 'http://isro.gov.in/docs/gaganyaan-safety.pdf', 90, 'Pending', 'Draft'),
+(4, 4, 'Aditya-L1 Technical Overview', '2023-11-01', 'Payload and solar mission systems', 'Dr. N. Singh', 'http://isro.gov.in/docs/aditya-overview.pdf', 65, 'Approved', 'Published'),
+(5, 5, 'IRNSS Deployment Report', '2022-03-05', 'Navigation satellite system deployment', 'Dr. R. Iyer', 'http://isro.gov.in/docs/irnss-report.pdf', 72, 'Approved', 'Published'),
+(6, 6, 'GISAT-1 Status Update', '2024-01-25', 'Report on delays and updates', 'Dr. M. Thomas', 'http://isro.gov.in/docs/gisat1-update.pdf', 43, 'Pending', 'Internal'),
+(7, 7, 'RISAT-2B Image Analysis', '2023-06-14', 'Radar imaging results and usage', 'Dr. P. Rao', 'http://isro.gov.in/docs/risat-analysis.pdf', 55, 'Approved', 'Published'),
+(8, 8, 'INSAT-3D Meteorology Report', '2022-10-10', 'Weather monitoring success metrics', 'Dr. S. Kale', 'http://isro.gov.in/docs/insat3d.pdf', 68, 'Approved', 'Archived'),
+(9, 9, 'SSLV First Launch Evaluation', '2023-02-18', 'SSLV launcher performance', 'Dr. V. Kulkarni', 'http://isro.gov.in/docs/sslv-launch.pdf', 50, 'Approved', 'Published'),
+(10, 10, 'International Collaboration Brief', '2023-08-07', 'Joint missions & agreements overview', 'Dr. L. Das', 'http://isro.gov.in/docs/international.pdf', 60, 'Approved', 'Published');
+
+
+ -- All table delete queries --
+drop table MissionReports;
+-- all data delete Queries--
+truncate table MissionReports;
+-- show the table 
+select *from   MissionReports;
+ 
+ -- table 25 tableAnomalies	
+create table Anomalies	(
+AnomalyID int primary key,
+ MissionID int, 
+ Description varchar(100),
+ DateDetected varchar(100),
+ Severity varchar(100),
+ Impact varchar(100),
+ ResolvedBy varchar(100),
+ ResolutionDate date,
+ Notes varchar(100),
+Status varchar(100),
+foreign key (MissionId) references Missions(MissionId)
+);
+
+-- insert in values Anomalies 	 table
+insert into Anomalies
+values
+(1, 1, 'Communication blackout', '2022-01-15 02:30', 'High', 'Loss of telemetry for 5 hrs', 'Dr. R. Iyer', '2022-01-16', 'Switched to backup transponder', 'Resolved'),
+(2, 2, 'Fuel line pressure drop', '2021-08-12 14:10', 'Medium', 'Potential thrust loss', 'Dr. A. Thomas', '2021-08-14', 'Inspected valves', 'Resolved'),
+(3, 3, 'Solar panel misalignment', '2023-11-20 11:00', 'High', 'Power reduction', 'Dr. M. Singh', '2023-11-22', 'Reoriented manually', 'Resolved'),
+(4, 4, 'Sensor malfunction', '2023-09-05 08:20', 'Low', 'Minor data distortion', 'Dr. P. Verma', '2023-09-07', 'Recalibrated sensor', 'Resolved'),
+(5, 5, 'Thermal spike', '2022-07-19 13:45', 'Medium', 'Heatsink overload', 'Dr. S. Kamat', '2022-07-20', 'Activated redundant cooling', 'Resolved'),
+(6, 6, 'Orbit drift', '2024-01-10 04:15', 'High', 'Deviation from planned path', 'Dr. L. Prakash', '2024-01-12', 'Performed orbit correction burn', 'Resolved'),
+(7, 7, 'Camera feed glitch', '2023-06-23 19:30', 'Low', 'Video lagging', 'Dr. D. Mehta', '2023-06-24', 'Updated firmware', 'Resolved'),
+(8, 8, 'Power subsystem fault', '2022-03-28 10:50', 'High', 'Satellite temporarily unresponsive', 'Dr. R. Kapoor', '2022-03-30', 'Switched to reserve battery', 'Resolved'),
+(9, 9, 'Thruster overheating', '2023-01-15 05:40', 'Medium', 'Abort risk', 'Dr. V. Rao', '2023-01-16', 'Thrust limit updated', 'Resolved'),
+(10, 10, 'Navigation data error', '2023-04-18 09:00', 'Low', 'Drifted coordinates', 'Dr. B. Nair', '2023-04-19', 'Adjusted GPS calibration', 'Resolved');
+
+
+ -- All table delete queries --
+drop table Anomalies;
+-- all data delete Queries--
+truncate table Anomalies;
+-- show the table--- 
+select *from   Anomalies;
+
+ -- table 26 table  AcademicPartners
+create table AcademicPartners	(
+PartnerID int ,
+ UniversityName varchar(100),
+ ContactPerson varchar(100), 
+ Country varchar(100),
+ AreaOfWork varchar(100), 
+ Projects varchar(100),
+ Budget decimal(10.2), 
+ Duration varchar(100),
+ Status varchar(100)
+ );
+ 
+ -- insert in values AcademicPartners 	 table
+insert into AcademicPartners
+values
+(1, 'University of Mumbai', 'Dr. A. Sharma', 'India',  'AI Research', 'AI for Healthcare', 5000000.00, '12 months', 'Active'),
+(2, 'IIT Bombay', 'Prof. R. Kumar', 'India', 'Quantum Computing', 'Quantum Algorithms', 7500000.00, '18 months', 'Active'),
+(3, 'University of Pune', 'Dr. S. Patel', 'India', 'Data Science', 'Data Analytics for Education', 4000000.00, '10 months', 'Completed'),
+(4, 'IIT Delhi', 'Dr. N. Mehta', 'India', 'Cybersecurity', 'Secure Cloud Computing', 6000000.00, '14 months', 'Active'),
+(5, 'University of Hyderabad', 'Prof. L. Rao', 'India',  'Biotechnology', 'Genetic Engineering', 5500000.00, '16 months', 'Pending'),
+(6, 'IIT Kanpur', 'Dr. P. Singh', 'India', 'Robotics', 'Autonomous Vehicles', 7000000.00, '20 months', 'Active'),
+(7, 'University of Delhi', 'Dr. Q. Sharma', 'India', 'Environmental Science', 'Climate Change Studies', 4500000.00, '12 months', 'Completed'),
+(8, 'IIT Madras', 'Prof. S. Kumar', 'India', 'Machine Learning', 'Deep Learning Models', 6500000.00, '18 months', 'Active'),
+(9, 'University of Kolkata', 'Dr. T. Gupta', 'India',  'Physics', 'Quantum Mechanics Research', 4800000.00, '15 months', 'Pending'),
+(10, 'IIT Roorkee', 'Prof. U. Verma', 'India', 'Civil Engineering', 'Smart Infrastructure', 7200000.00, '22 months', 'Active');
+
+
+ -- All table delete queries --
+ drop table AcademicPartners ;
+-- all data delete Queries--
+truncate table AcademicPartners;
+-- show the table--- 
+ select *from   AcademicPartners;
+ 
+ -- table 27 table Patents	
+create table  Patents	(
+PatentID int primary key,
+ Title varchar(100),
+ Inventor varchar(100),
+ FilingDate date,
+ GrantDate date,
+ Country varchar(100),
+ CenterID int,
+ ApplicationNo varchar(100),
+ Status varchar(100),
+ Field varchar(100),
+ foreign key (CenterID) references Scientists  (CenterID)
+ );
+ 
+ -- insert in values Patents	 table
+insert into Patents
+values
+(1, 'AI-Based Image Recognition System', 'Dr. A. Sharma', '2023-01-15', '2024-03-20', 'India', 101, 'IN20230115001', 'Granted', 'Artificial Intelligence'),
+(2, 'Quantum Computing Algorithm for Optimization', 'Prof. R. Kumar', '2022-11-10', '2023-12-05', 'India', 102, 'IN20221110002', 'Granted', 'Quantum Computing'),
+(3, 'Blockchain-Based Secure Voting System', 'Dr. S. Patel', '2023-05-22', '2024-07-18', 'India', 103, 'IN20230522003', 'Pending', 'Blockchain Technology'),
+(4, 'IoT-Enabled Smart Agriculture Solution', 'Prof. L. Rao', '2023-03-30', '2024-06-25', 'India', 104, 'IN20230330004', 'Pending', 'Internet of Things'),
+(5, 'Augmented Reality for Medical Training', 'Dr. N. Mehta', '2023-07-10', '2024-09-15', 'India', 105, 'IN20230710005', 'Granted', 'Augmented Reality'),
+(6, '5G-Enabled Smart City Infrastructure', 'Dr. P. Singh', '2023-02-05', '2024-04-12', 'India', 106, 'IN20230205006', 'Granted', 'Telecommunications'),
+(7, 'Nanotechnology for Drug Delivery Systems', 'Prof. Q. Gupta', '2023-08-20', '2024-10-25', 'India', 107, 'IN20230820007', 'Pending', 'Nanotechnology'),
+(8, 'AI-Powered Cybersecurity Framework', 'Dr. R. Joshi', '2023-04-15', '2024-06-30', 'India', 108, 'IN20230415008', 'Granted', 'Cybersecurity'),
+(9, 'Autonomous Drone Navigation System', 'Prof. S. Verma', '2023-09-10', '2024-11-05', 'India', 109, 'IN20230910009', 'Pending', 'Robotics'),
+(10, 'Blockchain for Supply Chain Management', 'Dr. T. Rao', '2023-06-25', '2024-08-15', 'India', 110, 'IN20230625010', 'Granted', 'Blockchain Technology');
+
+
+-- All table delete queries --
+ drop table Patents ;
+-- all data delete Queries--
+truncate table Patents  ;
+-- show the table--- 
+ select *from   Patents ;
+ 
+ 
+ -- table 28 table InnovationProjects	
+create table  InnovationProjects	(
+InnovationID int primary key,
+ Title varchar(100),
+ Description varchar(100),
+ Initiator varchar(100),
+ StartDate date,
+ EndDate date,
+ Budget varchar(100),
+ DepartmentID int, 
+ CenterID int,
+ Status varchar(100),
+ foreign key (CenterID) references Scientists  (CenterID),
+  foreign key (DepartmentID) references Departments (DepartmentID)
+  );
+
+-- insert in values InnovationProjects table
+insert into InnovationProjects
+values
+(1, 'AI-Based Image Recognition System', 'Development of an AI model for image classification and recognition.', 'Dr. A. Sharma', '2023-01-15', '2024-01-15', '500000.00', 1, 101, 'Ongoing'),
+(2, 'Quantum Computing Algorithm for Optimization', 'Research on quantum algorithms to solve complex optimization problems.', 'Prof. R. Kumar', '2022-11-10', '2023-11-10', '750000.00', 2, 102, 'Completed'),
+(3, 'Blockchain-Based Secure Voting System', 'Implementation of a secure voting system using blockchain technology.', 'Dr. S. Patel', '2023-05-22', '2024-05-22', '300000.00', 3, 103, 'Ongoing'),
+(4, 'IoT-Enabled Smart Agriculture Solution', 'Development of IoT devices for precision farming and crop monitoring.', 'Prof. L. Rao', '2023-03-30', '2024-03-30', '200000.00', 4, 104, 'Completed'),
+(5, 'Augmented Reality for Medical Training', 'Creation of AR modules for medical student education and training.', 'Dr. N. Mehta', '2023-07-10', '2024-07-10', '400000.00', 5, 105, 'Ongoing'),
+(6, '5G-Enabled Smart City Infrastructure', 'Deployment of 5G technology for smart city applications.', 'Dr. P. Singh', '2023-02-05', '2024-02-05', '1000000.00', 6, 106, 'Completed'),
+(7, 'Nanotechnology for Drug Delivery Systems', 'Research on nanomaterials for targeted drug delivery.', 'Prof. Q. Gupta', '2023-08-20', '2024-08-20', '600000.00', 7, 107, 'Ongoing'),
+(8, 'AI-Powered Cybersecurity Framework', 'Development of AI algorithms for enhanced cybersecurity measures.', 'Dr. R. Joshi', '2023-04-15', '2024-04-15', '500000.00', 8, 108, 'Completed'),
+(9, 'Autonomous Drone Navigation System', 'Design of autonomous drones for surveillance and delivery.', 'Prof. S. Verma', '2023-09-10', '2024-09-10', '700000.00', 9, 109, 'Ongoing'),
+(10, 'Blockchain for Supply Chain Management', 'Implementation of blockchain to enhance supply chain transparency.', 'Dr. T. Rao', '2023-06-25', '2024-06-25', '800000.00', 10, 110, 'Completed');
+
+ 
+ -- All table delete queries --
+ drop table InnovationProjects;
+-- all data delete Queries--
+truncate table InnovationProjects  ;
+-- show the table--- 
+ select *from   InnovationProjects ;
+ 
+ -- table 29 table Astronauts		
+create table  Astronauts	(
+AstronautID int primary key,
+ Name varchar(100),
+ DOB Date,
+ Gender varchar(100),
+ Nationality varchar(100),
+ SelectionDate date,
+ Missions varchar(100),
+ TrainingCenter varchar(100),
+ Status varchar(100),
+ Background varchar(100)
+ );
+ 
+ -- insert in values Astronauts	 table
+insert into Astronauts	
+values
+(1, 'Yuri Gagarin', '1934-03-09', 'Male', 'Soviet Union', '1960-10-12', 'Vostok 1', 'Yuri Gagarin Cosmonaut Training Center', 'Deceased', 'Pilot, Cosmonaut'),
+(2, 'Alan Shepard', '1923-11-18', 'Male', 'USA', '1959-04-09', 'Mercury-Redstone 3, Apollo 14', 'Naval Air Station Patuxent River', 'Deceased', 'Naval Aviator, Test Pilot'),
+(3, 'Valentina Tereshkova', '1937-03-06', 'Female', 'Soviet Union', '1961-10-16', 'Vostok 6', 'Yuri Gagarin Cosmonaut Training Center', 'Retired', 'Engineer, Cosmonaut'),
+(4, 'John Glenn', '1921-07-18', 'Male', 'USA', '1959-04-09', 'Mercury-Atlas 6, STS-95', 'Naval Air Station Patuxent River', 'Deceased', 'Marine Corps Officer, Senator'),
+(5, 'Buzz Aldrin', '1930-01-20', 'Male', 'USA', '1963-10-18', 'Gemini 12, Apollo 11', 'United States Air Force Academy', 'Retired', 'Pilot, Engineer'),
+(6, 'Sally Ride', '1951-05-26', 'Female', 'USA', '1978-07-01', 'STS-7, STS-41-G', 'Stanford University', 'Deceased', 'Physicist, Educator'),
+(7, 'Mae Jemison', '1956-10-17', 'Female', 'USA', '1987-10-07', 'STS-47', 'Cornell University Medical College', 'Retired', 'Physician, Engineer'),
+(8, 'Chris Hadfield', '1959-08-29', 'Male', 'Canada', '1992-07-01', 'STS-74, STS-100, Expedition 35', 'Canadian Forces Base Cold Lake', 'Retired', 'Pilot, Engineer'),
+(9, 'Peggy Whitson', '1960-02-09', 'Female', 'USA', '1996-07-01', 'STS-111, STS-113, Expedition 5, Expedition 16, Expedition 50/51/52', 'Iowa Wesleyan College', 'Retired', 'Biochemist, NASA Chief Astronaut'),
+(10, 'Shubhanshu Shukla', '1986-11-15', 'Male', 'India', '2025-06-09', 'Axiom Mission 2 (ISS)', 'Air Force Academy, Bengaluru', 'Active', 'Pilot Officer, Indian Air Force');
+
+
+-- All table delete queries --
+ drop table Astronauts	;
+-- all data delete Queries--
+truncate table Astronauts	 ;
+-- show the table--- 
+ select *from  Astronauts	 ;
+ 
+ -- table 30 table  SafetyInspections(		
+create table SafetyInspections(
+InspectionID int primary key,
+ SiteID int,
+ Date date,
+ Inspector varchar(100),
+ Department varchar(100),
+ Findings varchar(100),
+ Recommendations varchar(100),
+ ComplianceDate date,
+ Score varchar(100), 
+ Status varchar(100)
+ );
+-- insert in values SafetyInspections	 table
+insert into SafetyInspections
+values
+(1, 101, '2025-05-01', 'John Doe', 'Safety', 'Minor electrical hazard near main entrance.', 'Repair wiring and install warning signs.', '2025-06-01', '85', 'Pending'),
+(2, 102, '2025-05-02', 'Jane Smith', 'Maintenance', 'Leaking pipe in the storage room.', 'Replace damaged pipe and check for further leaks.', '2025-06-05', '90', 'Completed'),
+(3, 103, '2025-05-03', 'Emily Johnson', 'Operations', 'Blocked emergency exit due to stored materials.', 'Clear exit path and relocate materials.', '2025-06-10', '75', 'Pending'),
+(4, 104, '2025-05-04', 'Michael Brown', 'Security', 'Broken security camera in the parking lot.', 'Repair or replace the camera.', '2025-06-15', '80', 'Completed'),
+(5, 105, '2025-05-05', 'Sarah Davis', 'Quality Control', 'Slippery floor in the production area.', 'Place warning signs and schedule floor cleaning.', '2025-06-20', '70', 'Pending'),
+(6, 106, '2025-05-06', 'David Wilson', 'Logistics', 'Unmarked hazardous material storage.', 'Label all hazardous materials and train staff.', '2025-06-25', '95', 'Completed'),
+(7, 107, '2025-05-07', 'Laura Moore', 'Human Resources', 'Inadequate lighting in the break room.', 'Install additional lighting fixtures.', '2025-07-01', '88', 'Pending'),
+(8, 108, '2025-05-08', 'James Taylor', 'Research & Development', 'Unstable shelving in the lab.', 'Secure shelves and check for other hazards.', '2025-07-05', '92', 'Completed'),
+(9, 109, '2025-05-09', 'Patricia Anderson', 'Finance', 'Cluttered walkways in the office area.', 'Organize office supplies and clear walkways.', '2025-07-10', '85', 'Pending'),
+(10, 110, '2025-05-10', 'Robert Thomas', 'IT', 'Overloaded power strips in server room.', 'Distribute electrical load and check equipment.', '2025-07-15', '78', 'Completed');
+
+
+-- All table delete queries --
+ drop table SafetyInspections	;
+-- all data delete Queries--
+truncate table SafetyInspections	 ;
+-- show the table--- 
+ select *from  SafetyInspections ;
 
