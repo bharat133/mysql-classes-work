@@ -1,1 +1,585 @@
+----------------------------------------------------------- create database of company-----------------------------------------------------------------------------
+create database company;
+
+-------------------------------------------------------------- use the database-------------------------------------------------------------------------------------------
+use company;
+
+-------------------------------------------------------------- drop the database------------------------------------------------------------------------------------------
+drop database company;
+
+----------------------------------------- company databse anlysis---------------------------------------------------------------------------------------
+/*
+T1:employee(id,name ,adress,salary,age,contact,email,qualfitaion,birthdate,joiningdate,),
+T2:departmaent(dept_id,dept_name,head of department,adress,projects,section,status,description,totalempolyee,location)
+T3:projects(project_id,project_name,head_of_project,startdate,enddate,cost_of_project,totalemployes,description,status,client_requirement)
+T4:salaries(employee_id,name,overtime,date,salary,department_id,status,salary_type,payment_id,leave_day),
+T5:client(id,name,age,adress,email,contact,client_department,status,payment,project_id),
+*/
+
+/*
+table quires
+1. drop table
+2 .truncate the table
+3.select the table
+*/
+
+
+------ table   employee   ----
+create table employee(
+id int primary key,
+name varchar (100) ,
+adress varchar(100),
+salary int,
+age int check(age>0),
+contact varchar(10),
+email varchar(100),
+qualfitaion varchar(100),
+birthdate date,
+joiningdate date
+);
+
+----------------------------------------- inserting values into the table of employeee------------------------------------------------------------------------------------------------------
+
+insert into employee
+values
+(1,'bharat','jamsande','15000','25','7363736376','sky@gamil.com','diploma','2000-12-05','2015-2-12'),
+(2,'yash','devgad','14000','22','8756736376','bha@gamil.com','12','2001-12-12','2015-2-12'),
+(3,'anish','thane','17000','24','9567736376','rad@gamil.com','diploma','2004-12-3','2015-2-12'),
+(4,'prathmesh','bahndup','17000','21','4356736376','jhar@gamil.com',',msc','2004-7-12','2015-2-12'),
+(5,'bhavesh','pune','19000','22','7363736754','bkd@gamil.com','bsc','2004-11-07','2015-2-12'),
+(6,'athrav','nashik','11000','24','7363736342','lou@gamil.com','diploma','2000-4-05','2015-2-12'),
+(7,'soyam','kahashi','13000','21','6574736376','yupgamil.com','gartuate','2005-11-18','2015-2-12'),
+(8,'viraj','uttarpardesh','17000','26','7385636376','okl@gamil.com','mba','2000-12-23','2015-2-12'),
+(9,'sahil','jammu','18000','27','3241736376','pls@gamil.com','gartuate','2002-10-12','2015-2-12'),
+(10,'manswii','jamsande','19000','21','8907736376','tsr@gamil.com','10','2001-11-04','2015-2-12');
+
+----------------------------------------- showing the table database -----------------------------------------------------------------------------------------------------------------
+select*from employee;
+
+---- drop the table--------
+drop table employee;
+
+----- delete values of table
+truncate table employee;
+
+----------------------------------------------------------- all 20 quiers--------------------------------------------------------------------------------------------------------------------------------------------
+-- 1.Select specific columns
+   select name,NAME  from  employee;  
+   
+   
+   -- 2 .select a  employee by name
+   select * from  employee where name ='bharat'; 
+   
+   -- 3 count the number of NAME
+   select count(*) as total_NAME from  employee;
+   
+   -- 4 .select  employee with a name containing a specific worid
+   select * from  employee where name like'%bharat%';
+   
+   -- 5 select  employee order by DESCRIPTION
+   select * from  employee  order by  DESCRIPTION ;
+   
+   -- 6 select  employee wiTH email
+   SELECT * FROM  employee where email like '%sky@gamil.com';
+   
+   -- 7 Select  employee LESS than 10 character
+   select * from  employee where char_length(name )<10;
+   
+   -- 8 elect the first 2  employee
+   select * from  employee LIMIT 2;
+   
+   -- 9 select  employee name longer Than 5 character
+   select * from  employee where char_length(name)>5;
+   
+   -- 10 select  employee with name that does not coNTAIN 'bharat'--
+   select * from  employee where name not like '%bharat%';
+   
+   -- 11.  SELECT THE employee WITH shortest NAME
+   select * from  employee order by char_length(name) desc limit 6;
+   
+   -- 12.select   employee with descrioption containg a
+   select* from  employee where name like '%a';
+   
+   -- 13 select countries with cappital city that  is not'london'
+   select * from  employee where name !='bharat';
+
+
+-- 14 select the total number of unquie name
+select count(distinct name) as unquie_name from employee;
+
+-- 15 select  employee with the name that have more than 10 character
+select* from  employee where char_length(name)> 10;
+
+-- 16 select  employee order by description 
+select * from  employee order by   contact;
+
+-- 17 select  employee with name that is not null 
+select * from  employee where name is not nulL;
+
+-- 18. SELECT  employee WHERE name CONTAING 'v'
+SELECT * FROM  employee where name like '%v%';
+
+-- 19. Select employee with dept name that Have More than 6 Characters
+SELECT * FROM employee WHERE CHAR_LENGTH(name) > 6;
+
+-- 20. Select employee twith a project name that Does Not Contain 'ai agent'
+SELECT * FROM employee WHERE name  NOT LIKE '%hr%';
+
+
+-- table2 department
+create table departmaent(
+dept_id int primary key ,
+dept_name varchar(100),
+head_of_department varchar(100),
+adress varchar(100),
+projects varchar(100),
+section varchar(100),
+status varchar(100),
+description varchar(100),
+totalempolyee int,
+location varchar(100)
+
+);
+
+----- insrting value into the department table
+insert into departmaent
+value
+(101,'digitalmarketing','viraj','devgad','ai agent','c','work','good for empolyee','23','incompany'),
+(102,'hr','bahrat','pune','bilder plan','d','leave','good for empolyee','29','work from home'),
+(103,'hr','yash','khashi','fiance','c','work','good for empolyee','13','incompany'),
+(104,'tranning','anish','bhandup','startup','f','leave','good for empolyee','25','workforhome'),
+(105,'data handler','athrav','thane','it company','d','work','good for empolyee','19','incompany'),
+(106,'office exutive','mansawii','virar','book stall','h','leave','good for empolyee','11','workhome'),
+(107,'data entry','gaurii','goa','isro machniaryies','a','work','good for empolyee','10','incompany'),
+(108,'it ','akshay','vasai','agent building','g','work','good for empolyee','20','incompany'),
+(109,'promotion','more','diva','wedder machine','k','leave','good for empolyee','11','incompany'),
+(110,'hr','prafula','uttar','agent ai','l','work','good for empolyee','23','workforhome');
+
+
+----------------- showing table data base------
+select*from departmaent;
+
+---- drop the table--------
+drop table departmaent;
+
+----- delete values of table
+truncate tabledepartmaent;
+
+-------------------------------------------------- all 20 queries----------------------------------------------------------------------------------------
+-- 1.Select specific columns
+   select name,NAME  from  departmaent;  
+   
+   
+   -- 2 .select a  departmaent by name
+   select * from  departmaent where adress ='devgad'; 
+   
+   -- 3 count the number of NAME
+   select count(*) as total_NAME from  departmaent;
+   
+   -- 4 .select  departmaent with a name containing a specific worid
+   select * from departmaent where adress like'%devgad%';
+   
+   -- 5 select  departmaent order by DESCRIPTION
+   select * from departmaent  order by  adress;
+   
+   -- 6 select departmaent wiTH email
+   SELECT * FROM departmaent where location like 'incompany';
+   
+   -- 7 Select  departmaent LESS than 10 character
+   select * from  departmaent where char_length(adress )<10;
+   
+   -- 8 elect the first 2 departmaent
+   select * from   departmaent LIMIT 2;
+   
+   -- 9 select  departmaent name longer Than 5 character
+   select * from  departmaent where char_length(adress)>5;
+   
+   -- 10 select  departmaent with name that does not coNTAIN 'bharat'--
+   select * from  departmaent where adress not like '%davgad%';
+   
+   -- 11.  SELECT TH Edepartmaent WITH shortest NAME
+   select * from  departmaent order by char_length(dept_id) desc limit 6;
+   
+   -- 12.select   departmaent with adress containg a devgad
+   select* from  departmaent where adress like '%devgad';
+   
+   -- 13 select departmaent with cappital city that  is not'london'
+   select * from  departmaent where adress !='devgad';
+
+
+-- 14 select the total number of unquie 
+select count(distinct dept_name) as unquie_name from departmaent;
+
+-- 15 select departmaent with the name that have more than 10 character
+select* from  departmaent where char_length(adress)> 10;
+
+-- 16 select  departmaent order by status 
+select * from departmaent order by  status ;
+
+-- 17 select  departmaent withdepy_id that is not null 
+select * from  departmaent where dept_id is not nulL;
+
+-- 18. SELECT  departmaent WHERE adress CONTAING 'v'
+SELECT * FROM departmaent where adress like '%v%';
+
+ -- 19. Select departmaentwith dept name that Have More than 6 Characters
+SELECT * FROM departmaent WHERE CHAR_LENGTH(dept_name) > 6;
+
+-- 20. Select departmaenttwith a project name that Does Not Contain 'ai agent'
+SELECT * FROM departmaent WHERE dept_name  NOT LIKE '%hr%';
+
+
+----------- table 3 projects
+create table projects(
+project_id int primary key,
+project_name varchar(100),
+head_of_project varchar(100),
+startdate date,
+enddate date,
+cost_of_project varchar(100),
+totalemployes int,
+description varchar(100),
+status varchar(100),
+client_requirement varchar(100)
+);
+
+----- inmserting value in theble projects
+insert into projects
+value
+(1,'ai agent','bharat','2004-12-3','2005-12-5','200000','23','projects is in good work to complete','onboarding','computers'),
+(2,'fiance','yash','2007-12-6','2008-12-5','120000','56','projects is in good work to complete','active','computers'),
+(3,'building','arti','2005-11-8','2006-12-5','230000','12','projects is in good work to complete','onboarding','cement'),
+(4,'farmhouse','parthmesh','2007-12-6','2008-12-5','670000','11','projects is in good work to complete','inactive','soil'),
+(5,'school','anish','2004-12-3','2005-8-8','800000','67','projects is in good work to complete','onboarding','bench'),
+(6,'hotel','athrav','2004-12-3','2005-10-8','980000','89','projects is in good work to complete','onboarding','chair'),
+(7,'wendder pandu','pandu','2008-12-7','2009-12-5','900000','12','projects is in good work to complete','active','oil'),
+(8,'book printer','parfulla','2016-12-13','2017-12-5','760000','14','projects is in good work to complete','onboarding','printing ink'),
+(9,'it','more','2004-12-3','2005-11-5','450000','45','projects is in good work to complete','inactive','computers'),
+(10,'cement miing','dattraj','2025-12-3','2026-12-5','780000','23','projects is in good work to complete','onboarding','bomb minning');
+
+
+-------- showing the table data
+select*from projects;
+
+---- drop the table--------
+drop table projects;
+
+----- delete values of table
+truncate table projects;
+
+-------- select quiers
+-- 1.Select specific columns
+   select name,NAME  from  projects;  
+   
+   
+   -- 2 .select a   projects by name
+   select * from   projects where  description ='good work'; 
+   
+   -- 3 count the number of NAME
+   select count(*) as total_NAME from   projects;
+   
+   -- 4 .select   projects with a status containing a specific worid
+   select * from  projects where status like'%active%';
+   
+   -- 5 select  projects order by DESCRIPTION
+   select * from projects  order by  status;
+   
+   -- 6 select projects wiTH status
+   SELECT * FROM projects where status like 'onboarding';
+   
+   -- 7 Select  projects LESS than 10 character
+   select * from  projects where char_length(status)<10;
+   
+   -- 8 elect the first 2 departmaent
+   select * from   departmaent LIMIT 2;
+   
+   -- 9 select  projects name longer Than 5 character
+   select * from   projects where char_length(project_name)>5;
+   
+   -- 10 select   projects with name that does not coNTAIN 'ai agent'--
+   select * from  projects where project_name not like '%ai agent%';
+   
+   -- 11.  SELECT TH Eprojects WITH shortest NAME
+   select * from  projects order by char_length(project_name) desc limit 6;
+   
+   -- 12.select  projects with adress containg a devgad
+   select* from  projects where adress like '%devgad';
+   
+   -- 13 select projects with project_name that  is not'ai agent'
+   select * from  projects where project_name!='ai agent';
+
+
+-- 14 select the total number of unquie 
+select count(distinct project_name) as unquie_name from projects;
+
+-- 15 select projects with the name that have more than 10 character
+select* from  projects where char_length(adress)> 10;
+
+-- 16 select  projects order by status 
+select * from projects order by  status ;
+
+-- 17 select  projects with project_idthat is not null 
+select * from projects where project_id is not nulL;
+
+-- 18. SELECT  projects WHERE project CONTAING 'v'
+SELECT * FROM projects where project_name like '%v%';
+
+ -- 19. Selectprojects with name that Have More than 6 Characters
+SELECT * FROM projects WHERE CHAR_LENGTH(project_name) > 6;
+
+-- 20. Select projects twith a project name that Does Not Contain 'ai agent'
+SELECT * FROM projects WHERE project_name  NOT LIKE '%ai agent%';
+
+
+
+-------- cretating table 4 salaries
+create table salaries(
+employee_id int,
+name varchar(100),
+overtime time,
+date date,
+salary varchar(100),
+department_id int,
+status varchar(100),
+salary_type varchar(100),
+payment_id varchar(100),
+leave_day int,
+foreign key (employee_id) referenceS  employee (id),
+foreign key(department_id ) references departmaent(dept_id)
+);
+
+
+
+-------- insert values in this table
+
+insert into salaries
+value
+(1,'bharat','1','2004-12-3','12000','101','done','online','123','14'),
+(2,'anish','12','2012-11-4','14000','102','pending','online','321','10'),
+(3,'yash','12','2012-12-22','16000','103','done','online','345','11'),
+(4,'prathmesh','12','2017-11-3','18000','104','done','online','098','17'),
+(5,'kharat','12','2009-12-12','17800','105','pending','online','638','12'),
+(6,'prafulla','12','2012-6-3','19000','106','done','online','921','6'),
+(7,'mahesh','12','2004-8-3','12000','107','done','online','154','19'),
+(8,'arti','12','2004-8-3','11000','108','done','online','785','20'),
+(9,'gauri','12','2004-9-3','11000','109','done','pending','987','16'),
+(10,'mansawii','12','2014-11-3','23000','110','done','online','147','22');
+
+
+----------- showing table data of salries
+select*from salaries;
+
+---- drop the table--------
+drop table salaries;
+
+----- delete values of table--
+truncate table salaries;
+
+----------- select quires
+-- 1.Select specific columns
+   select name,NAME  from  salaries;  
+   
+   
+   -- 2 .select a  salaries by name
+   select * from  salaries where name ='bharat'; 
+   
+   -- 3 count the number of NAME
+   select count(*) as total_NAME from   salaries;
+   
+   -- 4 .select   salaries with  status a containing a specific worid done
+   select * from  salaries where status like'%done%';
+   
+   -- 5 select  salaries order by DESCRIPTION
+   select * from salaries  order by  status;
+   
+   -- 6 select salaries wiTH status
+   SELECT * FROM salaries where status like 'done';
+   
+   -- 7 Select  salaries  name LESS than 10 character
+   select * from  salaries where char_length(name)<10;
+   
+   -- 8 elect the first 2 salaries
+   select * from   salaries LIMIT 2;
+   
+   -- 9 select  salaries name longer Than 5 character
+   select * from   salaries where char_length(name)>5;
+   
+   -- 10 select salaries with name that does not coNTAIN 'bharat'--
+   select * from  salaries where name not like '%bharat%';
+   
+   -- 11.  SELECT TH salariess WITH shortest NAME
+   select * from  salaries order by char_length(name) desc limit 6;
+   
+   -- 12.select  salaries withname containg a anish
+   select* from  salaries where name like '%anish';
+   
+   -- 13 select salaries with name that  is not'bharat'
+   select * from  salaries where name!='bharat';
+
+
+-- 14 select the total number of unquie 
+select count(distinct name) as unquie_name from salaries;
+
+-- 15 select salaries with the name that have more than 10 character
+select* from  salaries where char_length(name)> 10;
+
+-- 16 select salaries order by status 
+select * from salaries order by  status ;
+
+-- 17 select  salaries with with that is not null 
+select * from salaries where name is not nulL;
+
+-- 18. SELECT  salaries WHERE name CONTAING 'an'
+SELECT * FROM salaries where name like '%an%';
+ 
+ -- 19. Select salaries with Names that Have More than 6 Characters
+SELECT * FROM salaries WHERE CHAR_LENGTH(name) > 6;
+
+-- 20. Select salaries twith a name that Does Not Contain 'country'
+SELECT * FROM salaries WHERE name  NOT LIKE '%bharat%';
+
+
+
+
+-------- creating the table 5
+
+create table client (
+id int ,
+name varchar(100),
+age varchar(100),
+adress varchar(100),
+email varchar(100),
+contact varchar(100),
+client_department varchar(100),
+status varchar(100),
+payment varchar(100),
+project_id varchar(100),
+foreign key (id) references employee (id)
+);
+
+
+-------- inserting values in it tables
+insert into client
+value
+(1,'bharat','20','jamsande','sky@gmail.com','8530329452','money','active','online','123'),
+(2,'yash','21','devgad','bha@gmail.com','5678329452','money','inactive','cash','673'),
+(3,'anish','25','ullas nagar','oku@gmail.com','2376329452','money','active','online','903'),
+(4,'prathmesh','25','pune','ert@gmail.com','8530320956','money','active','cash','675'),
+(5,'manish','26','mumbai','sdr@gmail.com','6749329452','money','inactive','online','233'),
+(6,'sanika','22','jamsahedpur','tyu@gmail.com','8530329452','money','active','online','078'),
+(7,'gaurav','21','thane','iol@gmail.com','8530329452','money','active','cash','213'),
+(8,'aknath','25','goa','qqe@gmail.com','8530329452','money','inactive','online','567'),
+(9,'gauri','27','bhandup','opg@gmail.com','786329452','money','active','cash','745'),
+(10,'samiksha','22','diva','qwe@gmail.com','9754329452','money','inactive','online','265');
+
+----------- showing tables data
+select*from client;
+
+---- drop the table--------
+drop table client;
+
+----- delete values of table--
+truncate table client;
+
+
+----------- select quires
+-- 1.Select specific columns
+   select name,NAME  from client;  
+   
+   
+   -- 2 .select a  client by name
+   select * from  client where name ='bharat'; 
+   
+   -- 3 count the number of NAME
+   select count(*) as total_NAME from  client;
+   
+   -- 4 .select  client with  name a containing a specific worid done
+   select * from  client where name like'%done%';
+   
+   -- 5 select  client order by name
+   select * from client  order by  name;
+   
+   -- 6 select client wiTH name
+   SELECT * FROM client where name like 'bharat';
+   
+   -- 7 Select  client  name LESS than 10 character
+   select * from  client  where char_length(name)<10;
+   
+   -- 8 elect the first 2 client 
+   select * from   client  LIMIT 2;
+   
+   -- 9 select  client  name longer Than 5 character
+   select * from   client  where char_length(name)>5;
+   
+   -- 10 select client  with name that does not coNTAIN 'bharat'--
+   select * from  client  where name not like '%bharat%';
+   
+   -- 11.  SELECT TH client  WITH shortest NAME
+   select * from  client  order by char_length(name) desc limit 6;
+   
+   -- 12.select  client  withname containg a anish
+   select* from  client  where name like '%anish';
+   
+   -- 13 select client  with name that  is not'bharat'
+   select * from  client  where name!='bharat';
+
+
+-- 14 select the total number of unquie 
+select count(distinct name) as unquie_name from client ;
+
+-- 15 select  client with the name that have more than 10 character
+select* from   client where char_length(name)> 10;
+
+-- 16 select  client order by id
+select * from  client order by  id ;
+
+-- 17 select  client with with that is not null 
+select * from  client where name is not nulL;
+
+-- 18. SELECT   client WHERE name CONTAING 'an'
+SELECT * FROM  client where name like '%an%';
+
+-- 19. Select client with Names that Have More than 6 Characters
+SELECT * FROM client WHERE CHAR_LENGTH(name) > 6;
+
+-- 20. Select clientwith a name that Does Not Contain 'country'
+SELECT * FROM client WHERE name  NOT LIKE '%bharat%';
+
+
+
+-------------------------------------------- database of company is finish ----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
