@@ -1,1 +1,2612 @@
 
+-------------------------- create database with 30 database with 5 attributes --------------------------------------------------------------
+
+-- for create database
+create database bharat;
+
+-- for use of database 
+use bharat;
+
+-- for drop the database 
+drop database bharat;
+
+-------------------------- 30  database tables with their 5 tables and 5 attributes  analysis------------------------------------------------------------------------
+/*
+
+
+
+
+
+1. Hospital Management System
+Patients: PatientID, Name, DOB, Gender, Diagnosis
+Doctors: DoctorID, Name, Specialty, YearsExperience, Department
+Appointments: AppointmentID, PatientID, DoctorID, Date, Status
+Prescriptions: PrescriptionID, PatientID, Medication, Dosage, StartDate
+Billing: InvoiceID, PatientID, Amount, Date, Paid
+
+2. University Academic System
+Students: StudentID, Name, Major, EnrollmentYear, Email
+Courses: CourseID, Title, Credits, Department, InstructorID
+Enrollments: EnrollmentID, StudentID, CourseID, Semester, Grade
+Faculty: FacultyID, Name, Department, Title, HireDate
+Classrooms: RoomID, Building, Capacity, Type, Availability
+
+3. ECommerce Platform
+Customers: CustomerID, Name, Email, Phone, SignupDate
+Products: ProductID, Name, Category, Price, Stock
+Orders: OrderID, CustomerID, OrderDate, TotalAmount, Status
+OrderItems: OrderItemID, OrderID, ProductID, Quantity, Price
+Reviews: ReviewID, ProductID, CustomerID, Rating, Comment
+
+4. Banking System
+Accounts: AccountID, CustomerID, Balance, AccountType, OpenDate
+Customers: CustomerID, Name, Address, SSN, DOB
+Transactions: TransactionID, AccountID, Date, Type, Amount
+Loans: LoanID, CustomerID, LoanType, Amount, StartDate
+Branches: BranchID, Name, City, ManagerID, OpenDate
+
+5. Airline Reservation System
+Flights: FlightID, Airline, Origin, Destination, Status
+Passengers: PassengerID, Name, PassportNumber, DOB, Nationality
+Bookings: BookingID, PassengerID, FlightID, BookingDate, Seat
+Crew: CrewID, Name, Role, AssignedFlightID, HireDate
+Airports: AirportID, Name, City, Country, TimeZone
+
+6. Hotel Management System
+Guests: GuestID, Name, Email, Phone, LoyaltyMember
+Reservations: ReservationID, GuestID, RoomID, CheckIn, Nights
+Rooms: RoomID, Type, Rate, Floor, Status
+Staff: StaffID, Name, Role, Department, HireDate
+Payments: PaymentID, ReservationID, Amount, Method, Date
+
+7. Retail Point‑of‑Sale System
+Products: ProductID, Name, Price, Category, Stock
+Sales: SaleID, Date, CashierID, Total, PaymentMethod
+Customers: CustomerID, Name, Email, Phone, MemberSince
+Cashiers: CashierID, Name, Shift, HireDate, ManagerID
+Suppliers: SupplierID, Name, ProductCategory, ContactInfo, Rating
+
+8. Logistics & Shipping
+Shipments: ShipmentID, Origin, Destination, Weight, Status
+Couriers: CourierID, Name, Region, Phone, Active
+Packages: PackageID, ShipmentID, Weight, ContentType, Fragile
+Warehouses: WarehouseID, City, Capacity, ManagerID, ISOCode
+Routes: RouteID, Start, End, Distance, EstimatedTime
+
+9. Insurance Claims Processing
+Policies: PolicyID, CustomerID, Type, Premium, StartDate
+Customers: CustomerID, Name, DOB, Address, Email
+Claims: ClaimID, PolicyID, Date, ClaimType, Amount
+Adjusters: AdjusterID, Name, Region, HireDate, LicenseNo
+Payments: PaymentID, ClaimID, Amount, Date, Method
+
+10. Media Streaming Service
+Users: UserID, Name, Email, SubscriptionPlan, JoinDate
+Titles: TitleID, Name, Genre, ReleaseYear, Rating
+WatchHistory: WatchID, UserID, TitleID, WatchDate, Duration
+Subscribers: SubscriberID, UserID, Plan, MonthlyFee, Status
+Reviews: ReviewID, UserID, TitleID, Rating, Text
+
+11. Social Media Platform
+Users: UserID, Name, Username, Email, SignUpDate
+Posts: PostID, UserID, Content, Timestamp, Likes
+Comments: CommentID, PostID, UserID, CommentText, Timestamp
+Followers: FollowerID, UserID, FollowerUserID, Since, Status
+Messages: MessageID, FromUserID, ToUserID, MessageText, SentAt
+
+12. IoT Smart Home System
+Devices: DeviceID, Type, Status, Location, LastActive
+Users: UserID, Name, Email, AuthLevel, CreatedAt
+DeviceLogs: LogID, DeviceID, Timestamp, Action, Status
+Scenes: SceneID, Name, Trigger, Actions, Active
+Alerts: AlertID, DeviceID, AlertType, Timestamp, Resolved
+
+13. Manufacturing ERP
+Products: ProductID, Name, Category, UnitCost, Stock
+Suppliers: SupplierID, Name, Contact, Rating, Country
+PurchaseOrders: POID, SupplierID, Date, TotalAmount, Status
+WorkOrders: WOID, ProductID, Quantity, StartDate, Status
+Inventory: InventoryID, ProductID, WarehouseID, Quantity, LastUpdated
+
+14. Real Estate Management
+Properties: PropertyID, Address, Type, Bedrooms, Price
+Owners: OwnerID, Name, Phone, Email, Address
+Tenants: TenantID, Name, LeaseStart, LeaseEnd, MonthlyRent
+Payments: PaymentID, TenantID, Amount, Date, Method
+Inspections: InspectionID, PropertyID, InspectorID, Date, Status
+
+15. Education LMS (Learning Management System)
+Instructors: InstructorID, Name, Department, Email, HireDate
+Courses: CourseID, Name, Credits, InstructorID, Term
+Students: StudentID, Name, Major, Year, Email
+Assignments: AssignmentID, CourseID, Title, DueDate, MaxScore
+Submissions: SubmissionID, AssignmentID, StudentID, SubmitDate, Score
+
+16. Event Ticketing Platform
+Events: EventID, Name, VenueID, Date, Capacity
+Venues: VenueID, Name, City, Capacity, Type
+Attendees: AttendeeID, Name, Email, TicketType, CheckedIn
+Tickets: TicketID, EventID, AttendeeID, Price, PurchaseDate
+Staff: StaffID, EventID, Role, Name, Contact
+
+17. Restaurant Reservation & Orders
+Restaurants: RestaurantID, Name, Address, Cuisine, Rating
+Tables: TableID, RestaurantID, Seats, Location, Status
+Reservations: ResID, TableID, GuestName, Date, Time
+Orders: OrderID, ResID, ItemID, Quantity, Price
+MenuItems: ItemID, RestaurantID, Name, Price, Availability
+
+18. Healthcare Insurance
+Members: MemberID, Name, DOB, PlanType, JoinDate
+Policies: PolicyID, MemberID, CoverageType, Premium, EffectiveDate
+Claims: ClaimID, PolicyID, Date, Diagnosis, Amount
+Providers: ProviderID, Name, Specialty, City, Rating
+Visits: VisitID, MemberID, ProviderID, VisitDate, Reason
+
+19. Sports League Management
+Teams: TeamID, Name, City, CoachID, FoundedYear
+Players: PlayerID, Name, TeamID, Position, JerseyNumber
+Matches: MatchID, HomeTeamID, AwayTeamID, Date, Venue
+Scores: ScoreID, MatchID, TeamID, Goals, Fouls
+Referees: RefereeID, Name, ExperienceYears, Nationality, AssignedMatches
+
+20. Car Rental System
+Cars: CarID, Make, Model, Year, DailyRate
+Customers: CustomerID, Name, LicenseNo, Phone, Email
+Rentals: RentalID, CarID, CustomerID, StartDate, EndDate
+Payments: PaymentID, RentalID, Amount, Date, Method
+Maintenance: MaintID, CarID, Date, Description, Cost
+
+21. Publishing House
+Authors: AuthorID, Name, Country, DOB, Genre
+Books: BookID, Title, AuthorID, PublishYear, ISBN
+Sales: SaleID, BookID, DateSold, Quantity, TotalAmount
+Editors: EditorID, Name, Specialty, BookID, HireDate
+Contracts: ContractID, AuthorID, StartDate, EndDate, RoyaltyRate
+
+22. Charity / NonProfit Organization
+Donors: DonorID, Name, Email, Phone, JoinDate
+Donations: DonationID, DonorID, Date, Amount, CampaignID
+Campaigns: CampaignID, Title, StartDate, EndDate, GoalAmount
+Volunteers: VolunteerID, Name, Availability, Skills, JoinedDate
+Events: EventID, Name, Date, Location, AttendeesCount
+
+23. Pharmaceutical Research
+Studies: StudyID, Title, Phase, StartDate, PrincipalInvestigator
+Patients: PatientID, StudyID, Age, Gender, EnrollmentDate
+Medications: MedicationID, Name, Dosage, Manufacturer, ExpiryDate
+Visits: VisitID, PatientID, VisitDate, Observations, AdverseEvents
+Results: ResultID, VisitID, Measurement, Value, Unit
+
+24. Music Streaming Analytics
+Songs: SongID, Title, Artist, Genre, Duration
+Listeners: ListenerID, Name, Country, SubscriptionType, JoinDate
+Plays: PlayID, ListenerID, SongID, Timestamp, Device
+Playlists: PlaylistID, ListenerID, Name, CreatedDate, SongCount
+Likes: LikeID, ListenerID, SongID, Timestamp, Platform
+
+25. Advertising Platform
+Advertisers: AdvertiserID, Name, Industry, ContactEmail, Budget
+Campaigns: CampaignID, AdvertiserID, StartDate, EndDate, Objective
+Ads: AdID, CampaignID, Format, ImpressionCount, ClickCount
+Platforms: PlatformID, Name, Type, AudienceSize, Region
+Billing: BillID, AdvertiserID, Period, Amount, Paid
+
+26. Film Production Studio
+Films: FilmID, Title, Genre, ReleaseDate, Budget
+Actors: ActorID, Name, DOB, Nationality, AgentID
+Crew: CrewID, FilmID, Role, Name, ExperienceYears
+Locations: LocationID, FilmID, City, Country, DurationDays
+BoxOffice: BOID, FilmID, OpeningWeekend, TotalGross, Region
+
+27. Legal Case Management
+Clients: ClientID, Name, Address, Phone, Email
+Cases: CaseID, ClientID, CaseType, StartDate, Status
+Lawyers: LawyerID, Name, Specialty, HireDate, CasesHandled
+Hearings: HearingID, CaseID, Date, Courtroom, Outcome
+Invoices: InvoiceID, CaseID, IssueDate, Amount, Paid
+
+28. Smart Agriculture / Farm IoT
+Fields: FieldID, CropType, AreaAcres, IrrigationType, SoilType
+Sensors: SensorID, FieldID, SensorType, LastCalibration, Status
+Readings: ReadingID, SensorID, Timestamp, Value, Unit
+Fertilizers: FertilizerID, Name, ApplicationRate, CostPerAcre, Supplier
+Harvests: HarvestID, FieldID, Date, YieldKg, QualityGrade
+
+29. Travel Booking Platform
+Users: UserID, Name, Email, PreferredDestinations, JoinedDate
+Trips: TripID, UserID, Destination, StartDate, EndDate
+Accommodations: AccID, TripID, HotelName, CheckIn, Nights
+Flights: FlightBookingID, TripID, Airline, FlightNumber, Date
+Reviews: ReviewID, TripID, Rating, Comment, Date
+
+30. Art Gallery Management
+Artists: ArtistID, Name, Nationality, BirthYear, Style
+Artworks: ArtworkID, Title, ArtistID, YearCreated, Medium
+Exhibitions: ExhibitionID, Name, StartDate, EndDate, Venue
+Sales: SaleID, ArtworkID, BuyerName, Date, SalePrice
+Curators: CuratorID, Name, ExhibitionID, ExperienceYears, Specialty
+*/
+
+
+-- first databse of hospital mangement system
+CREATE TABLE Patients (
+    PatientID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DOB DATE,
+    Gender VARCHAR(10),
+    Diagnosis VARCHAR(255)
+);
+
+INSERT INTO Patients VALUES
+(1, 'John Doe', '1980-03-15', 'Male', 'Diabetes'),
+(2, 'Jane Smith', '1992-07-22', 'Female', 'Asthma'),
+(3, 'Carlos Vega', '1975-11-05', 'Male', 'Hypertension'),
+(4, 'Fatima Noor', '1988-02-10', 'Female', 'Fracture'),
+(5, 'Mohammed Ali', '2000-09-30', 'Male', 'Migraine');
+
+CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Specialty VARCHAR(100),
+    YearsExperience INT,
+    Department VARCHAR(100)
+);
+
+INSERT INTO Doctors VALUES
+(101, 'Dr. Alice Green', 'Cardiology', 12, 'Cardio Dept'),
+(102, 'Dr. Rahul Singh', 'Orthopedics', 8, 'Ortho Dept'),
+(103, 'Dr. Sarah Brown', 'Pediatrics', 5, 'Child Care'),
+(104, 'Dr. Omar Youssef', 'Neurology', 15, 'Neuro Dept'),
+(105, 'Dr. Emma Wang', 'Dermatology', 6, 'Skin Care');
+
+CREATE TABLE Appointments (
+    AppointmentID INT PRIMARY KEY,
+    PatientID INT,
+    DoctorID INT,
+    Date DATE,
+    Status VARCHAR(20),
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+);
+
+INSERT INTO Appointments VALUES
+(1001, 1, 101, '2025-07-01', 'Completed'),
+(1002, 2, 102, '2025-07-02', 'Scheduled'),
+(1003, 3, 104, '2025-07-03', 'Completed'),
+(1004, 4, 102, '2025-07-04', 'Cancelled'),
+(1005, 5, 105, '2025-07-05', 'Scheduled');
+
+CREATE TABLE Prescriptions (
+    PrescriptionID INT PRIMARY KEY,
+    PatientID INT,
+    Medication VARCHAR(100),
+    Dosage VARCHAR(50),
+    StartDate DATE,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
+);
+
+INSERT INTO Prescriptions VALUES
+(5001, 1, 'Metformin', '500mg twice daily', '2025-07-01'),
+(5002, 2, 'Ventolin', '2 puffs as needed', '2025-07-02'),
+(5003, 3, 'Lisinopril', '10mg once daily', '2025-07-03'),
+(5004, 4, 'Ibuprofen', '400mg as needed', '2025-07-04'),
+(5005, 5, 'Sumatriptan', '50mg at onset', '2025-07-05');
+
+
+CREATE TABLE Billing (
+    InvoiceID INT PRIMARY KEY,
+    PatientID INT,
+    Amount DECIMAL(10, 2),
+    Date DATE,
+    Paid BOOLEAN,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
+);
+
+INSERT INTO Billing VALUES
+(9001, 1, 150.00, '2025-07-01', TRUE),
+(9002, 2, 300.00, '2025-07-02', FALSE),
+(9003, 3, 220.50, '2025-07-03', TRUE),
+(9004, 4, 130.00, '2025-07-04', FALSE),
+(9005, 5, 175.75, '2025-07-05', TRUE);
+
+----- second database university accadmy system
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Major VARCHAR(100),
+    EnrollmentYear INT,
+    Email VARCHAR(100)
+);
+
+INSERT INTO Students VALUES
+(1001, 'Alice Johnson', 'Computer Science', 2022, 'alice.johnson@example.edu'),
+(1002, 'Brian Chen', 'Mathematics', 2021, 'brian.chen@example.edu'),
+(1003, 'Sophia Lee', 'Biology', 2023, 'sophia.lee@example.edu'),
+(1004, 'David Kim', 'Economics', 2022, 'david.kim@example.edu'),
+(1005, 'Nina Patel', 'History', 2020, 'nina.patel@example.edu');
+
+CREATE TABLE Courses (
+    CourseID VARCHAR(10) PRIMARY KEY,
+    Title VARCHAR(100),
+    Credits INT,
+    Department VARCHAR(100),
+    InstructorID INT
+);
+
+INSERT INTO Courses VALUES
+('CS101', 'Intro to Programming', 3, 'Computer Science', 201),
+('MATH201', 'Calculus II', 4, 'Mathematics', 202),
+('BIO150', 'General Biology', 4, 'Biology', 203),
+('ECON210', 'Microeconomics', 3, 'Economics', 204),
+('HIST300', 'World History', 3, 'History', 205);
+
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY,
+    StudentID INT,
+    CourseID VARCHAR(10),
+    Semester VARCHAR(10),
+    Grade VARCHAR(2),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+
+INSERT INTO Enrollments VALUES
+(1, 1001, 'CS101', 'Fall', 'A'),
+(2, 1002, 'MATH201', 'Spring', 'B+'),
+(3, 1003, 'BIO150', 'Fall', 'A-'),
+(4, 1004, 'ECON210', 'Summer', 'B'),
+(5, 1005, 'HIST300', 'Spring', 'A');
+
+CREATE TABLE Faculty (
+    FacultyID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Department VARCHAR(100),
+    Title VARCHAR(50),
+    HireDate DATE
+);
+
+INSERT INTO Faculty VALUES
+(201, 'Dr. Emily Zhang', 'Computer Science', 'Associate Professor', '2017-08-15'),
+(202, 'Dr. Mark Rivera', 'Mathematics', 'Professor', '2010-01-10'),
+(203, 'Dr. Olivia Grant', 'Biology', 'Assistant Professor', '2019-09-01'),
+(204, 'Dr. Henry Adams', 'Economics', 'Lecturer', '2015-03-21'),
+(205, 'Dr. Aisha Malik', 'History', 'Professor', '2012-06-05');
+
+CREATE TABLE Classrooms (
+    RoomID VARCHAR(10) PRIMARY KEY,
+    Building VARCHAR(50),
+    Capacity INT,
+    Type VARCHAR(30),
+    Availability VARCHAR(10)
+);
+
+INSERT INTO Classrooms VALUES
+('B101', 'Engineering Hall', 40, 'Lecture', 'Available'),
+('C202', 'Science Center', 35, 'Lab', 'Occupied'),
+('A303', 'Main Building', 25, 'Seminar', 'Available'),
+('D404', 'Library Annex', 50, 'Lecture', 'Maintenance'),
+('E505', 'Business School', 30, 'Computer Lab', 'Available');
+
+
+----- third database ecommerce
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Phone VARCHAR(20),
+    SignupDate DATE
+);
+
+INSERT INTO Customers VALUES
+(1, 'Emily Carter', 'emily.carter@example.com', '555-1234', '2023-01-10'),
+(2, 'Jake Thomas', 'jake.thomas@example.com', '555-2345', '2023-02-15'),
+(3, 'Linda Nguyen', 'linda.nguyen@example.com', '555-3456', '2023-03-20'),
+(4, 'Noah Smith', 'noah.smith@example.com', '555-4567', '2023-04-05'),
+(5, 'Ava Brown', 'ava.brown@example.com', '555-5678', '2023-05-01');
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10,2),
+    Stock INT
+);
+
+INSERT INTO Products VALUES
+(101, 'Wireless Headphones', 'Electronics', 79.99, 50),
+(102, 'Running Shoes', 'Footwear', 59.99, 30),
+(103, 'Smart Watch', 'Electronics', 129.99, 20),
+(104, 'Coffee Maker', 'Home Appliances', 49.99, 25),
+(105, 'Yoga Mat', 'Fitness', 19.99, 100);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    TotalAmount DECIMAL(10,2),
+    Status VARCHAR(20),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Orders VALUES
+(5001, 1, '2023-06-01', 159.98, 'Shipped'),
+(5002, 2, '2023-06-02', 59.99, 'Processing'),
+(5003, 3, '2023-06-03', 129.99, 'Delivered'),
+(5004, 4, '2023-06-04', 69.98, 'Cancelled'),
+(5005, 5, '2023-06-05', 19.99, 'Delivered');
+
+CREATE TABLE OrderItems (
+    OrderItemID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    Price DECIMAL(10,2),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+INSERT INTO OrderItems VALUES
+(1, 5001, 101, 1, 79.99),
+(2, 5001, 103, 1, 79.99),
+(3, 5002, 102, 1, 59.99),
+(4, 5003, 103, 1, 129.99),
+(5, 5005, 105, 1, 19.99);
+
+CREATE TABLE Reviews (
+    ReviewID INT PRIMARY KEY,
+    ProductID INT,
+    CustomerID INT,
+    Rating INT CHECK (Rating BETWEEN 1 AND 5),
+    Comment TEXT,
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Reviews VALUES
+(9001, 101, 1, 5, 'Excellent sound quality!'),
+(9002, 102, 2, 4, 'Very comfortable and fits well.'),
+(9003, 103, 3, 3, 'Good features but battery life could be better.'),
+(9004, 104, 4, 5, 'Makes great coffee!'),
+(9005, 105, 5, 4, 'Good value for the price.');
+
+----- fourth database banking system
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Address VARCHAR(200),
+    SSN VARCHAR(15),
+    DOB DATE
+);
+
+INSERT INTO Customers VALUES
+(1, 'John Anderson', '123 Main St, Springfield', '123-45-6789', '1980-04-12'),
+(2, 'Emily Clark', '456 Elm St, Greenville', '987-65-4321', '1990-08-25'),
+(3, 'Michael Brown', '789 Maple Ave, Lakeside', '555-66-7777', '1975-12-03'),
+(4, 'Sophia Martinez', '321 Oak Dr, Rivertown', '222-33-4444', '1988-06-19'),
+(5, 'David Wilson', '654 Pine Rd, Hillview', '111-22-3333', '1995-01-10');
+
+CREATE TABLE Accounts (
+    AccountID INT PRIMARY KEY,
+    CustomerID INT,
+    Balance DECIMAL(10,2),
+    AccountType VARCHAR(20),
+    OpenDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Accounts VALUES
+(1001, 1, 1500.00, 'Checking', '2021-01-10'),
+(1002, 2, 3200.75, 'Savings', '2020-06-15'),
+(1003, 3, 500.00, 'Checking', '2022-09-20'),
+(1004, 4, 2400.30, 'Savings', '2019-11-05'),
+(1005, 5, 700.00, 'Checking', '2023-03-12');
+
+CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY,
+    AccountID INT,
+    Date DATE,
+    Type VARCHAR(20),
+    Amount DECIMAL(10,2),
+    FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
+);
+
+INSERT INTO Transactions VALUES
+(5001, 1001, '2023-07-01', 'Deposit', 300.00),
+(5002, 1002, '2023-07-02', 'Withdrawal', 200.00),
+(5003, 1003, '2023-07-03', 'Deposit', 150.00),
+(5004, 1004, '2023-07-04', 'Transfer', 400.00),
+(5005, 1005, '2023-07-05', 'Deposit', 250.00);
+
+CREATE TABLE Loans (
+    LoanID INT PRIMARY KEY,
+    CustomerID INT,
+    LoanType VARCHAR(30),
+    Amount DECIMAL(10,2),
+    StartDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Loans VALUES
+(2001, 1, 'Home Loan', 250000.00, '2022-01-15'),
+(2002, 2, 'Car Loan', 15000.00, '2023-03-10'),
+(2003, 3, 'Personal Loan', 10000.00, '2021-07-20'),
+(2004, 4, 'Education Loan', 30000.00, '2020-08-01'),
+(2005, 5, 'Business Loan', 50000.00, '2023-05-05');
+
+CREATE TABLE Branches (
+    BranchID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    City VARCHAR(50),
+    ManagerID INT,
+    OpenDate DATE
+);
+
+INSERT INTO Branches VALUES
+(301, 'Central Branch', 'Springfield', 101, '2015-05-10'),
+(302, 'Northside Branch', 'Greenville', 102, '2017-03-15'),
+(303, 'Downtown Branch', 'Lakeside', 103, '2016-11-22'),
+(304, 'Westend Branch', 'Rivertown', 104, '2018-01-30'),
+(305, 'Hilltop Branch', 'Hillview', 105, '2020-09-12');
+
+
+-------- fifth database airline resvertion system
+CREATE TABLE Flights (
+    FlightID VARCHAR(10) PRIMARY KEY,
+    Airline VARCHAR(50),
+    Origin VARCHAR(50),
+    Destination VARCHAR(50),
+    Status VARCHAR(20)
+);
+
+INSERT INTO Flights VALUES
+('FL1001', 'Delta Airlines', 'New York', 'London', 'On Time'),
+('FL1002', 'Emirates', 'Dubai', 'Paris', 'Delayed'),
+('FL1003', 'Lufthansa', 'Berlin', 'Tokyo', 'Cancelled'),
+('FL1004', 'American Airlines', 'Chicago', 'Toronto', 'On Time'),
+('FL1005', 'Qatar Airways', 'Doha', 'Sydney', 'On Time');
+
+CREATE TABLE Passengers (
+    PassengerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    PassportNumber VARCHAR(20),
+    DOB DATE,
+    Nationality VARCHAR(50)
+);
+
+INSERT INTO Passengers VALUES
+(1, 'Emma Watson', 'A1234567', '1990-04-15', 'British'),
+(2, 'Carlos Rivera', 'B7654321', '1985-09-22', 'Mexican'),
+(3, 'Mei Lin', 'C3344556', '1992-12-03', 'Chinese'),
+(4, 'James Patel', 'D5566778', '1988-06-30', 'Indian'),
+(5, 'Anna Müller', 'E9988776', '1995-11-10', 'German');
+
+CREATE TABLE Bookings (
+    BookingID VARCHAR(10) PRIMARY KEY,
+    PassengerID INT,
+    FlightID VARCHAR(10),
+    BookingDate DATE,
+    Seat VARCHAR(5),
+    FOREIGN KEY (PassengerID) REFERENCES Passengers(PassengerID),
+    FOREIGN KEY (FlightID) REFERENCES Flights(FlightID)
+);
+
+INSERT INTO Bookings VALUES
+('BK001', 1, 'FL1001', '2025-07-01', '12A'),
+('BK002', 2, 'FL1002', '2025-07-02', '14B'),
+('BK003', 3, 'FL1003', '2025-07-03', '22C'),
+('BK004', 4, 'FL1004', '2025-07-04', '10D'),
+('BK005', 5, 'FL1005', '2025-07-05', '16E');
+
+CREATE TABLE Crew (
+    CrewID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Role VARCHAR(50),
+    AssignedFlightID VARCHAR(10),
+    HireDate DATE,
+    FOREIGN KEY (AssignedFlightID) REFERENCES Flights(FlightID)
+);
+
+INSERT INTO Crew VALUES
+(201, 'Captain John Smith', 'Pilot', 'FL1001', '2015-03-12'),
+(202, 'Mary Jones', 'Flight Attendant', 'FL1002', '2018-05-20'),
+(203, 'Ali Khan', 'Engineer', 'FL1003', '2017-08-14'),
+(204, 'Sarah Lee', 'Pilot', 'FL1004', '2016-11-09'),
+(205, 'Liam O’Brien', 'Flight Attendant', 'FL1005', '2019-04-23');
+
+CREATE TABLE Airports (
+    AirportID VARCHAR(10) PRIMARY KEY,
+    Name VARCHAR(100),
+    City VARCHAR(50),
+    Country VARCHAR(50),
+    TimeZone VARCHAR(50)
+);
+
+INSERT INTO Airports VALUES
+('APT001', 'Heathrow Airport', 'London', 'United Kingdom', 'GMT'),
+('APT002', 'Dubai International', 'Dubai', 'UAE', 'GMT+4'),
+('APT003', 'Narita Airport', 'Tokyo', 'Japan', 'GMT+9'),
+('APT004', 'O’Hare International', 'Chicago', 'USA', 'GMT-6'),
+('APT005', 'Sydney Airport', 'Sydney', 'Australia', 'GMT+10');
+
+
+-- sixteth database hotel mangement system
+CREATE TABLE Guests (
+    GuestID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Phone VARCHAR(20),
+    LoyaltyMember VARCHAR(5)
+);
+
+INSERT INTO Guests VALUES
+(1, 'Olivia Brown', 'olivia.brown@example.com', '555-1234', 'Yes'),
+(2, 'Ethan Clark', 'ethan.clark@example.com', '555-5678', 'No'),
+(3, 'Sophia Davis', 'sophia.davis@example.com', '555-8765', 'Yes'),
+(4, 'Liam Wilson', 'liam.wilson@example.com', '555-4321', 'No'),
+(5, 'Ava Martinez', 'ava.martinez@example.com', '555-6789', 'Yes');
+
+CREATE TABLE Reservations (
+    ReservationID INT PRIMARY KEY,
+    GuestID INT,
+    RoomID INT,
+    CheckIn DATE,
+    Nights INT,
+    FOREIGN KEY (GuestID) REFERENCES Guests(GuestID)
+);
+
+INSERT INTO Reservations VALUES
+(101, 1, 301, '2025-07-10', 3),
+(102, 2, 204, '2025-07-12', 2),
+(103, 3, 102, '2025-07-13', 4),
+(104, 4, 305, '2025-07-14', 1),
+(105, 5, 401, '2025-07-15', 5);
+
+CREATE TABLE Rooms (
+    RoomID INT PRIMARY KEY,
+    Type VARCHAR(50),
+    Rate DECIMAL(10,2),
+    Floor INT,
+    Status VARCHAR(20)
+);
+
+INSERT INTO Rooms VALUES
+(301, 'Deluxe', 150.00, 3, 'Occupied'),
+(204, 'Standard', 100.00, 2, 'Occupied'),
+(102, 'Single', 80.00, 1, 'Occupied'),
+(305, 'Suite', 200.00, 3, 'Available'),
+(401, 'Executive', 250.00, 4, 'Occupied');
+
+CREATE TABLE Staff (
+    StaffID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Role VARCHAR(50),
+    Department VARCHAR(50),
+    HireDate DATE
+);
+
+INSERT INTO Staff VALUES
+(501, 'Mark Johnson', 'Receptionist', 'Front Desk', '2020-02-15'),
+(502, 'Emily Carter', 'Housekeeper', 'Housekeeping', '2019-06-01'),
+(503, 'David Lee', 'Chef', 'Kitchen', '2018-09-10'),
+(504, 'Grace Kim', 'Manager', 'Administration', '2016-12-05'),
+(505, 'Noah Adams', 'Bellhop', 'Service', '2021-07-18');
+
+CREATE TABLE Payments (
+    PaymentID INT PRIMARY KEY,
+    ReservationID INT,
+    Amount DECIMAL(10,2),
+    Method VARCHAR(20),
+    Date DATE,
+    FOREIGN KEY (ReservationID) REFERENCES Reservations(ReservationID)
+);
+
+INSERT INTO Payments VALUES
+(1001, 101, 450.00, 'Credit Card', '2025-07-13'),
+(1002, 102, 200.00, 'Cash', '2025-07-14'),
+(1003, 103, 320.00, 'Debit Card', '2025-07-17'),
+(1004, 104, 200.00, 'Credit Card', '2025-07-14'),
+(1005, 105, 1250.00, 'Online', '2025-07-20');
+
+--  seventh databse Retail Point-of-Sale System
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Price DECIMAL(10,2),
+    Category VARCHAR(50),
+    Stock INT
+);
+
+INSERT INTO Products VALUES
+(1, 'Wireless Mouse', 25.99, 'Electronics', 150),
+(2, 'Notebook', 2.50, 'Stationery', 500),
+(3, 'LED Bulb', 5.99, 'Home', 300),
+(4, 'Shampoo', 4.75, 'Personal Care', 200),
+(5, 'Phone Charger', 12.00, 'Electronics', 100);
+
+CREATE TABLE Sales (
+    SaleID INT PRIMARY KEY,
+    Date DATE,
+    CashierID INT,
+    Total DECIMAL(10,2),
+    PaymentMethod VARCHAR(20)
+);
+
+INSERT INTO Sales VALUES
+(1001, '2025-07-10', 201, 45.98, 'Credit Card'),
+(1002, '2025-07-11', 202, 10.50, 'Cash'),
+(1003, '2025-07-12', 203, 23.75, 'Debit Card'),
+(1004, '2025-07-13', 201, 55.00, 'Mobile Pay'),
+(1005, '2025-07-13', 202, 12.00, 'Cash');
+
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Phone VARCHAR(20),
+    MemberSince DATE
+);
+
+INSERT INTO Customers VALUES
+(1, 'Amelia White', 'amelia.white@example.com', '555-1010', '2022-01-15'),
+(2, 'James Hall', 'james.hall@example.com', '555-2020', '2021-11-08'),
+(3, 'Chloe Scott', 'chloe.scott@example.com', '555-3030', '2023-03-10'),
+(4, 'William King', 'william.king@example.com', '555-4040', '2020-07-19'),
+(5, 'Isabella Moore', 'isabella.moore@example.com', '555-5050', '2024-05-05');
+
+Edit
+CREATE TABLE Cashiers (
+    CashierID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Shift VARCHAR(10),
+    HireDate DATE,
+    ManagerID INT
+);
+
+INSERT INTO Cashiers VALUES
+(201, 'Lily Green', 'Morning', '2021-06-10', 301),
+(202, 'Noah Brooks', 'Evening', '2020-09-01', 301),
+(203, 'Mason Lee', 'Morning', '2022-03-25', 302),
+(204, 'Emma Rivera', 'Evening', '2023-07-15', 302),
+(205, 'Lucas Bell', 'Morning', '2024-01-12', 301);
+t
+CREATE TABLE Suppliers (
+    SupplierID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    ProductCategory VARCHAR(50),
+    ContactInfo VARCHAR(100),
+    Rating DECIMAL(2,1)
+);
+
+INSERT INTO Suppliers VALUES
+(1, 'Global Tech Ltd.', 'Electronics', 'support@globaltech.com', 4.5),
+(2, 'PaperMart', 'Stationery', 'info@papermart.com', 4.2),
+(3, 'BrightLights Co.', 'Home', 'sales@brightlights.com', 4.7),
+(4, 'PureCare Inc.', 'Personal Care', 'contact@purecare.com', 4.4),
+(5, 'MobileGear', 'Electronics', 'help@mobilegear.com', 4.6);
+
+----- eighth database logictic and shipping 
+CREATE TABLE Shipments (
+    ShipmentID INT PRIMARY KEY,
+    Origin VARCHAR(50),
+    Destination VARCHAR(50),
+    Weight DECIMAL(10,2),
+    Status VARCHAR(20)
+);
+
+INSERT INTO Shipments VALUES
+(101, 'New York', 'Los Angeles', 450.75, 'In Transit'),
+(102, 'Chicago', 'Houston', 300.00, 'Delivered'),
+(103, 'Seattle', 'Miami', 620.50, 'Pending'),
+(104, 'Boston', 'Denver', 280.00, 'In Transit'),
+(105, 'Atlanta', 'San Francisco', 510.25, 'Delivered');
+
+CREATE TABLE Couriers (
+    CourierID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Region VARCHAR(50),
+    Phone VARCHAR(20),
+    Active VARCHAR(5)
+);
+
+INSERT INTO Couriers VALUES
+(1, 'SpeedX', 'East Coast', '555-1111', 'Yes'),
+(2, 'QuickLogi', 'Midwest', '555-2222', 'Yes'),
+(3, 'ZoomExpress', 'South', '555-3333', 'No'),
+(4, 'DashMove', 'West Coast', '555-4444', 'Yes'),
+(5, 'CargoJet', 'Nationwide', '555-5555', 'Yes');
+
+CREATE TABLE Packages (
+    PackageID INT PRIMARY KEY,
+    ShipmentID INT,
+    Weight DECIMAL(10,2),
+    ContentType VARCHAR(50),
+    Fragile VARCHAR(5)
+);
+
+INSERT INTO Packages VALUES
+(201, 101, 50.00, 'Electronics', 'Yes'),
+(202, 102, 80.00, 'Books', 'No'),
+(203, 103, 120.50, 'Furniture', 'No'),
+(204, 104, 30.25, 'Glassware', 'Yes'),
+(205, 105, 75.00, 'Clothing', 'No');
+
+CREATE TABLE Warehouses (
+    WarehouseID INT PRIMARY KEY,
+    City VARCHAR(50),
+    Capacity INT,
+    ManagerID INT,
+    ISOCode VARCHAR(10)
+);
+
+INSERT INTO Warehouses VALUES
+(301, 'Dallas', 2000, 501, 'WH-DAL-01'),
+(302, 'Phoenix', 1800, 502, 'WH-PHX-02'),
+(303, 'Philadelphia', 2200, 503, 'WH-PHL-03'),
+(304, 'San Diego', 1600, 504, 'WH-SD-04'),
+(305, 'Detroit', 1900, 505, 'WH-DET-05');
+
+CREATE TABLE Routes (
+    RouteID INT PRIMARY KEY,
+    Start VARCHAR(50),
+    End VARCHAR(50),
+    Distance DECIMAL(10,2),
+    EstimatedTime VARCHAR(20)
+);
+
+INSERT INTO Routes VALUES
+(401, 'New York', 'Los Angeles', 3940.00, '3 Days'),
+(402, 'Chicago', 'Houston', 1740.50, '2 Days'),
+(403, 'Seattle', 'Miami', 4300.25, '4 Days'),
+(404, 'Boston', 'Denver', 2830.75, '2.5 Days'),
+(405, 'Atlanta', 'San Francisco', 3420.00, '3 Days');
+
+-- ninth database insurence clamming system
+CREATE TABLE Policies (
+    PolicyID INT PRIMARY KEY,
+    CustomerID INT,
+    Type VARCHAR(30),
+    Premium DECIMAL(10,2),
+    StartDate DATE
+);
+
+INSERT INTO Policies VALUES
+(1001, 1, 'Auto', 1200.00, '2023-01-15'),
+(1002, 2, 'Home', 1500.50, '2022-06-01'),
+(1003, 3, 'Health', 950.75, '2024-03-10'),
+(1004, 4, 'Life', 1800.00, '2021-11-25'),
+(1005, 5, 'Auto', 1100.00, '2023-07-01');
+
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DOB DATE,
+    Address VARCHAR(100),
+    Email VARCHAR(100)
+);
+
+INSERT INTO Customers VALUES
+(1, 'Alice Johnson', '1985-04-23', '123 Main St, NY', 'alice.johnson@example.com'),
+(2, 'Brian Lee', '1978-08-12', '45 Oak Dr, TX', 'brian.lee@example.com'),
+(3, 'Catherine Smith', '1990-12-03', '789 Pine Ave, FL', 'cathy.smith@example.com'),
+(4, 'David Kim', '1982-01-17', '321 Elm St, CA', 'david.kim@example.com'),
+(5, 'Eva Martinez', '1995-05-08', '555 Maple Rd, IL', 'eva.m@example.com');
+
+CREATE TABLE Claims (
+    ClaimID INT PRIMARY KEY,
+    PolicyID INT,
+    Date DATE,
+    ClaimType VARCHAR(30),
+    Amount DECIMAL(10,2)
+);
+
+INSERT INTO Claims VALUES
+(2001, 1001, '2024-06-10', 'Collision', 2500.00),
+(2002, 1002, '2023-12-18', 'Fire Damage', 8000.00),
+(2003, 1003, '2024-05-05', 'Medical', 1200.50),
+(2004, 1004, '2022-09-20', 'Death Benefit', 50000.00),
+(2005, 1005, '2024-07-01', 'Theft', 3000.00);
+
+CREATE TABLE Adjusters (
+    AdjusterID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Region VARCHAR(50),
+    HireDate DATE,
+    LicenseNo VARCHAR(20)
+);
+
+INSERT INTO Adjusters VALUES
+(501, 'Tom Sanders', 'Northeast', '2020-02-01', 'LIC12345'),
+(502, 'Laura Green', 'Southwest', '2018-06-15', 'LIC23456'),
+(503, 'Mike Rogers', 'Midwest', '2019-10-30', 'LIC34567'),
+(504, 'Sophie Chen', 'Southeast', '2021-01-22', 'LIC45678'),
+(505, 'Ryan Patel', 'West Coast', '2022-08-09', 'LIC56789');
+
+CREATE TABLE Payments (
+    PaymentID INT PRIMARY KEY,
+    ClaimID INT,
+    Amount DECIMAL(10,2),
+    Date DATE,
+    Method VARCHAR(20)
+);
+
+INSERT INTO Payments VALUES
+(3001, 2001, 2500.00, '2024-06-15', 'Bank Transfer'),
+(3002, 2002, 8000.00, '2024-01-05', 'Check'),
+(3003, 2003, 1200.50, '2024-05-10', 'Credit Card'),
+(3004, 2004, 50000.00, '2022-10-01', 'Wire'),
+(3005, 2005, 3000.00, '2024-07-05', 'Bank Transfer');
+
+-- tenth database media streming service
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    SubscriptionPlan VARCHAR(30),
+    JoinDate DATE
+);
+
+INSERT INTO Users VALUES
+(1, 'Liam Davis', 'liam.davis@example.com', 'Premium', '2023-01-15'),
+(2, 'Olivia Harris', 'olivia.harris@example.com', 'Basic', '2022-08-10'),
+(3, 'Ethan Lee', 'ethan.lee@example.com', 'Standard', '2023-05-20'),
+(4, 'Emma Johnson', 'emma.j@example.com', 'Premium', '2024-02-05'),
+(5, 'Noah Smith', 'noah.smith@example.com', 'Basic', '2023-11-30');
+
+CREATE TABLE Titles (
+    TitleID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Genre VARCHAR(30),
+    ReleaseYear INT,
+    Rating DECIMAL(2,1)
+);
+
+INSERT INTO Titles VALUES
+(101, 'The Silent Sea', 'Sci-Fi', 2021, 7.2),
+(102, 'Mindhunter', 'Crime', 2017, 8.6),
+(103, 'Breaking Bad', 'Drama', 2008, 9.5),
+(104, 'Chernobyl', 'History', 2019, 9.4),
+(105, 'Black Mirror', 'Thriller', 2011, 8.8);
+
+CREATE TABLE WatchHistory (
+    WatchID INT PRIMARY KEY,
+    UserID INT,
+    TitleID INT,
+    WatchDate DATE,
+    Duration INT -- in minutes
+);
+
+INSERT INTO WatchHistory VALUES
+(201, 1, 101, '2024-07-01', 45),
+(202, 2, 102, '2024-06-18', 50),
+(203, 3, 103, '2024-07-11', 60),
+(204, 4, 104, '2024-07-10', 60),
+(205, 5, 105, '2024-07-09', 48);
+
+CREATE TABLE Subscribers (
+    SubscriberID INT PRIMARY KEY,
+    UserID INT,
+    Plan VARCHAR(30),
+    MonthlyFee DECIMAL(6,2),
+    Status VARCHAR(10)
+);
+
+INSERT INTO Subscribers VALUES
+(301, 1, 'Premium', 15.99, 'Active'),
+(302, 2, 'Basic', 7.99, 'Active'),
+(303, 3, 'Standard', 12.99, 'Active'),
+(304, 4, 'Premium', 15.99, 'Active'),
+(305, 5, 'Basic', 7.99, 'Inactive');
+
+CREATE TABLE Reviews (
+    ReviewID INT PRIMARY KEY,
+    UserID INT,
+    TitleID INT,
+    Rating DECIMAL(2,1),
+    Text TEXT
+);
+
+INSERT INTO Reviews VALUES
+(401, 1, 101, 8.0, 'Great concept and visuals.'),
+(402, 2, 102, 9.0, 'Very intense and well-acted.'),
+(403, 3, 103, 10.0, 'One of the best series ever made.'),
+(404, 4, 104, 9.5, 'Very emotional and powerful.'),
+(405, 5, 105, 8.5, 'Unique episodes with surprising twists.');
+
+--  eleventh database social media platform
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Username VARCHAR(50),
+    Email VARCHAR(100),
+    SignUpDate DATE
+);
+
+INSERT INTO Users VALUES
+(1, 'Ava Martin', 'ava_m', 'ava@example.com', '2024-05-10'),
+(2, 'James Wilson', 'james_w', 'james@example.com', '2023-12-01'),
+(3, 'Sophia Turner', 'sophia_t', 'sophia@example.com', '2024-01-20'),
+(4, 'Lucas Brown', 'lucas_b', 'lucas@example.com', '2024-03-05'),
+(5, 'Mia Scott', 'mia_s', 'mia@example.com', '2024-06-15');
+
+CREATE TABLE Posts (
+    PostID INT PRIMARY KEY,
+    UserID INT,
+    Content TEXT,
+    Timestamp DATETIME,
+    Likes INT
+);
+
+INSERT INTO Posts VALUES
+(101, 1, 'Loving this sunny day!', '2025-07-10 09:00:00', 120),
+(102, 2, 'Just finished reading a great book.', '2025-07-11 14:30:00', 85),
+(103, 3, 'Back to work on my project.', '2025-07-12 08:15:00', 65),
+(104, 4, 'Morning coffee is the best.', '2025-07-12 07:50:00', 98),
+(105, 5, 'Can’t wait for the weekend!', '2025-07-13 10:00:00', 130);
+
+CREATE TABLE Comments (
+    CommentID INT PRIMARY KEY,
+    PostID INT,
+    UserID INT,
+    CommentText TEXT,
+    Timestamp DATETIME
+);
+
+INSERT INTO Comments VALUES
+(201, 101, 2, 'Totally agree!', '2025-07-10 09:15:00'),
+(202, 102, 3, 'Which book was it?', '2025-07-11 15:00:00'),
+(203, 103, 1, 'Good luck with the project!', '2025-07-12 08:30:00'),
+(204, 104, 5, 'Same here!', '2025-07-12 08:00:00'),
+(205, 105, 4, 'Me too!', '2025-07-13 10:10:00');
+
+CREATE TABLE Followers (
+    FollowerID INT PRIMARY KEY,
+    UserID INT,
+    FollowerUserID INT,
+    Since DATE,
+    Status VARCHAR(10)
+);
+
+INSERT INTO Followers VALUES
+(301, 1, 2, '2024-06-01', 'Active'),
+(302, 1, 3, '2024-06-02', 'Active'),
+(303, 2, 1, '2024-06-10', 'Active'),
+(304, 3, 4, '2024-07-01', 'Blocked'),
+(305, 4, 5, '2024-07-05', 'Active');
+
+CREATE TABLE Messages (
+    MessageID INT PRIMARY KEY,
+    FromUserID INT,
+    ToUserID INT,
+    MessageText TEXT,
+    SentAt DATETIME
+);
+
+INSERT INTO Messages VALUES
+(401, 1, 2, 'Hey, how are you?', '2025-07-13 08:00:00'),
+(402, 2, 1, 'Doing well! You?', '2025-07-13 08:05:00'),
+(403, 3, 4, 'Can we meet tomorrow?', '2025-07-12 16:20:00'),
+(404, 4, 3, 'Sure, let’s plan!', '2025-07-12 16:45:00'),
+(405, 5, 1, 'Loved your last post!', '2025-07-13 09:30:00');
+
+-----  12 databse iot samrt home system
+CREATE TABLE Devices (
+    DeviceID INT PRIMARY KEY,
+    Type VARCHAR(50),
+    Status VARCHAR(20),
+    Location VARCHAR(50),
+    LastActive DATETIME
+);
+
+INSERT INTO Devices VALUES
+(1, 'Thermostat', 'Online', 'Living Room', '2025-07-13 08:15:00'),
+(2, 'Security Camera', 'Offline', 'Front Door', '2025-07-12 22:00:00'),
+(3, 'Smart Light', 'Online', 'Bedroom', '2025-07-13 07:50:00'),
+(4, 'Smoke Detector', 'Online', 'Kitchen', '2025-07-13 06:30:00'),
+(5, 'Smart Lock', 'Online', 'Back Door', '2025-07-13 09:05:00');
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    AuthLevel VARCHAR(20),
+    CreatedAt DATE
+);
+
+INSERT INTO Users VALUES
+(101, 'Emma Green', 'emma@example.com', 'Admin', '2024-11-01'),
+(102, 'Noah White', 'noah@example.com', 'User', '2025-01-15'),
+(103, 'Olivia Gray', 'olivia@example.com', 'Admin', '2024-12-10'),
+(104, 'Liam Black', 'liam@example.com', 'User', '2025-03-08'),
+(105, 'Ava Reed', 'ava@example.com', 'Guest', '2025-06-20');
+
+CREATE TABLE DeviceLogs (
+    LogID INT PRIMARY KEY,
+    DeviceID INT,
+    Timestamp DATETIME,
+    Action VARCHAR(100),
+    Status VARCHAR(20)
+);
+
+INSERT INTO DeviceLogs VALUES
+(201, 1, '2025-07-13 08:16:00', 'Temperature adjusted', 'Success'),
+(202, 2, '2025-07-12 21:59:00', 'Motion detected', 'Failure'),
+(203, 3, '2025-07-13 07:51:00', 'Turned on', 'Success'),
+(204, 4, '2025-07-13 06:32:00', 'Smoke detected', 'Alert'),
+(205, 5, '2025-07-13 09:06:00', 'Door unlocked', 'Success');
+
+CREATE TABLE Scenes (
+    SceneID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Trigger VARCHAR(100),
+    Actions TEXT,
+    Active BOOLEAN
+);
+
+INSERT INTO Scenes VALUES
+(301, 'Morning Routine', '06:30 AM', 'Turn on lights, adjust thermostat', TRUE),
+(302, 'Night Mode', '10:00 PM', 'Turn off lights, lock doors', TRUE),
+(303, 'Away Mode', 'No motion detected', 'Activate cameras, lock all doors', TRUE),
+(304, 'Cooking Scene', 'Oven on', 'Turn on exhaust fan, set lighting', FALSE),
+(305, 'Welcome Home', 'Front door opens', 'Turn on hallway lights, play music', TRUE);
+
+CREATE TABLE Alerts (
+    AlertID INT PRIMARY KEY,
+    DeviceID INT,
+    AlertType VARCHAR(50),
+    Timestamp DATETIME,
+    Resolved BOOLEAN
+);
+
+INSERT INTO Alerts VALUES
+(401, 2, 'Motion Alert', '2025-07-12 21:59:00', FALSE),
+(402, 4, 'Smoke Alarm', '2025-07-13 06:32:00', TRUE),
+(403, 5, 'Unauthorized Access', '2025-07-13 09:06:00', FALSE),
+(404, 1, 'Sensor Failure', '2025-07-12 23:00:00', TRUE),
+(405, 3, 'Connectivity Issue', '2025-07-13 02:00:00', TRUE);
+
+
+-----  13 databse manfacturing er
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Category VARCHAR(50),
+    UnitCost DECIMAL(10, 2),
+    Stock INT
+);
+
+INSERT INTO Products VALUES
+(1, 'Steel Rod', 'Raw Material', 12.50, 1000),
+(2, 'Gearbox', 'Component', 150.00, 200),
+(3, 'Motor', 'Component', 300.00, 150),
+(4, 'Control Panel', 'Finished Goods', 450.00, 75),
+(5, 'Plastic Cover', 'Raw Material', 5.00, 2000);
+
+CREATE TABLE Suppliers (
+    SupplierID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Contact VARCHAR(100),
+    Rating INT,
+    Country VARCHAR(50)
+);
+
+INSERT INTO Suppliers VALUES
+(101, 'Global Metals Ltd.', 'gm@example.com', 4, 'USA'),
+(102, 'Precision Components', 'pc@example.com', 5, 'Germany'),
+(103, 'AutoParts Co.', 'ap@example.com', 3, 'Japan'),
+(104, 'TechSupply Inc.', 'ts@example.com', 4, 'South Korea'),
+(105, 'PolyMat Ltd.', 'pm@example.com', 5, 'China');
+
+CREATE TABLE PurchaseOrders (
+    POID INT PRIMARY KEY,
+    SupplierID INT,
+    Date DATE,
+    TotalAmount DECIMAL(10, 2),
+    Status VARCHAR(20)
+);
+
+INSERT INTO PurchaseOrders VALUES
+(1001, 101, '2025-06-15', 12500.00, 'Received'),
+(1002, 102, '2025-06-18', 7500.00, 'Pending'),
+(1003, 103, '2025-06-20', 9800.00, 'Shipped'),
+(1004, 104, '2025-07-01', 14300.00, 'Received'),
+(1005, 105, '2025-07-10', 3200.00, 'Canceled');
+
+CREATE TABLE WorkOrders (
+    WOID INT PRIMARY KEY,
+    ProductID INT,
+    Quantity INT,
+    StartDate DATE,
+    Status VARCHAR(20)
+);
+
+INSERT INTO WorkOrders VALUES
+(201, 2, 50, '2025-07-01', 'In Progress'),
+(202, 3, 30, '2025-07-03', 'Completed'),
+(203, 4, 20, '2025-07-05', 'Scheduled'),
+(204, 1, 200, '2025-07-08', 'Pending'),
+(205, 5, 500, '2025-07-11', 'In Progress');
+
+CREATE TABLE Inventory (
+    InventoryID INT PRIMARY KEY,
+    ProductID INT,
+    WarehouseID INT,
+    Quantity INT,
+    LastUpdated DATE
+);
+
+INSERT INTO Inventory VALUES
+(301, 1, 1, 500, '2025-07-10'),
+(302, 2, 2, 100, '2025-07-12'),
+(303, 3, 1, 50, '2025-07-11'),
+(304, 4, 3, 75, '2025-07-13'),
+(305, 5, 2, 1500, '2025-07-09');
+
+----- 14 database real estate mangement 
+cREATE TABLE Properties (
+    PropertyID VARCHAR(10),
+    Address VARCHAR(100),
+    Type VARCHAR(30),
+    Bedrooms INT,
+    Price DECIMAL(10,2)
+);
+
+INSERT INTO Properties VALUES 
+('P001', '123 Elm St', 'Apartment', 2, 150000.00),
+('P002', '456 Oak Ave', 'House', 4, 325000.00),
+('P003', '789 Pine Rd', 'Condo', 3, 220000.00),
+('P004', '321 Maple Ln', 'Townhouse', 3, 270000.00),
+('P005', '654 Birch Blvd', 'Villa', 5, 480000.00);
+
+-- 2. Owners Table
+CREATE TABLE Owners (
+    OwnerID VARCHAR(10),
+    Name VARCHAR(50),
+    Phone VARCHAR(20),
+    Email VARCHAR(50),
+    Address VARCHAR(100)
+);
+
+INSERT INTO Owners VALUES 
+('O001', 'Alice Johnson', '555-1234', 'alice@example.com', '789 Sunset Blvd'),
+('O002', 'Bob Smith', '555-5678', 'bob@example.com', '456 Valley Rd'),
+('O003', 'Cathy Lee', '555-8765', 'cathy@example.com', '123 River St'),
+('O004', 'David Kim', '555-4321', 'david@example.com', '98 Hillside Dr'),
+('O005', 'Eva Green', '555-6789', 'eva@example.com', '654 Grove Ave');
+
+-- 3. Tenants Table
+CREATE TABLE Tenants (
+    TenantID VARCHAR(10),
+    Name VARCHAR(50),
+    LeaseStart DATE,
+    LeaseEnd DATE,
+    MonthlyRent DECIMAL(10,2)
+);
+
+INSERT INTO Tenants VALUES 
+('T001', 'Frank Moore', '2024-01-01', '2024-12-31', 1200.00),
+('T002', 'Grace Hall', '2024-06-15', '2025-06-14', 1500.00),
+('T003', 'Harry Adams', '2024-03-01', '2025-02-28', 1300.00),
+('T004', 'Isla Brown', '2024-04-01', '2025-03-31', 1400.00),
+('T005', 'Jack White', '2024-05-01', '2025-04-30', 1600.00);
+
+-- 4. Payments Table
+CREATE TABLE Payments (
+    PaymentID VARCHAR(10),
+    TenantID VARCHAR(10),
+    Amount DECIMAL(10,2),
+    Date DATE,
+    Method VARCHAR(20)
+);
+
+INSERT INTO Payments VALUES 
+('PM001', 'T001', 1200.00, '2024-07-01', 'Credit Card'),
+('PM002', 'T002', 1500.00, '2024-07-01', 'Bank Transfer'),
+('PM003', 'T003', 1300.00, '2024-07-01', 'Cash'),
+('PM004', 'T004', 1400.00, '2024-07-01', 'Credit Card'),
+('PM005', 'T005', 1600.00, '2024-07-01', 'Mobile Payment');
+
+-- 5. Inspections Table
+CREATE TABLE Inspections (
+    InspectionID VARCHAR(10),
+    PropertyID VARCHAR(10),
+    InspectorID VARCHAR(10),
+    Date DATE,
+    Status VARCHAR(20)
+);
+
+INSERT INTO Inspections VALUES 
+('IN001', 'P001', 'I001', '2024-06-15', 'Passed'),
+('IN002', 'P002', 'I002', '2024-06-16', 'Pending'),
+('IN003', 'P003', 'I003', '2024-06-17', 'Failed'),
+('IN004', 'P004', 'I001', '2024-06-18', 'Passed'),
+('IN005', 'P005', 'I002', '2024-06-19', 'Passed');
+
+
+-- 15 databse education lms
+-- 1. Instructors Table
+CREATE TABLE Instructors (
+    InstructorID VARCHAR(10),
+    Name VARCHAR(50),
+    Department VARCHAR(50),
+    Email VARCHAR(50),
+    HireDate DATE
+);
+
+INSERT INTO Instructors VALUES 
+('I001', 'Dr. Alice Carter', 'Computer Science', 'alice.carter@edu.com', '2018-08-15'),
+('I002', 'Prof. Brian King', 'Mathematics', 'b.king@edu.com', '2015-09-01'),
+('I003', 'Dr. Carla Green', 'Physics', 'carla.green@edu.com', '2020-01-10'),
+('I004', 'Prof. Daniel Moore', 'History', 'dan.moore@edu.com', '2012-06-20'),
+('I005', 'Dr. Eva White', 'Biology', 'eva.white@edu.com', '2019-03-05');
+
+-- 2. Courses Table
+CREATE TABLE Courses (
+    CourseID VARCHAR(10),
+    Name VARCHAR(100),
+    Credits INT,
+    InstructorID VARCHAR(10),
+    Term VARCHAR(20)
+);
+
+INSERT INTO Courses VALUES 
+('C101', 'Intro to Programming', 3, 'I001', 'Fall 2024'),
+('C102', 'Calculus I', 4, 'I002', 'Fall 2024'),
+('C103', 'Modern Physics', 3, 'I003', 'Spring 2025'),
+('C104', 'World History', 3, 'I004', 'Fall 2024'),
+('C105', 'Cell Biology', 4, 'I005', 'Spring 2025');
+
+-- 3. Students Table
+CREATE TABLE Students (
+    StudentID VARCHAR(10),
+    Name VARCHAR(50),
+    Major VARCHAR(50),
+    Year INT,
+    Email VARCHAR(50)
+);
+
+INSERT INTO Students VALUES 
+('S001', 'John Smith', 'Computer Science', 2, 'john.smith@students.edu'),
+('S002', 'Lisa Ray', 'Mathematics', 3, 'lisa.ray@students.edu'),
+('S003', 'Mike Brown', 'Physics', 1, 'mike.brown@students.edu'),
+('S004', 'Nina Chen', 'History', 4, 'nina.chen@students.edu'),
+('S005', 'Omar Zaki', 'Biology', 2, 'omar.zaki@students.edu');
+
+-- 4. Assignments Table
+CREATE TABLE Assignments (
+    AssignmentID VARCHAR(10),
+    CourseID VARCHAR(10),
+    Title VARCHAR(100),
+    DueDate DATE,
+    MaxScore INT
+);
+
+INSERT INTO Assignments VALUES 
+('A001', 'C101', 'Loops and Conditionals', '2024-10-01', 100),
+('A002', 'C102', 'Limits and Derivatives', '2024-09-15', 100),
+('A003', 'C103', 'Relativity Report', '2025-02-10', 50),
+('A004', 'C104', 'Essay on Renaissance', '2024-11-01', 75),
+('A005', 'C105', 'Lab Report 1', '2025-03-20', 100);
+
+-- 5. Submissions Table
+CREATE TABLE Submissions (
+    SubmissionID VARCHAR(10),
+    AssignmentID VARCHAR(10),
+    StudentID VARCHAR(10),
+    SubmitDate DATE,
+    Score INT
+);
+
+INSERT INTO Submissions VALUES 
+('SBN001', 'A001', 'S001', '2024-09-29', 95),
+('SBN002', 'A002', 'S002', '2024-09-14', 90),
+('SBN003', 'A003', 'S003', '2025-02-09', 48),
+('SBN004', 'A004', 'S004', '2024-10-30', 72),
+('SBN005', 'A005', 'S005', '2025-03-19', 100);
+
+
+-------- 16 databse  event ticket platform
+-- 1. Events Table
+CREATE TABLE Events (
+    EventID VARCHAR(10),
+    Name VARCHAR(100),
+    VenueID VARCHAR(10),
+    Date DATE,
+    Capacity INT
+);
+
+INSERT INTO Events VALUES
+('E001', 'Music Fest 2025', 'V001', '2025-08-15', 5000),
+('E002', 'Tech Conference', 'V002', '2025-09-10', 2000),
+('E003', 'Art Expo', 'V003', '2025-07-25', 1500),
+('E004', 'Food Carnival', 'V004', '2025-10-01', 3000),
+('E005', 'Startup Meetup', 'V002', '2025-11-05', 1000);
+
+-- 2. Venues Table
+CREATE TABLE Venues (
+    VenueID VARCHAR(10),
+    Name VARCHAR(100),
+    City VARCHAR(50),
+    Capacity INT,
+    Type VARCHAR(30)
+);
+
+INSERT INTO Venues VALUES
+('V001', 'Sunshine Arena', 'Los Angeles', 5000, 'Stadium'),
+('V002', 'Metro Convention Center', 'New York', 2000, 'Convention Center'),
+('V003', 'Gallery One', 'Chicago', 1500, 'Exhibition Hall'),
+('V004', 'City Park Grounds', 'Austin', 3000, 'Outdoor'),
+('V005', 'Innovation Hub', 'San Francisco', 1200, 'Tech Center');
+
+-- 3. Attendees Table
+CREATE TABLE Attendees (
+    AttendeeID VARCHAR(10),
+    Name VARCHAR(50),
+    Email VARCHAR(50),
+    TicketType VARCHAR(20),
+    CheckedIn BOOLEAN
+);
+
+INSERT INTO Attendees VALUES
+('A001', 'Julia Roberts', 'julia.r@example.com', 'VIP', TRUE),
+('A002', 'Mark Spencer', 'mark.s@example.com', 'General', FALSE),
+('A003', 'Lisa Wong', 'lisa.w@example.com', 'Premium', TRUE),
+('A004', 'Nikhil Rao', 'nikhil.r@example.com', 'General', TRUE),
+('A005', 'Sara Kim', 'sara.k@example.com', 'VIP', FALSE);
+
+-- 4. Tickets Table
+CREATE TABLE Tickets (
+    TicketID VARCHAR(10),
+    EventID VARCHAR(10),
+    AttendeeID VARCHAR(10),
+    Price DECIMAL(10,2),
+    PurchaseDate DATE
+);
+
+INSERT INTO Tickets VALUES
+('T001', 'E001', 'A001', 150.00, '2025-06-01'),
+('T002', 'E002', 'A002', 75.00, '2025-07-10'),
+('T003', 'E003', 'A003', 100.00, '2025-06-20'),
+('T004', 'E004', 'A004', 50.00, '2025-08-15'),
+('T005', 'E001', 'A005', 150.00, '2025-06-15');
+
+-- 5. Staff Table
+CREATE TABLE Staff (
+    StaffID VARCHAR(10),
+    EventID VARCHAR(10),
+    Role VARCHAR(30),
+    Name VARCHAR(50),
+    Contact VARCHAR(30)
+);
+
+INSERT INTO Staff VALUES
+('S001', 'E001', 'Coordinator', 'David Lee', 'david.l@staff.com'),
+('S002', 'E002', 'Security', 'Emily Hart', 'emily.h@staff.com'),
+('S003', 'E003', 'Guide', 'Tom Blake', 'tom.b@staff.com'),
+('S004', 'E004', 'Technician', 'Ali Zahid', 'ali.z@staff.com'),
+('S005', 'E005', 'Manager', 'Rachel Adams', 'rachel.a@staff.com');
+
+--  17 databse resatrurant reservation and order system
+-- 1. Restaurants Table
+CREATE TABLE Restaurants (
+    RestaurantID VARCHAR(10),
+    Name VARCHAR(100),
+    Address VARCHAR(150),
+    Cuisine VARCHAR(50),
+    Rating DECIMAL(2,1)
+);
+
+INSERT INTO Restaurants VALUES
+('R001', 'Olive Garden', '123 Main St, New York', 'Italian', 4.5),
+('R002', 'Sushi Samba', '456 Ocean Dr, Miami', 'Japanese', 4.7),
+('R003', 'Tandoori Flame', '789 Curry Ave, Houston', 'Indian', 4.3),
+('R004', 'La Parisienne', '101 Rue Blvd, Chicago', 'French', 4.6),
+('R005', 'Texan Grill', '202 Steak Rd, Dallas', 'American', 4.2);
+
+-- 2. Tables Table
+CREATE TABLE Tables (
+    TableID VARCHAR(10),
+    RestaurantID VARCHAR(10),
+    Seats INT,
+    Location VARCHAR(30),
+    Status VARCHAR(20)
+);
+
+INSERT INTO Tables VALUES
+('T001', 'R001', 4, 'Indoor', 'Available'),
+('T002', 'R001', 2, 'Patio', 'Occupied'),
+('T003', 'R002', 6, 'Indoor', 'Reserved'),
+('T004', 'R003', 4, 'Outdoor', 'Available'),
+('T005', 'R004', 2, 'Indoor', 'Available');
+
+-- 3. Reservations Table
+CREATE TABLE Reservations (
+    ResID VARCHAR(10),
+    TableID VARCHAR(10),
+    GuestName VARCHAR(100),
+    Date DATE,
+    Time TIME
+);
+
+INSERT INTO Reservations VALUES
+('RS001', 'T001', 'Emily Carter', '2025-07-20', '19:00'),
+('RS002', 'T002', 'John Mathews', '2025-07-20', '20:30'),
+('RS003', 'T003', 'Akira Tanaka', '2025-07-21', '18:00'),
+('RS004', 'T004', 'Priya Sharma', '2025-07-21', '19:45'),
+('RS005', 'T005', 'Claire Dubois', '2025-07-22', '20:00');
+
+-- 4. MenuItems Table
+CREATE TABLE MenuItems (
+    ItemID VARCHAR(10),
+    RestaurantID VARCHAR(10),
+    Name VARCHAR(100),
+    Price DECIMAL(6,2),
+    Availability BOOLEAN
+);
+
+INSERT INTO MenuItems VALUES
+('M001', 'R001', 'Fettuccine Alfredo', 12.99, TRUE),
+('M002', 'R002', 'Dragon Roll', 14.50, TRUE),
+('M003', 'R003', 'Chicken Tikka', 11.75, FALSE),
+('M004', 'R004', 'Beef Bourguignon', 18.00, TRUE),
+('M005', 'R005', 'Grilled Ribeye', 21.99, TRUE);
+
+-- 5. Orders Table
+CREATE TABLE Orders (
+    OrderID VARCHAR(10),
+    ResID VARCHAR(10),
+    ItemID VARCHAR(10),
+    Quantity INT,
+    Price DECIMAL(6,2)
+);
+
+INSERT INTO Orders VALUES
+('O001', 'RS001', 'M001', 2, 25.98),
+('O002', 'RS002', 'M002', 1, 14.50),
+('O003', 'RS003', 'M003', 3, 35.25),
+('O004', 'RS004', 'M004', 2, 36.00),
+('O005', 'RS005', 'M005', 1, 21.99);
+
+----- 18 databse  helthcare insurence
+ -- 1. Members Table
+CREATE TABLE Members (
+    MemberID VARCHAR(10),
+    Name VARCHAR(100),
+    DOB DATE,
+    PlanType VARCHAR(50),
+    JoinDate DATE
+);
+
+INSERT INTO Members VALUES
+('M001', 'Alice Johnson', '1985-04-12', 'Gold', '2021-01-15'),
+('M002', 'Brian Smith', '1990-06-22', 'Silver', '2022-03-10'),
+('M003', 'Catherine Lee', '1978-09-30', 'Platinum', '2020-11-05'),
+('M004', 'David Brown', '2000-12-10', 'Bronze', '2023-02-20'),
+('M005', 'Emma Davis', '1995-07-18', 'Gold', '2021-09-30');
+
+-- 2. Policies Table
+CREATE TABLE Policies (
+    PolicyID VARCHAR(10),
+    MemberID VARCHAR(10),
+    CoverageType VARCHAR(50),
+    Premium DECIMAL(8,2),
+    EffectiveDate DATE
+);
+
+INSERT INTO Policies VALUES
+('P001', 'M001', 'Full', 250.00, '2021-01-15'),
+('P002', 'M002', 'Partial', 180.50, '2022-03-10'),
+('P003', 'M003', 'Comprehensive', 320.00, '2020-11-05'),
+('P004', 'M004', 'Basic', 100.00, '2023-02-20'),
+('P005', 'M005', 'Full', 250.00, '2021-09-30');
+
+-- 3. Claims Table
+CREATE TABLE Claims (
+    ClaimID VARCHAR(10),
+    PolicyID VARCHAR(10),
+    Date DATE,
+    Diagnosis VARCHAR(100),
+    Amount DECIMAL(8,2)
+);
+
+INSERT INTO Claims VALUES
+('C001', 'P001', '2023-05-20', 'Fractured Arm', 1200.00),
+('C002', 'P002', '2023-06-10', 'Flu', 200.00),
+('C003', 'P003', '2024-01-15', 'Migraine', 350.00),
+('C004', 'P004', '2024-03-01', 'Sprained Ankle', 600.00),
+('C005', 'P005', '2023-11-23', 'Appendicitis', 2500.00);
+
+-- 4. Providers Table
+CREATE TABLE Providers (
+    ProviderID VARCHAR(10),
+    Name VARCHAR(100),
+    Specialty VARCHAR(50),
+    City VARCHAR(50),
+    Rating DECIMAL(2,1)
+);
+
+INSERT INTO Providers VALUES
+('PR001', 'Dr. Linda Moore', 'Pediatrics', 'New York', 4.8),
+('PR002', 'Dr. Kevin Lee', 'Cardiology', 'Los Angeles', 4.7),
+('PR003', 'Dr. Nina Patel', 'General Medicine', 'Chicago', 4.5),
+('PR004', 'Dr. Oscar Kim', 'Orthopedics', 'Houston', 4.6),
+('PR005', 'Dr. Sarah Thompson', 'Neurology', 'Phoenix', 4.9);
+
+-- 5. Visits Table
+CREATE TABLE Visits (
+    VisitID VARCHAR(10),
+    MemberID VARCHAR(10),
+    ProviderID VARCHAR(10),
+    VisitDate DATE,
+    Reason VARCHAR(100)
+);
+
+INSERT INTO Visits VALUES
+('V001', 'M001', 'PR001', '2023-05-19', 'Annual Checkup'),
+('V002', 'M002', 'PR003', '2023-06-09', 'Flu Symptoms'),
+('V003', 'M003', 'PR005', '2024-01-14', 'Migraine Evaluation'),
+('V004', 'M004', 'PR004', '2024-02-28', 'Ankle Pain'),
+('V005', 'M005', 'PR002', '2023-11-22', 'Chest Pain');
+
+
+--  19 databse sport league management
+-- 1. Teams Table
+CREATE TABLE Teams (
+    TeamID VARCHAR(10),
+    Name VARCHAR(100),
+    City VARCHAR(50),
+    CoachID VARCHAR(10),
+    FoundedYear INT
+);
+
+INSERT INTO Teams VALUES
+('T001', 'Eagles FC', 'New York', 'C001', 1995),
+('T002', 'Lions United', 'Los Angeles', 'C002', 2000),
+('T003', 'Sharks SC', 'Chicago', 'C003', 1998),
+('T004', 'Bulls FC', 'Houston', 'C004', 2005),
+('T005', 'Wolves FC', 'Miami', 'C005', 2010);
+
+-- 2. Players Table
+CREATE TABLE Players (
+    PlayerID VARCHAR(10),
+    Name VARCHAR(100),
+    TeamID VARCHAR(10),
+    Position VARCHAR(50),
+    JerseyNumber INT
+);
+
+INSERT INTO Players VALUES
+('P001', 'John Smith', 'T001', 'Forward', 9),
+('P002', 'Carlos Ruiz', 'T002', 'Midfielder', 10),
+('P003', 'Tom Lee', 'T003', 'Defender', 5),
+('P004', 'Ahmed Zaki', 'T004', 'Goalkeeper', 1),
+('P005', 'James Owen', 'T005', 'Forward', 11);
+
+-- 3. Matches Table
+CREATE TABLE Matches (
+    MatchID VARCHAR(10),
+    HomeTeamID VARCHAR(10),
+    AwayTeamID VARCHAR(10),
+    Date DATE,
+    Venue VARCHAR(100)
+);
+
+INSERT INTO Matches VALUES
+('M001', 'T001', 'T002', '2025-07-01', 'Central Stadium'),
+('M002', 'T003', 'T004', '2025-07-03', 'Downtown Arena'),
+('M003', 'T005', 'T001', '2025-07-05', 'Sunset Field'),
+('M004', 'T002', 'T003', '2025-07-08', 'East Bay Ground'),
+('M005', 'T004', 'T005', '2025-07-10', 'Northern Park');
+
+-- 4. Scores Table
+CREATE TABLE Scores (
+    ScoreID VARCHAR(10),
+    MatchID VARCHAR(10),
+    TeamID VARCHAR(10),
+    Goals INT,
+    Fouls INT
+);
+
+INSERT INTO Scores VALUES
+('S001', 'M001', 'T001', 2, 3),
+('S002', 'M001', 'T002', 1, 4),
+('S003', 'M002', 'T003', 3, 2),
+('S004', 'M002', 'T004', 0, 1),
+('S005', 'M003', 'T005', 2, 5);
+
+-- 5. Referees Table
+CREATE TABLE Referees (
+    RefereeID VARCHAR(10),
+    Name VARCHAR(100),
+    ExperienceYears INT,
+    Nationality VARCHAR(50),
+    AssignedMatches VARCHAR(100)
+);
+
+INSERT INTO Referees VALUES
+('R001', 'Daniel Stone', 12, 'USA', 'M001,M005'),
+('R002', 'Luis Gomez', 10, 'Mexico', 'M002'),
+('R003', 'Sarah Tan', 8, 'Canada', 'M003'),
+('R004', 'Ali Khan', 15, 'Pakistan', 'M004'),
+('R005', 'Emily Zhang', 6, 'China', 'M001,M002');
+
+--  20 database car rental system
+-- 1. Cars Table
+CREATE TABLE Cars (
+    CarID VARCHAR(10),
+    Make VARCHAR(50),
+    Model VARCHAR(50),
+    Year INT,
+    DailyRate DECIMAL(8,2)
+);
+
+INSERT INTO Cars VALUES
+('C001', 'Toyota', 'Camry', 2021, 55.00),
+('C002', 'Honda', 'Civic', 2020, 50.00),
+('C003', 'Ford', 'Escape', 2019, 60.00),
+('C004', 'Tesla', 'Model 3', 2022, 90.00),
+('C005', 'Chevrolet', 'Malibu', 2018, 45.00);
+
+-- 2. Customers Table
+CREATE TABLE Customers (
+    CustomerID VARCHAR(10),
+    Name VARCHAR(100),
+    LicenseNo VARCHAR(20),
+    Phone VARCHAR(20),
+    Email VARCHAR(100)
+);
+
+INSERT INTO Customers VALUES
+('CU001', 'Alice Johnson', 'A1234567', '555-1234', 'alice@example.com'),
+('CU002', 'Bob Smith', 'B7654321', '555-5678', 'bob@example.com'),
+('CU003', 'Charlie Lee', 'C9998888', '555-9012', 'charlie@example.com'),
+('CU004', 'Diana Ross', 'D7776666', '555-3456', 'diana@example.com'),
+('CU005', 'Ethan King', 'E5554444', '555-7890', 'ethan@example.com');
+
+-- 3. Rentals Table
+CREATE TABLE Rentals (
+    RentalID VARCHAR(10),
+    CarID VARCHAR(10),
+    CustomerID VARCHAR(10),
+    StartDate DATE,
+    EndDate DATE
+);
+
+INSERT INTO Rentals VALUES
+('R001', 'C001', 'CU001', '2025-07-01', '2025-07-05'),
+('R002', 'C002', 'CU002', '2025-07-03', '2025-07-07'),
+('R003', 'C003', 'CU003', '2025-07-04', '2025-07-08'),
+('R004', 'C004', 'CU004', '2025-07-05', '2025-07-09'),
+('R005', 'C005', 'CU005', '2025-07-06', '2025-07-10');
+
+-- 4. Payments Table
+CREATE TABLE Payments (
+    PaymentID VARCHAR(10),
+    RentalID VARCHAR(10),
+    Amount DECIMAL(8,2),
+    Date DATE,
+    Method VARCHAR(20)
+);
+
+INSERT INTO Payments VALUES
+('P001', 'R001', 220.00, '2025-07-05', 'Credit Card'),
+('P002', 'R002', 200.00, '2025-07-07', 'Debit Card'),
+('P003', 'R003', 240.00, '2025-07-08', 'Cash'),
+('P004', 'R004', 360.00, '2025-07-09', 'Online'),
+('P005', 'R005', 180.00, '2025-07-10', 'Credit Card');
+
+-- 5. Maintenance Table
+CREATE TABLE Maintenance (
+    MaintID VARCHAR(10),
+    CarID VARCHAR(10),
+    Date DATE,
+    Description VARCHAR(255),
+    Cost DECIMAL(8,2)
+);
+
+INSERT INTO Maintenance VALUES
+('M001', 'C001', '2025-06-20', 'Oil change', 40.00),
+('M002', 'C002', '2025-06-22', 'Brake replacement', 150.00),
+('M003', 'C003', '2025-06-25', 'Tire rotation', 60.00),
+('M004', 'C004', '2025-06-27', 'Battery check', 30.00),
+('M005', 'C005', '2025-06-30', 'AC repair', 100.00);
+
+-----  21 databse publishing house
+-- 1. Authors Table
+CREATE TABLE Authors (
+    AuthorID VARCHAR(10),
+    Name VARCHAR(100),
+    Country VARCHAR(50),
+    DOB DATE,
+    Genre VARCHAR(50)
+);
+
+INSERT INTO Authors VALUES
+('A001', 'Jane Austen', 'UK', '1775-12-16', 'Romance'),
+('A002', 'George Orwell', 'UK', '1903-06-25', 'Dystopian'),
+('A003', 'Mark Twain', 'USA', '1835-11-30', 'Fiction'),
+('A004', 'Haruki Murakami', 'Japan', '1949-01-12', 'Magical Realism'),
+('A005', 'Chimamanda Adichie', 'Nigeria', '1977-09-15', 'Contemporary');
+
+-- 2. Books Table
+CREATE TABLE Books (
+    BookID VARCHAR(10),
+    Title VARCHAR(150),
+    AuthorID VARCHAR(10),
+    PublishYear INT,
+    ISBN VARCHAR(20)
+);
+
+INSERT INTO Books VALUES
+('B001', 'Pride and Prejudice', 'A001', 1813, '9780141040349'),
+('B002', '1984', 'A002', 1949, '9780451524935'),
+('B003', 'Adventures of Huckleberry Finn', 'A003', 1884, '9780486280615'),
+('B004', 'Kafka on the Shore', 'A004', 2002, '9781400079278'),
+('B005', 'Americanah', 'A005', 2013, '9780307455925');
+
+-- 3. Sales Table
+CREATE TABLE Sales (
+    SaleID VARCHAR(10),
+    BookID VARCHAR(10),
+    DateSold DATE,
+    Quantity INT,
+    TotalAmount DECIMAL(10,2)
+);
+
+INSERT INTO Sales VALUES
+('S001', 'B001', '2025-07-01', 3, 45.00),
+('S002', 'B002', '2025-07-03', 2, 30.00),
+('S003', 'B003', '2025-07-04', 5, 50.00),
+('S004', 'B004', '2025-07-05', 4, 60.00),
+('S005', 'B005', '2025-07-06', 1, 20.00);
+
+-- 4. Editors Table
+CREATE TABLE Editors (
+    EditorID VARCHAR(10),
+    Name VARCHAR(100),
+    Specialty VARCHAR(50),
+    BookID VARCHAR(10),
+    HireDate DATE
+);
+
+INSERT INTO Editors VALUES
+('E001', 'Mary Shelley', 'Romance', 'B001', '2020-01-15'),
+('E002', 'Aldous Huxley', 'Dystopian', 'B002', '2019-03-10'),
+('E003', 'Ernest Hemingway', 'Fiction', 'B003', '2018-05-22'),
+('E004', 'Kazuo Ishiguro', 'Magical Realism', 'B004', '2021-07-30'),
+('E005', 'Ngũgĩ wa Thiong\'o', 'Contemporary', 'B005', '2022-09-12');
+
+-- 5. Contracts Table
+CREATE TABLE Contracts (
+    ContractID VARCHAR(10),
+    AuthorID VARCHAR(10),
+    StartDate DATE,
+    EndDate DATE,
+    RoyaltyRate DECIMAL(5,2)
+);
+
+INSERT INTO Contracts VALUES
+('C001', 'A001', '2020-01-01', '2030-01-01', 12.50),
+('C002', 'A002', '2021-01-01', '2031-01-01', 15.00),
+('C003', 'A003', '2019-01-01', '2029-01-01', 10.00),
+('C004', 'A004', '2022-01-01', '2032-01-01', 13.75),
+('C005', 'A005', '2023-01-01', '2033-01-01', 14.20);
+
+-- 22 databse  charity and non profit organisation 
+-- 1. Donors Table
+CREATE TABLE Donors (
+    DonorID VARCHAR(10),
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Phone VARCHAR(15),
+    JoinDate DATE
+);
+
+INSERT INTO Donors VALUES
+('D001', 'Alice Morgan', 'alice@example.com', '555-1234', '2021-03-01'),
+('D002', 'John Smith', 'john@example.com', '555-5678', '2022-06-15'),
+('D003', 'Maria Lopez', 'maria@example.com', '555-9012', '2020-11-20'),
+('D004', 'Wei Zhang', 'wei@example.com', '555-3456', '2023-01-10'),
+('D005', 'Amina Yusuf', 'amina@example.com', '555-7890', '2021-08-05');
+
+-- 2. Donations Table
+CREATE TABLE Donations (
+    DonationID VARCHAR(10),
+    DonorID VARCHAR(10),
+    Date DATE,
+    Amount DECIMAL(10,2),
+    CampaignID VARCHAR(10)
+);
+
+INSERT INTO Donations VALUES
+('DN001', 'D001', '2023-05-12', 150.00, 'C001'),
+('DN002', 'D002', '2023-06-01', 200.00, 'C002'),
+('DN003', 'D003', '2023-06-15', 100.00, 'C001'),
+('DN004', 'D004', '2023-07-05', 250.00, 'C003'),
+('DN005', 'D005', '2023-07-10', 300.00, 'C002');
+
+-- 3. Campaigns Table
+CREATE TABLE Campaigns (
+    CampaignID VARCHAR(10),
+    Title VARCHAR(100),
+    StartDate DATE,
+    EndDate DATE,
+    GoalAmount DECIMAL(12,2)
+);
+
+INSERT INTO Campaigns VALUES
+('C001', 'Clean Water Project', '2023-04-01', '2023-08-01', 10000.00),
+('C002', 'School Supplies Drive', '2023-05-01', '2023-09-01', 8000.00),
+('C003', 'Community Garden', '2023-06-01', '2023-10-01', 5000.00),
+('C004', 'Disaster Relief Fund', '2023-03-01', '2023-07-01', 15000.00),
+('C005', 'Youth Mentorship', '2023-07-01', '2023-12-01', 7000.00);
+
+-- 4. Volunteers Table
+CREATE TABLE Volunteers (
+    VolunteerID VARCHAR(10),
+    Name VARCHAR(100),
+    Availability VARCHAR(50),
+    Skills VARCHAR(100),
+    JoinedDate DATE
+);
+
+INSERT INTO Volunteers VALUES
+('V001', 'Tom Harris', 'Weekends', 'Event Planning, Logistics', '2021-05-10'),
+('V002', 'Lina Patel', 'Evenings', 'Fundraising, Outreach', '2022-01-15'),
+('V003', 'Omar Malik', 'Full-time', 'Teaching, Admin Support', '2023-03-20'),
+('V004', 'Emily Chen', 'Weekdays', 'Marketing, Design', '2021-11-30'),
+('V005', 'Carlos Rivera', 'Flexible', 'Translation, Coordination', '2022-08-05');
+
+-- 5. Events Table
+CREATE TABLE Events (
+    EventID VARCHAR(10),
+    Name VARCHAR(100),
+    Date DATE,
+    Location VARCHAR(100),
+    AttendeesCount INT
+);
+
+INSERT INTO Events VALUES
+('E001', 'Annual Gala', '2023-07-15', 'City Convention Center', 250),
+('E002', 'Community Clean-Up', '2023-06-10', 'Central Park', 80),
+('E003', 'Volunteer Meetup', '2023-05-20', 'Main Office', 40),
+('E004', 'Fundraising Walk', '2023-08-01', 'Riverfront Trail', 300),
+('E005', 'School Supplies Giveaway', '2023-09-05', 'Community Hall', 120);
+
+--   23 database Pharmaceutical Research
+-- 1. Studies Table
+CREATE TABLE Studies (
+    StudyID VARCHAR(10),
+    Title VARCHAR(100),
+    Phase VARCHAR(10),
+    StartDate DATE,
+    PrincipalInvestigator VARCHAR(100)
+);
+
+INSERT INTO Studies VALUES
+('S001', 'COVID-19 Vaccine Trial', 'Phase 3', '2021-01-10', 'Dr. Laura Bennett'),
+('S002', 'Diabetes Drug Efficacy', 'Phase 2', '2022-03-15', 'Dr. Eric Johnson'),
+('S003', 'Hypertension Study', 'Phase 1', '2023-05-01', 'Dr. Nina Rao'),
+('S004', 'Alzheimer\'s Prevention', 'Phase 2', '2021-09-20', 'Dr. Ahmed Saleh'),
+('S005', 'Asthma Medication Safety', 'Phase 4', '2023-01-05', 'Dr. Chloe Wang');
+
+-- 2. Patients Table
+CREATE TABLE Patients (
+    PatientID VARCHAR(10),
+    StudyID VARCHAR(10),
+    Age INT,
+    Gender VARCHAR(10),
+    EnrollmentDate DATE
+);
+
+INSERT INTO Patients VALUES
+('P001', 'S001', 35, 'Female', '2021-01-15'),
+('P002', 'S002', 42, 'Male', '2022-04-01'),
+('P003', 'S001', 29, 'Male', '2021-02-10'),
+('P004', 'S003', 55, 'Female', '2023-05-10'),
+('P005', 'S004', 68, 'Male', '2021-10-05');
+
+-- 3. Medications Table
+CREATE TABLE Medications (
+    MedicationID VARCHAR(10),
+    Name VARCHAR(100),
+    Dosage VARCHAR(50),
+    Manufacturer VARCHAR(100),
+    ExpiryDate DATE
+);
+
+INSERT INTO Medications VALUES
+('M001', 'Covaxin', '5ml', 'Bharat Biotech', '2024-12-31'),
+('M002', 'Metformin XR', '500mg', 'Glucopharm', '2025-06-30'),
+('M003', 'Amlodipine', '10mg', 'HealthCore', '2024-09-15'),
+('M004', 'Memantine', '20mg', 'NeuroGenix', '2025-01-10'),
+('M005', 'Salbutamol', '100mcg', 'AirMed Labs', '2024-11-01');
+
+-- 4. Visits Table
+CREATE TABLE Visits (
+    VisitID VARCHAR(10),
+    PatientID VARCHAR(10),
+    VisitDate DATE,
+    Observations TEXT,
+    AdverseEvents TEXT
+);
+
+INSERT INTO Visits VALUES
+('V001', 'P001', '2021-01-25', 'Mild fever reported', 'None'),
+('V002', 'P002', '2022-04-15', 'Blood glucose improved', 'Nausea'),
+('V003', 'P003', '2021-02-20', 'Normal vitals', 'Headache'),
+('V004', 'P004', '2023-05-20', 'Slight increase in BP', 'None'),
+('V005', 'P005', '2021-10-15', 'Cognitive baseline unchanged', 'Dizziness');
+
+-- 5. Results Table
+CREATE TABLE Results (
+    ResultID VARCHAR(10),
+    VisitID VARCHAR(10),
+    Measurement VARCHAR(50),
+    Value DECIMAL(10,2),
+    Unit VARCHAR(20)
+);
+
+INSERT INTO Results VALUES
+('R001', 'V001', 'Body Temperature', 37.8, 'Celsius'),
+('R002', 'V002', 'Blood Glucose', 98.0, 'mg/dL'),
+('R003', 'V003', 'Heart Rate', 72.0, 'bpm'),
+('R004', 'V004', 'Blood Pressure', 142.0, 'mmHg'),
+('R005', 'V005', 'Cognitive Score', 27.0, 'points');
+
+----- 24 database music streming anlytics
+-- 1. Songs Table
+CREATE TABLE Songs (
+    SongID VARCHAR(10),
+    Title VARCHAR(100),
+    Artist VARCHAR(100),
+    Genre VARCHAR(50),
+    Duration INT  -- Duration in seconds
+);
+
+INSERT INTO Songs VALUES
+('S001', 'Shape of You', 'Ed Sheeran', 'Pop', 233),
+('S002', 'Blinding Lights', 'The Weeknd', 'R&B', 200),
+('S003', 'Bohemian Rhapsody', 'Queen', 'Rock', 354),
+('S004', 'Levitating', 'Dua Lipa', 'Pop', 203),
+('S005', 'Stayin\' Alive', 'Bee Gees', 'Disco', 285);
+
+-- 2. Listeners Table
+CREATE TABLE Listeners (
+    ListenerID VARCHAR(10),
+    Name VARCHAR(100),
+    Country VARCHAR(50),
+    SubscriptionType VARCHAR(20),
+    JoinDate DATE
+);
+
+INSERT INTO Listeners VALUES
+('L001', 'Alice Smith', 'USA', 'Premium', '2022-01-15'),
+('L002', 'Carlos Vega', 'Mexico', 'Free', '2021-12-10'),
+('L003', 'Hiro Tanaka', 'Japan', 'Premium', '2023-03-05'),
+('L004', 'Mina Patel', 'India', 'Free', '2022-06-20'),
+('L005', 'Liam Brown', 'UK', 'Premium', '2021-10-01');
+
+-- 3. Plays Table
+CREATE TABLE Plays (
+    PlayID VARCHAR(10),
+    ListenerID VARCHAR(10),
+    SongID VARCHAR(10),
+    Timestamp DATETIME,
+    Device VARCHAR(50)
+);
+
+INSERT INTO Plays VALUES
+('P001', 'L001', 'S001', '2023-07-01 08:15:00', 'iPhone'),
+('P002', 'L002', 'S003', '2023-07-01 12:30:00', 'Android'),
+('P003', 'L003', 'S002', '2023-07-02 14:45:00', 'Web'),
+('P004', 'L004', 'S004', '2023-07-02 19:20:00', 'Smart Speaker'),
+('P005', 'L005', 'S005', '2023-07-03 09:00:00', 'Windows');
+
+-- 4. Playlists Table
+CREATE TABLE Playlists (
+    PlaylistID VARCHAR(10),
+    ListenerID VARCHAR(10),
+    Name VARCHAR(100),
+    CreatedDate DATE,
+    SongCount INT
+);
+
+INSERT INTO Playlists VALUES
+('PL001', 'L001', 'Morning Vibes', '2023-01-10', 15),
+('PL002', 'L002', 'Classic Rock', '2022-11-23', 8),
+('PL003', 'L003', 'Workout Mix', '2023-03-15', 12),
+('PL004', 'L004', 'Party Hits', '2023-04-08', 20),
+('PL005', 'L005', 'Chill Out', '2021-12-05', 10);
+
+-- 5. Likes Table
+CREATE TABLE Likes (
+    LikeID VARCHAR(10),
+    ListenerID VARCHAR(10),
+    SongID VARCHAR(10),
+    Timestamp DATETIME,
+    Platform VARCHAR(50)
+);
+
+INSERT INTO Likes VALUES
+('LK001', 'L001', 'S001', '2023-07-01 08:20:00', 'iOS App'),
+('LK002', 'L002', 'S003', '2023-07-01 12:35:00', 'Android App'),
+('LK003', 'L003', 'S002', '2023-07-02 14:50:00', 'Web Browser'),
+('LK004', 'L004', 'S004', '2023-07-02 19:25:00', 'Alexa'),
+('LK005', 'L005', 'S005', '2023-07-03 09:05:00', 'Windows App');
+
+-- 25 database advertising platform
+-- 1. Advertisers Table
+CREATE TABLE Advertisers (
+    AdvertiserID VARCHAR(10),
+    Name VARCHAR(100),
+    Industry VARCHAR(50),
+    ContactEmail VARCHAR(100),
+    Budget DECIMAL(12,2)
+);
+
+INSERT INTO Advertisers VALUES
+('ADV001', 'Nike Inc.', 'Apparel', 'contact@nike.com', 500000.00),
+('ADV002', 'Samsung', 'Electronics', 'ads@samsung.com', 750000.00),
+('ADV003', 'Spotify', 'Entertainment', 'marketing@spotify.com', 300000.00),
+('ADV004', 'Ford Motors', 'Automotive', 'ford.ads@ford.com', 400000.00),
+('ADV005', 'Amazon', 'E-commerce', 'ads@amazon.com', 1000000.00);
+
+-- 2. Campaigns Table
+CREATE TABLE Campaigns (
+    CampaignID VARCHAR(10),
+    AdvertiserID VARCHAR(10),
+    StartDate DATE,
+    EndDate DATE,
+    Objective VARCHAR(100)
+);
+
+INSERT INTO Campaigns VALUES
+('CMP001', 'ADV001', '2023-06-01', '2023-08-31', 'Increase brand awareness'),
+('CMP002', 'ADV002', '2023-07-01', '2023-09-30', 'Product launch promotion'),
+('CMP003', 'ADV003', '2023-05-15', '2023-07-15', 'App install growth'),
+('CMP004', 'ADV004', '2023-04-01', '2023-06-30', 'New model advertising'),
+('CMP005', 'ADV005', '2023-01-01', '2023-12-31', 'Holiday season sales');
+
+-- 3. Ads Table
+CREATE TABLE Ads (
+    AdID VARCHAR(10),
+    CampaignID VARCHAR(10),
+    Format VARCHAR(50),
+    ImpressionCount INT,
+    ClickCount INT
+);
+
+INSERT INTO Ads VALUES
+('AD001', 'CMP001', 'Video', 1000000, 45000),
+('AD002', 'CMP002', 'Banner', 750000, 38000),
+('AD003', 'CMP003', 'Audio', 500000, 20000),
+('AD004', 'CMP004', 'Carousel', 600000, 25000),
+('AD005', 'CMP005', 'Display', 1500000, 90000);
+
+-- 4. Platforms Table
+CREATE TABLE Platforms (
+    PlatformID VARCHAR(10),
+    Name VARCHAR(50),
+    Type VARCHAR(30),
+    AudienceSize INT,
+    Region VARCHAR(50)
+);
+
+INSERT INTO Platforms VALUES
+('PLT001', 'Google Ads', 'Search', 500000000, 'Global'),
+('PLT002', 'Facebook', 'Social Media', 2800000000, 'Global'),
+('PLT003', 'Spotify', 'Streaming', 500000000, 'Global'),
+('PLT004', 'LinkedIn', 'Professional', 800000000, 'Global'),
+('PLT005', 'YouTube', 'Video', 2500000000, 'Global');
+
+-- 5. Billing Table
+CREATE TABLE Billing (
+    BillID VARCHAR(10),
+    AdvertiserID VARCHAR(10),
+    Period VARCHAR(20),
+    Amount DECIMAL(10,2),
+    Paid BOOLEAN
+);
+
+INSERT INTO Billing VALUES
+('BILL001', 'ADV001', '2023-Q2', 120000.00, TRUE),
+('BILL002', 'ADV002', '2023-Q2', 180000.00, FALSE),
+('BILL003', 'ADV003', '2023-Q2', 90000.00, TRUE),
+('BILL004', 'ADV004', '2023-Q2', 100000.00, TRUE),
+('BILL005', 'ADV005', '2023-Q2', 250000.00, FALSE);
+
+
+-- 26 databse flim production studio
+-- 1. Films Table
+CREATE TABLE Films (
+    FilmID VARCHAR(10),
+    Title VARCHAR(100),
+    Genre VARCHAR(50),
+    ReleaseDate DATE,
+    Budget DECIMAL(12,2)
+);
+
+INSERT INTO Films VALUES
+('F001', 'Edge of Tomorrow', 'Sci-Fi', '2014-06-06', 178000000.00),
+('F002', 'La La Land', 'Romance', '2016-12-09', 30000000.00),
+('F003', 'Parasite', 'Thriller', '2019-05-30', 11400000.00),
+('F004', 'The Batman', 'Action', '2022-03-04', 200000000.00),
+('F005', 'Coco', 'Animation', '2017-11-22', 175000000.00);
+
+-- 2. Actors Table
+CREATE TABLE Actors (
+    ActorID VARCHAR(10),
+    Name VARCHAR(100),
+    DOB DATE,
+    Nationality VARCHAR(50),
+    AgentID VARCHAR(10)
+);
+
+INSERT INTO Actors VALUES
+('A001', 'Tom Cruise', '1962-07-03', 'American', 'AG001'),
+('A002', 'Emma Stone', '1988-11-06', 'American', 'AG002'),
+('A003', 'Song Kang-ho', '1967-01-17', 'South Korean', 'AG003'),
+('A004', 'Robert Pattinson', '1986-05-13', 'British', 'AG004'),
+('A005', 'Anthony Gonzalez', '2004-09-23', 'American', 'AG005');
+
+-- 3. Crew Table
+CREATE TABLE Crew (
+    CrewID VARCHAR(10),
+    FilmID VARCHAR(10),
+    Role VARCHAR(50),
+    Name VARCHAR(100),
+    ExperienceYears INT
+);
+
+INSERT INTO Crew VALUES
+('C001', 'F001', 'Director', 'Doug Liman', 25),
+('C002', 'F002', 'Composer', 'Justin Hurwitz', 15),
+('C003', 'F003', 'Cinematographer', 'Hong Kyung-pyo', 20),
+('C004', 'F004', 'Producer', 'Dylan Clark', 18),
+('C005', 'F005', 'Director', 'Lee Unkrich', 22);
+
+-- 4. Locations Table
+CREATE TABLE Locations (
+    LocationID VARCHAR(10),
+    FilmID VARCHAR(10),
+    City VARCHAR(50),
+    Country VARCHAR(50),
+    DurationDays INT
+);
+
+INSERT INTO Locations VALUES
+('L001', 'F001', 'London', 'UK', 45),
+('L002', 'F002', 'Los Angeles', 'USA', 30),
+('L003', 'F003', 'Seoul', 'South Korea', 25),
+('L004', 'F004', 'Glasgow', 'UK', 50),
+('L005', 'F005', 'Oaxaca', 'Mexico', 40);
+
+-- 5. BoxOffice Table
+CREATE TABLE BoxOffice (
+    BOID VARCHAR(10),
+    FilmID VARCHAR(10),
+    OpeningWeekend DECIMAL(10,2),
+    TotalGross DECIMAL(12,2),
+    Region VARCHAR(50)
+);
+
+INSERT INTO BoxOffice VALUES
+('BO001', 'F001', 28500000.00, 370500000.00, 'Global'),
+('BO002', 'F002', 8800000.00, 446000000.00, 'Global'),
+('BO003', 'F003', 2580000.00, 263000000.00, 'Global'),
+('BO004', 'F004', 134000000.00, 772000000.00, 'Global'),
+('BO005', 'F005', 50400000.00, 814000000.00, 'Global');
+
+
+-------- 27 databse legal case mangment
+CREATE TABLE Clients (
+    ClientID VARCHAR(10),
+    Name VARCHAR(100),
+    Address VARCHAR(150),
+    Phone VARCHAR(15),
+    Email VARCHAR(100)
+);
+
+INSERT INTO Clients VALUES
+('CL001', 'John Smith', '123 Maple St, New York, NY', '2125556789', 'john.smith@example.com'),
+('CL002', 'Emily Davis', '456 Oak Rd, Chicago, IL', '3125552345', 'emily.davis@example.com'),
+('CL003', 'Michael Lee', '789 Pine Ave, Los Angeles, CA', '2135553456', 'michael.lee@example.com'),
+('CL004', 'Sarah Johnson', '321 Elm St, Boston, MA', '6175558765', 'sarah.j@example.com'),
+('CL005', 'Carlos Rivera', '654 Cedar Blvd, Miami, FL', '3055551122', 'carlos.rivera@example.com');
+
+CREATE TABLE Cases (
+    CaseID VARCHAR(10),
+    ClientID VARCHAR(10),
+    CaseType VARCHAR(50),
+    StartDate DATE,
+    Status VARCHAR(20)
+);
+
+INSERT INTO Cases VALUES
+('CA001', 'CL001', 'Divorce', '2023-01-15', 'Open'),
+('CA002', 'CL002', 'Contract Dispute', '2023-03-10', 'Closed'),
+('CA003', 'CL003', 'Criminal Defense', '2022-11-20', 'Open'),
+('CA004', 'CL004', 'Real Estate', '2023-05-05', 'Pending'),
+('CA005', 'CL005', 'Personal Injury', '2022-09-30', 'Closed');
+
+CREATE TABLE Lawyers (
+    LawyerID VARCHAR(10),
+    Name VARCHAR(100),
+    Specialty VARCHAR(50),
+    HireDate DATE,
+    CasesHandled INT
+);
+
+INSERT INTO Lawyers VALUES
+('LW001', 'Alice Carter', 'Family Law', '2018-06-01', 45),
+('LW002', 'James Miller', 'Corporate Law', '2020-02-15', 30),
+('LW003', 'Nina Patel', 'Criminal Law', '2016-09-12', 60),
+('LW004', 'David Kim', 'Real Estate', '2019-11-20', 35),
+('LW005', 'Olivia Brown', 'Tort Law', '2021-04-05', 25);
+
+CREATE TABLE Hearings (
+    HearingID VARCHAR(10),
+    CaseID VARCHAR(10),
+    Date DATE,
+    Courtroom VARCHAR(20),
+    Outcome VARCHAR(50)
+);
+
+INSERT INTO Hearings VALUES
+('H001', 'CA001', '2023-02-20', 'Courtroom A', 'Postponed'),
+('H002', 'CA002', '2023-04-12', 'Courtroom B', 'Judgment Passed'),
+('H003', 'CA003', '2023-01-18', 'Courtroom C', 'Ongoing'),
+('H004', 'CA004', '2023-06-25', 'Courtroom A', 'Scheduled'),
+('H005', 'CA005', '2022-12-10', 'Courtroom D', 'Settled');
+
+CREATE TABLE Invoices (
+    InvoiceID VARCHAR(10),
+    CaseID VARCHAR(10),
+    IssueDate DATE,
+    Amount DECIMAL(10,2),
+    Paid VARCHAR(5)
+);
+
+INSERT INTO Invoices VALUES
+('IN001', 'CA001', '2023-02-01', 1500.00, 'No'),
+('IN002', 'CA002', '2023-04-15', 2500.00, 'Yes'),
+('IN003', 'CA003', '2023-01-25', 3000.00, 'No'),
+('IN004', 'CA004', '2023-06-30', 1200.00, 'No'),
+('IN005', 'CA005', '2022-10-15', 2000.00, 'Yes');
+
+-- 28 database Smart Agriculture / Farm IoT
+CREATE TABLE Fields (
+    FieldID VARCHAR(10),
+    CropType VARCHAR(50),
+    AreaAcres DECIMAL(5,2),
+    IrrigationType VARCHAR(30),
+    SoilType VARCHAR(30)
+);
+
+INSERT INTO Fields VALUES
+('F001', 'Wheat', 10.50, 'Drip', 'Loamy'),
+('F002', 'Corn', 15.75, 'Sprinkler', 'Sandy'),
+('F003', 'Rice', 8.20, 'Flood', 'Clay'),
+('F004', 'Soybean', 12.00, 'Pivot', 'Silty'),
+('F005', 'Barley', 9.60, 'Manual', 'Peaty');
+
+CREATE TABLE Sensors (
+    SensorID VARCHAR(10),
+    FieldID VARCHAR(10),
+    SensorType VARCHAR(30),
+    LastCalibration DATE,
+    Status VARCHAR(10)
+);
+
+INSERT INTO Sensors VALUES
+('S001', 'F001', 'Moisture', '2024-05-10', 'Active'),
+('S002', 'F002', 'Temperature', '2024-06-01', 'Active'),
+('S003', 'F003', 'pH', '2024-04-20', 'Inactive'),
+('S004', 'F004', 'Humidity', '2024-05-25', 'Active'),
+('S005', 'F005', 'Nutrient', '2024-03-15', 'Active');
+
+CREATE TABLE Readings (
+    ReadingID VARCHAR(10),
+    SensorID VARCHAR(10),
+    Timestamp DATETIME,
+    Value DECIMAL(6,2),
+    Unit VARCHAR(10)
+);
+
+INSERT INTO Readings VALUES
+('R001', 'S001', '2025-07-10 08:00:00', 23.50, '%'),
+('R002', 'S002', '2025-07-10 08:05:00', 30.10, '°C'),
+('R003', 'S003', '2025-07-10 08:10:00', 6.80, 'pH'),
+('R004', 'S004', '2025-07-10 08:15:00', 55.20, '%'),
+('R005', 'S005', '2025-07-10 08:20:00', 120.00, 'ppm');
+
+CREATE TABLE Fertilizers (
+    FertilizerID VARCHAR(10),
+    Name VARCHAR(50),
+    ApplicationRate DECIMAL(5,2), -- kg/acre
+    CostPerAcre DECIMAL(7,2),
+    Supplier VARCHAR(50)
+);
+
+INSERT INTO Fertilizers VALUES
+('FZ001', 'Urea', 50.00, 25.00, 'AgriGrow Inc.'),
+('FZ002', 'DAP', 40.00, 30.00, 'FarmSupply Co.'),
+('FZ003', 'Compost', 100.00, 15.00, 'GreenFields'),
+('FZ004', 'NPK', 60.00, 28.50, 'CropCare Ltd.'),
+('FZ005', 'Potash', 35.00, 22.00, 'AgroMart');
+
+CREATE TABLE Harvests (
+    HarvestID VARCHAR(10),
+    FieldID VARCHAR(10),
+    Date DATE,
+    YieldKg DECIMAL(7,2),
+    QualityGrade VARCHAR(10)
+);
+
+INSERT INTO Harvests VALUES
+('H001', 'F001', '2025-06-20', 12000.50, 'A'),
+('H002', 'F002', '2025-06-22', 15800.75, 'B'),
+('H003', 'F003', '2025-06-25', 9500.00, 'A'),
+('H004', 'F004', '2025-06-27', 13500.25, 'C'),
+('H005', 'F005', '2025-06-30', 11000.00, 'B');
+
+
+-------- 29 databse travel bokking platfom
+CREATE TABLE Users (
+    UserID VARCHAR(10),
+    Name VARCHAR(50),
+    Email VARCHAR(50),
+    PreferredDestinations VARCHAR(100),
+    JoinedDate DATE
+);
+
+INSERT INTO Users VALUES
+('U001', 'Alice Smith', 'alice@example.com', 'Paris, Tokyo', '2023-01-15'),
+('U002', 'Bob Johnson', 'bob@example.com', 'New York, Rome', '2022-11-10'),
+('U003', 'Cathy Lee', 'cathy@example.com', 'Bangkok, Sydney', '2023-06-05'),
+('U004', 'David Kim', 'david@example.com', 'Berlin, Dubai', '2021-09-20'),
+('U005', 'Eva Martinez', 'eva@example.com', 'London, Tokyo', '2023-03-12');
+
+CREATE TABLE Trips (
+    TripID VARCHAR(10),
+    UserID VARCHAR(10),
+    Destination VARCHAR(50),
+    StartDate DATE,
+    EndDate DATE
+);
+
+INSERT INTO Trips VALUES
+('T001', 'U001', 'Paris', '2024-05-10', '2024-05-20'),
+('T002', 'U002', 'Rome', '2024-06-15', '2024-06-25'),
+('T003', 'U003', 'Bangkok', '2024-07-05', '2024-07-15'),
+('T004', 'U004', 'Berlin', '2024-08-01', '2024-08-10'),
+('T005', 'U005', 'Tokyo', '2024-09-10', '2024-09-18');
+
+CREATE TABLE Accommodations (
+    AccID VARCHAR(10),
+    TripID VARCHAR(10),
+    HotelName VARCHAR(100),
+    CheckIn DATE,
+    Nights INT
+);
+
+INSERT INTO Accommodations VALUES
+('A001', 'T001', 'Hotel Paris Luxe', '2024-05-10', 10),
+('A002', 'T002', 'Rome Central Inn', '2024-06-15', 10),
+('A003', 'T003', 'Bangkok Palace Hotel', '2024-07-05', 10),
+('A004', 'T004', 'Berlin Comfort Stay', '2024-08-01', 9),
+('A005', 'T005', 'Tokyo Garden Hotel', '2024-09-10', 8);
+
+CREATE TABLE Flights (
+    FlightBookingID VARCHAR(10),
+    TripID VARCHAR(10),
+    Airline VARCHAR(50),
+    FlightNumber VARCHAR(20),
+    Date DATE
+);
+
+INSERT INTO Flights VALUES
+('F001', 'T001', 'Air France', 'AF123', '2024-05-10'),
+('F002', 'T002', 'Alitalia', 'AZ456', '2024-06-15'),
+('F003', 'T003', 'Thai Airways', 'TG789', '2024-07-05'),
+('F004', 'T004', 'Lufthansa', 'LH321', '2024-08-01'),
+('F005', 'T005', 'ANA', 'NH654', '2024-09-10');
+
+CREATE TABLE Reviews (
+    ReviewID VARCHAR(10),
+    TripID VARCHAR(10),
+    Rating INT,
+    Comment TEXT,
+    Date DATE
+);
+
+INSERT INTO Reviews VALUES
+('R001', 'T001', 5, 'Amazing trip to Paris!', '2024-05-21'),
+('R002', 'T002', 4, 'Rome was beautiful, great food.', '2024-06-26'),
+('R003', 'T003', 5, 'Loved the culture in Bangkok.', '2024-07-16'),
+('R004', 'T004', 3, 'Berlin was okay, hotel could be better.', '2024-08-11'),
+('R005', 'T005', 5, 'Tokyo is now my favorite city!', '2024-09-19');
+
+----- 30 databse art gallery mangement
+CREATE TABLE Artists (
+    ArtistID VARCHAR(10),
+    Name VARCHAR(50),
+    Nationality VARCHAR(50),
+    BirthYear INT,
+    Style VARCHAR(50)
+);
+
+INSERT INTO Artists VALUES
+('AR001', 'Pablo Picasso', 'Spanish', 1881, 'Cubism'),
+('AR002', 'Frida Kahlo', 'Mexican', 1907, 'Surrealism'),
+('AR003', 'Claude Monet', 'French', 1840, 'Impressionism'),
+('AR004', 'Andy Warhol', 'American', 1928, 'Pop Art'),
+('AR005', 'Yayoi Kusama', 'Japanese', 1929, 'Abstract');
+
+CREATE TABLE Artworks (
+    ArtworkID VARCHAR(10),
+    Title VARCHAR(100),
+    ArtistID VARCHAR(10),
+    YearCreated INT,
+    Medium VARCHAR(50)
+);
+
+INSERT INTO Artworks VALUES
+('AW001', 'Les Demoiselles d\'Avignon', 'AR001', 1907, 'Oil on Canvas'),
+('AW002', 'The Two Fridas', 'AR002', 1939, 'Oil on Canvas'),
+('AW003', 'Water Lilies', 'AR003', 1916, 'Oil on Canvas'),
+('AW004', 'Marilyn Diptych', 'AR004', 1962, 'Silkscreen'),
+('AW005', 'Infinity Mirrored Room', 'AR005', 2013, 'Mixed Media');
+
+CREATE TABLE Exhibitions (
+    ExhibitionID VARCHAR(10),
+    Name VARCHAR(100),
+    StartDate DATE,
+    EndDate DATE,
+    Venue VARCHAR(100)
+);
+
+INSERT INTO Exhibitions VALUES
+('EX001', 'Modern Masters', '2024-01-10', '2024-03-15', 'Gallery One'),
+('EX002', 'Latin American Visions', '2024-04-01', '2024-05-20', 'Cultural Hall'),
+('EX003', 'Impressionist Glow', '2024-06-10', '2024-07-30', 'ArtSpace Paris'),
+('EX004', 'Pop Art Boom', '2024-08-15', '2024-09-30', 'City Gallery'),
+('EX005', 'Infinity Rooms', '2024-10-01', '2024-11-15', 'Lightbox Museum');
+
+CREATE TABLE Sales (
+    SaleID VARCHAR(10),
+    ArtworkID VARCHAR(10),
+    BuyerName VARCHAR(50),
+    Date DATE,
+    SalePrice DECIMAL(10,2)
+);
+
+INSERT INTO Sales VALUES
+('S001', 'AW001', 'John Carter', '2024-01-20', 1200000.00),
+('S002', 'AW002', 'Maria Lopez', '2024-04-10', 850000.00),
+('S003', 'AW003', 'Pierre Dupont', '2024-06-15', 1300000.00),
+('S004', 'AW004', 'Anna Taylor', '2024-08-20', 920000.00),
+('S005', 'AW005', 'Kenji Sato', '2024-10-05', 1500000.00);
+
+CREATE TABLE Curators (
+    CuratorID VARCHAR(10),
+    Name VARCHAR(50),
+    ExhibitionID VARCHAR(10),
+    ExperienceYears INT,
+    Specialty VARCHAR(50)
+);
+
+INSERT INTO Curators VALUES
+('C001', 'Laura Green', 'EX001', 10, 'Modern Art'),
+('C002', 'Carlos Mendez', 'EX002', 7, 'Latin American Art'),
+('C003', 'Sophie Leclair', 'EX003', 12, 'Impressionism'),
+('C004', 'Mike Anderson', 'EX004', 8, 'Pop Art'),
+('C005', 'Emiko Tanaka', 'EX005', 9, 'Installation Art');
+
+
+
+
+
+
+
