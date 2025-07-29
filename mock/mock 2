@@ -1,1 +1,958 @@
 
+-- ----------------------------------- Database Queries --------------------------------------
+-- Create SBI Bank database
+CREATE DATABASE SBI_Bank;
+
+-- Select the database for use
+USE SBI_Bank;
+
+-- ---------------------------------- Table Queries -----------------------------------------
+
+-- Table-1 : Customers
+
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    FullName VARCHAR(100),
+    DOB DATE,
+    Gender VARCHAR(10),
+    Email VARCHAR(100),
+    Phone VARCHAR(15),
+    AadharNumber VARCHAR(16),
+    PANNumber VARCHAR(12),
+    Address TEXT,
+    BranchCode VARCHAR(10)
+);
+
+INSERT INTO Customers VALUES
+(1, 'Rahul Sharma', '1988-06-12', 'Male', 'rahul88@gmail.com', '9876543210', '123412341234', 'ABCDE1234F', 'Delhi, India', 'SBI001'),
+(2, 'Anjali Mehta', '1992-03-25', 'Female', 'anjali25@gmail.com', '9856432109', '987698769876', 'GHYTR5678G', 'Mumbai, India', 'SBI002'),
+(3, 'Amit Roy', '1985-01-10', 'Male', 'amitroy@gmail.com', '9871122334', '123456781234', 'DFGTR1234E', 'Kolkata, India', 'SBI003'),
+(4, 'Pooja Nair', '1990-09-17', 'Female', 'pooja.n@gmail.com', '9934567890', '567812341234', 'POIUY6789H', 'Chennai, India', 'SBI004'),
+(5, 'Vikram Sinha', '1982-12-04', 'Male', 'vikram.sinha@gmail.com', '9765432101', '345612341234', 'PLMNB2345J', 'Bangalore, India', 'SBI005'),
+(6, 'Riya Sen', '1994-11-30', 'Female', 'riya.sen@gmail.com', '9823456781', '876543218765', 'LKJHG8765K', 'Hyderabad, India', 'SBI006'),
+(7, 'Neeraj Das', '1987-07-23', 'Male', 'neeraj.das@gmail.com', '9812345672', '765412349876', 'MNBVC2345L', 'Ahmedabad, India', 'SBI007'),
+(8, 'Seema Agarwal', '1993-04-15', 'Female', 'seema.a@gmail.com', '9743124567', '234512347654', 'QWERT1234P', 'Surat, India', 'SBI008'),
+(9, 'Anil Kumar', '1989-08-12', 'Male', 'anil.k@gmail.com', '9687654321', '112233445566', 'ZXCVB3456M', 'Jaipur, India', 'SBI009'),
+(10, 'Sneha Das', '1991-02-22', 'Female', 'sneha.d@gmail.com', '9765123890', '667788990011', 'ASDFG5678T', 'Bhopal, India', 'SBI010'),
+(11, 'Aditya Mehra', '1990-03-11', 'Male', 'aditya.m@gmail.com', '9845000001', '123400000123', 'PQWER6789Z', 'Lucknow, India', 'SBI011'),
+(12, 'Divya Thakur', '1995-06-19', 'Female', 'divya.t@gmail.com', '9789456123', '234500000123', 'LKJHG0001A', 'Kanpur, India', 'SBI012'),
+(13, 'Manish Tiwari', '1984-05-15', 'Male', 'manish.t@gmail.com', '9876541290', '321654987000', 'ZMXNB7890D', 'Nagpur, India', 'SBI013'),
+(14, 'Priya Kaur', '1987-07-21', 'Female', 'priya.k@gmail.com', '9712314567', '654321009876', 'REWQ1234AS', 'Amritsar, India', 'SBI014'),
+(15, 'Kunal Ghosh', '1992-10-01', 'Male', 'kunal.g@gmail.com', '9834567890', '223344556677', 'IUYTRE4321Z', 'Guwahati, India', 'SBI015'),
+(16, 'Rachna Pathak', '1989-12-12', 'Female', 'rachna.p@gmail.com', '9854123987', '334455667788', 'OIUYT5678B', 'Indore, India', 'SBI016'),
+(17, 'Saurabh Jain', '1985-08-08', 'Male', 'saurabh.j@gmail.com', '9723456789', '445566778899', 'XCVBN2345U', 'Kota, India', 'SBI017'),
+(18, 'Meera Joshi', '1991-09-09', 'Female', 'meera.j@gmail.com', '9745123467', '556677889900', 'TREWQ3456N', 'Raipur, India', 'SBI018'),
+(19, 'Arun Verma', '1993-06-06', 'Male', 'arun.v@gmail.com', '9887654321', '667788990011', 'NBVCX9876P', 'Agra, India', 'SBI019'),
+(20, 'Meena Kapoor', '1991-08-09', 'Female', 'meenak@gmail.com', '9945362819', '673498761234', 'FHTRE7865J', 'Pune, India', 'SBI020');
+
+-- Display all customers
+SELECT * FROM Customers;
+
+-- Delete all customer records but keep the table structure
+TRUNCATE TABLE Customers;
+
+-- Completely remove the Customers table from the database
+DROP TABLE Customers;
+
+--------------------------------------- all 50 queries ------------------------------------------------------------------------------------------------------------------------
+-- Select Querise (15)
+ 
+-- 1. All records
+SELECT * FROM Customers;
+
+-- 2. Select names and emails  
+SELECT FullName, Email FROM Customers;
+
+-- 3. Count total entries
+SELECT COUNT(*) AS total_customers FROM Customers;
+
+-- 4. Distinct branch codes
+SELECT DISTINCT BranchCode FROM Customers;
+
+-- 5. Limit first 10 rows
+SELECT * FROM Customers LIMIT 10;
+
+-- 6. Born after 1990
+SELECT * FROM Customers WHERE DOB > '1990-01-01';
+
+-- 7. Female customers
+SELECT * FROM Customers WHERE Gender = 'Female';
+
+-- 8. Customers from Mumbai
+SELECT * FROM Customers WHERE Address LIKE '%Mumbai%';
+
+-- 9. Order by DOB ascending
+SELECT * FROM Customers ORDER BY DOB ASC;
+
+-- 10. Earliest date of birth
+SELECT * FROM Customers ORDER BY DOB ASC LIMIT 1;
+
+-- 11. FullName and phone sorted by name
+SELECT FullName, Phone FROM Customers ORDER BY FullName;
+
+-- 12. Use IN filter for specific branches
+SELECT * FROM Customers WHERE BranchCode IN ('SBI001','SBI002','SBI003');
+
+-- 13. Names containing 'Das'
+SELECT * FROM Customers WHERE FullName LIKE '%Das%';
+
+-- 14. Extract year of birth
+SELECT FullName, YEAR(DOB) AS birth_year FROM Customers;
+
+-- 15. Email uppercase view
+SELECT CustomerID, UPPER(Email) AS EmailCaps FROM Customers;
+
+-- Alter querise (10)
+
+-- 1. Add column LoyaltyPoints
+Alter table  Customers ADD LoyaltyPoints INT DEFAULT 0;
+
+-- 2. Add NationalIDType nullable
+ALTER table Customers ADD NationalIDType VARCHAR(20);
+
+-- 3. Drop PANNumber column
+ALTER TABLE Customers DROP COLUMN PANNumber;
+
+-- 4. Change Phone length
+alter TABLE Customers MODIFY COLUMN Phone VARCHAR(20);
+
+-- 5. Make Phone NOT NULL
+ALTER TABLE Customers MODIFY COLUMN Phone VARCHAR(20) NOT NULL;
+
+-- 6. Add Aadhaar constraint check (length = 12)
+ALTER TABLE Customers ADD CONSTRAINT chk_aadhar_length CHECK (CHAR_LENGTH(AadharNumber) = 12);
+
+-- 7. Drop that constraint
+ALTER TABLE Customers DROP CHECK chk_aadhar_length;
+
+-- 8. Modify Email to NOT NULL
+ALTER table  Customers MODIFY COLUMN Email VARCHAR(100) NOT NULL;
+
+-- 9. Modify DOB to not allow NULL
+ALTER TABLE Customers MODIFY COLUMN DOB DATE NOT NULL;
+
+-- 10. Add Flags integer column for bit operations
+ALTER TABLE Customers ADD Flags INT DEFAULT 0;
+
+-- Update querise (10)
+
+-- 1. Correct Rahul's email address
+UPDATE Customers SET Email = 'rahul.sharma@newmail.com' WHERE CustomerID = 1;
+
+-- 2. Set loyalty points to 100 for Rahul
+UPDATE Customers SET LoyaltyPoints = 100 WHERE CustomerID = 1;
+
+-- 3. Bulk set loyalty to zero if NULL
+UPDATE Customers SET LoyaltyPoints = 0 WHERE LoyaltyPoints IS NULL;
+
+-- 4. Change branch of Anjali Mehta
+UPDATE Customers SET BranchCode = 'SBI010' WHERE FullName = 'Anjali Mehta';
+
+-- 5. Mask Aadhar for privacy
+UPDATE Customers SET AadharNumber = 'XXXXXXXXXXXX' WHERE CustomerID = 3;
+
+-- 6. Append ', India' to addresses missing it
+UPDATE Customers SET Address = CONCAT(Address, ', India') WHERE Address NOT LIKE '%, India';
+
+-- 7. Update branch code for Pune
+UPDATE Customers SET BranchCode = 'SBI020' WHERE Address LIKE '%Pune%';
+
+-- 8. Uppercase all emails
+UPDATE Customers SET Email = UPPER(Email);
+
+-- 9. Remove nodigits from phone for record 2
+UPDATE Customers SET Phone = REGEXP_REPLACE(Phone, '[^0-9]', '') WHERE CustomerID = 2;
+
+-- 10. Set Flags bit on for customer 1 (requires Flags column)
+UPDATE Customers SET Flags = Flags | 1 WHERE CustomerID = 1;
+
+-- Delete Querise (5)
+
+DELETE FROM Customers
+WHERE Address LIKE '%Delhi%';
+
+DELETE FROM Customers
+WHERE DOB < '1990-01-01';
+
+DELETE FROM Customers
+WHERE Gender = 'Female'
+  AND BranchCode = 'SBI004';
+  
+ DELETE FROM Customers;
+
+-- Reaname querise (5)
+
+-- 1. Rename table to BankCustomers
+ALTER table Customers RENAME TO BankCustomers;
+
+-- 2. Rename FullName to CustomerName
+alter TABLE BankCustomers CHANGE COLUMN FullName CustomerName VARCHAR(100);
+
+-- 3. Rename Address to Residence
+alter TABLE BankCustomers CHANGE COLUMN Address Residence TEXT;
+
+-- 4. Rename AadharNumber to AadhaarNo
+ALTER table BankCustomers CHANGE COLUMN AadharNumber AadhaarNo VARCHAR(16);
+
+-- 5. Rename BranchCode to Branch_ID
+alter TABLE BankCustomers CHANGE COLUMN BranchCode Branch_ID VARCHAR(10);
+
+
+
+-- Table-2: Accounts
+
+CREATE TABLE Accounts (
+    AccountID INT PRIMARY KEY,
+    CustomerID INT,
+    AccountType VARCHAR(20),
+    OpenDate DATE,
+    Balance DECIMAL(12,2),
+    IFSCCode VARCHAR(11),
+    BranchCode VARCHAR(10),
+    Status VARCHAR(10),
+    NomineeName VARCHAR(100),
+    Currency VARCHAR(5),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Accounts VALUES
+(101, 1, 'Savings', '2020-01-15', 55000.75, 'SBIN000001', 'SBI001', 'Active', 'Reena Sharma', 'INR'),
+(102, 2, 'Current', '2019-05-22', 125000.00, 'SBIN000002', 'SBI002', 'Active', 'Vijay Mehta', 'INR'),
+(103, 3, 'Savings', '2021-11-10', 67000.00, 'SBIN000003', 'SBI003', 'Active', 'Asha Roy', 'INR'),
+(104, 4, 'Savings', '2018-07-09', 89000.00, 'SBIN000004', 'SBI004', 'Active', 'Pritam Nair', 'INR'),
+(105, 5, 'Current', '2022-01-01', 32000.00, 'SBIN000005', 'SBI005', 'Active', 'Kiran Sinha', 'INR'),
+(106, 6, 'Savings', '2020-06-15', 47000.90, 'SBIN000006', 'SBI006', 'Active', 'Aman Sen', 'INR'),
+(107, 7, 'Savings', '2021-02-25', 51000.50, 'SBIN000007', 'SBI007', 'Active', 'Sonal Das', 'INR'),
+(108, 8, 'Current', '2017-09-10', 95000.00, 'SBIN000008', 'SBI008', 'Active', 'Vivek Agarwal', 'INR'),
+(109, 9, 'Savings', '2023-04-20', 22000.00, 'SBIN000009', 'SBI009', 'Active', 'Rina Kumar', 'INR'),
+(110, 10, 'Savings', '2019-12-12', 34000.00, 'SBIN000010', 'SBI010', 'Active', 'Neeraj Das', 'INR'),
+(111, 11, 'Savings', '2021-08-12', 78000.45, 'SBIN000011', 'SBI011', 'Active', 'Priya Mehra', 'INR'),
+(112, 12, 'Current', '2022-03-19', 125000.00, 'SBIN000012', 'SBI012', 'Active', 'Ajay Thakur', 'INR'),
+(113, 13, 'Savings', '2023-01-23', 33000.00, 'SBIN000013', 'SBI013', 'Active', 'Anita Tiwari', 'INR'),
+(114, 14, 'Savings', '2020-10-14', 59000.00, 'SBIN000014', 'SBI014', 'Active', 'Karan Kaur', 'INR'),
+(115, 15, 'Current', '2021-04-18', 40500.00, 'SBIN000015', 'SBI015', 'Active', 'Deepak Ghosh', 'INR'),
+(116, 16, 'Savings', '2019-11-11', 22000.00, 'SBIN000016', 'SBI016', 'Active', 'Nidhi Pathak', 'INR'),
+(117, 17, 'Savings', '2020-05-30', 47000.50, 'SBIN000017', 'SBI017', 'Active', 'Tarun Jain', 'INR'),
+(118, 18, 'Current', '2022-06-22', 110000.00, 'SBIN000018', 'SBI018', 'Active', 'Ankit Joshi', 'INR'),
+(119, 19, 'Savings', '2023-03-03', 56000.00, 'SBIN000019', 'SBI019', 'Active', 'Radhika Verma', 'INR'),
+(120, 20, 'Savings', '2023-07-07', 43250.50, 'SBIN000020', 'SBI020', 'Active', 'Amit Kapoor', 'INR');
+
+-- Show all accounts
+SELECT * FROM Accounts;
+
+-- Delete all account records but keep the structure
+TRUNCATE TABLE Accounts;
+
+-- Completely remove the Accounts table
+DROP TABLE Accounts;
+
+-- Select Querise (20)
+
+-- 1. All accounts
+SELECT * FROM Accounts;
+
+-- 2. Accounts with balance above 50,000
+SELECT * FROM Accounts WHERE Balance > 50000;
+
+-- 3. Savings accounts only
+SELECT * FROM Accounts WHERE AccountType = 'Savings';
+
+-- 4. Current accounts only
+SELECT * FROM Accounts WHERE AccountType = 'Current';
+
+-- 5. Accounts opened in 2023
+SELECT * FROM Accounts WHERE YEAR(OpenDate) = 2023;
+
+-- 6. Accounts with INR currency
+SELECT * FROM Accounts WHERE Currency = 'INR';
+
+-- 7. Accounts with nominee name starting with 'A'
+SELECT * FROM Accounts WHERE NomineeName LIKE 'A%';
+
+-- 8. Get distinct account types
+SELECT DISTINCT AccountType FROM Accounts;
+
+-- 9. Get max balance
+SELECT MAX(Balance) AS MaxBalance FROM Accounts;
+
+-- 10. Get min balance
+SELECT MIN(Balance) AS MinBalance FROM Accounts;
+
+-- 11. Get total balance of all accounts
+SELECT SUM(Balance) AS TotalBalance FROM Accounts;
+
+-- 12. Count total number of Savings accounts
+SELECT COUNT(*) FROM Accounts WHERE AccountType = 'Savings';
+
+-- 13. List accounts grouped by account type
+SELECT AccountType, COUNT(*) FROM Accounts GROUP BY AccountType;
+
+-- 14. Find accounts with 'Das' in nominee name
+SELECT * FROM Accounts WHERE NomineeName LIKE '%Das%';
+
+-- 15. Accounts opened before 2020
+SELECT * FROM Accounts WHERE OpenDate < '2020-01-01';
+
+-- 16. Order accounts by balance descending
+SELECT * FROM Accounts ORDER BY Balance DESC;
+
+-- 17. Top 5 highest balance accounts
+SELECT * FROM Accounts ORDER BY Balance DESC LIMIT 5;
+
+-- 18. Accounts with status 'Active'
+SELECT * FROM Accounts WHERE Status = 'Active';
+
+-- 19. Accounts with IFSC starting with 'SBIN00001'
+SELECT * FROM Accounts WHERE IFSCCode LIKE 'SBIN00001%';
+
+-- 20. Get average balance of savings accounts
+SELECT AVG(Balance) AS AvgSavingsBalance FROM Accounts WHERE AccountType = 'Savings';
+
+-- Alter Querise (10)
+
+-- 1. Add a new column for account branch name
+ALTER TABLE Accounts ADD BranchName VARCHAR(50);
+
+-- 2. Add a column for last transaction date
+ALTER TABLE Accounts ADD LastTransaction DATE;
+
+-- 3. Add a column for account remarks
+ALTER TABLE Accounts ADD Remarks TEXT;
+
+-- 4. Add a column for overdraft limit
+ALTER TABLE Accounts ADD OverdraftLimit DECIMAL(12,2);
+
+-- 5. Modify Balance column to allow more precision
+ALTER TABLE Accounts MODIFY Balance DECIMAL(15,2);
+
+-- 6. Change NomineeName column to NOT NULL
+ALTER TABLE Accounts MODIFY NomineeName VARCHAR(100) NOT NULL;
+
+-- 7. Add a unique constraint on IFSCCode and AccountID
+ALTER TABLE Accounts ADD CONSTRAINT Unique_IFSC UNIQUE (IFSCCode, AccountID);
+
+-- 8. Drop the BranchName column
+ALTER TABLE Accounts DROP COLUMN BranchName;
+
+-- 9. Rename column Status to AccountStatus
+ALTER TABLE Accounts CHANGE Status AccountStatus VARCHAR(10);
+
+-- 10. Rename column OpenDate to AccountOpenDate
+ALTER TABLE Accounts CHANGE OpenDate AccountOpenDate DATE;
+
+-- Update querise (10)
+
+-- 1. Update balance of AccountID 101
+UPDATE Accounts SET Balance = Balance + 5000 WHERE AccountID = 101;
+
+-- 2. Mark AccountID 105 as Inactive
+UPDATE Accounts SET AccountStatus = 'Inactive' WHERE AccountID = 105;
+
+-- 3. Update nominee name for AccountID 110
+UPDATE Accounts SET NomineeName = 'Neeraj Kumar' WHERE AccountID = 110;
+
+-- 4. Update IFSCCode for AccountID 115
+UPDATE Accounts SET IFSCCode = 'SBIN000021' WHERE AccountID = 115;
+
+-- 5. Increase balance by 10% for all Savings accounts
+UPDATE Accounts SET Balance = Balance * 1.10 WHERE AccountType = 'Savings';
+
+-- 6. Change currency to USD for AccountID 108
+UPDATE Accounts SET Currency = 'USD' WHERE AccountID = 108;
+
+-- 7. Set overdraft limit for current accounts
+UPDATE Accounts SET OverdraftLimit = 50000 WHERE AccountType = 'Current';
+
+-- 8. Set Remarks for AccountID 112
+UPDATE Accounts SET Remarks = 'Preferred Customer' WHERE AccountID = 112;
+
+-- 9. Update last transaction date for AccountID 117
+UPDATE Accounts SET LastTransaction = '2025-07-29' WHERE AccountID = 117;
+
+-- 10. Mark all accounts with balance below 30,000 as Inactive
+UPDATE Accounts SET AccountStatus = 'Inactive' WHERE Balance < 30000;
+
+-- Rename Querise (5)
+
+-- 1. Rename table Accounts to BankAccounts
+ALTER TABLE Accounts RENAME TO BankAccounts;
+
+-- 2. Rename table BankAccounts back to Accounts
+ALTER TABLE BankAccounts RENAME TO Accounts;
+
+-- 3. Rename column AccountStatus back to Status
+ALTER TABLE Accounts CHANGE AccountStatus Status VARCHAR(10);
+
+-- 4. Rename column AccountOpenDate back to OpenDate
+ALTER TABLE Accounts CHANGE AccountOpenDate OpenDate DATE;
+
+-- 5. Rename column Remarks to AccountRemarks
+ALTER TABLE Accounts CHANGE Remarks AccountRemarks TEXT;
+
+--  Table-3: Transactions
+
+CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY,
+    AccountID INT,
+    TransactionDate DATE,
+    Type VARCHAR(10),
+    Amount DECIMAL(10,2),
+    Description TEXT,
+    Mode VARCHAR(20),
+    Status VARCHAR(10),
+    BalanceAfter DECIMAL(12,2),
+    BranchCode VARCHAR(10),
+    FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
+);
+
+INSERT INTO Transactions VALUES
+(1001, 101, '2024-06-10', 'Credit', 5000.00, 'Salary credited', 'NEFT', 'Success', 60000.75, 'SBI001'),
+(1002, 101, '2024-06-15', 'Debit', 2000.00, 'Mobile recharge', 'UPI', 'Success', 58000.75, 'SBI001'),
+(1003, 102, '2024-05-22', 'Debit', 1500.00, 'Electricity bill', 'Net Banking', 'Success', 123500.00, 'SBI002'),
+(1004, 103, '2024-07-01', 'Credit', 20000.00, 'Cheque deposit', 'Cheque', 'Success', 87000.00, 'SBI003'),
+(1005, 104, '2024-07-02', 'Debit', 500.00, 'ATM Withdrawal', 'ATM', 'Success', 88500.00, 'SBI004'),
+(1006, 105, '2024-06-20', 'Credit', 10000.00, 'UPI received', 'UPI', 'Success', 42000.00, 'SBI005'),
+(1007, 106, '2024-05-10', 'Debit', 1500.00, 'Online shopping', 'UPI', 'Success', 45500.90, 'SBI006'),
+(1008, 107, '2024-07-15', 'Debit', 2500.00, 'Fuel payment', 'Card', 'Success', 48500.50, 'SBI007'),
+(1009, 108, '2024-06-30', 'Credit', 7000.00, 'Client payment', 'IMPS', 'Success', 102000.00, 'SBI008'),
+(1010, 109, '2024-05-18', 'Debit', 1000.00, 'Recharge', 'UPI', 'Success', 21000.00, 'SBI009'),
+(1011, 110, '2024-07-05', 'Credit', 5000.00, 'Salary', 'NEFT', 'Success', 39000.00, 'SBI010'),
+(1012, 111, '2024-06-12', 'Debit', 2000.00, 'Shopping', 'UPI', 'Success', 76000.45, 'SBI011'),
+(1013, 112, '2024-05-25', 'Credit', 15000.00, 'Cheque', 'Cheque', 'Success', 140000.00, 'SBI012'),
+(1014, 113, '2024-06-07', 'Debit', 2000.00, 'Rent', 'NEFT', 'Success', 31000.00, 'SBI013'),
+(1015, 114, '2024-05-29', 'Debit', 1000.00, 'Petrol', 'UPI', 'Success', 58000.00, 'SBI014'),
+(1016, 115, '2024-07-18', 'Credit', 10000.00, 'Client Payment', 'IMPS', 'Success', 50500.00, 'SBI015'),
+(1017, 116, '2024-06-25', 'Debit', 500.00, 'Bill Payment', 'Net Banking', 'Success', 21500.00, 'SBI016'),
+(1018, 117, '2024-07-03', 'Credit', 12000.00, 'Cash Deposit', 'Cash', 'Success', 59000.50, 'SBI017'),
+(1019, 118, '2024-06-17', 'Debit', 1000.00, 'Restaurant', 'Card', 'Success', 109000.00, 'SBI018'),
+(1020, 119, '2024-07-21', 'Credit', 8000.00, 'Transfer from friend', 'UPI', 'Success', 64000.00, 'SBI019');
+
+-- Show all transactions
+SELECT * FROM Transactions;
+
+-- Remove all transaction records (preserves structure)
+TRUNCATE TABLE Transactions;
+
+-- Delete the Transactions table permanently
+DROP TABLE Transactions;
+
+-- Select Querise (20)
+
+-- 1. Show all transactions
+SELECT * FROM Transactions;
+
+-- 2. Show all credit transactions
+SELECT * FROM Transactions WHERE Type = 'Credit';
+
+-- 3. Show all debit transactions
+SELECT * FROM Transactions WHERE Type = 'Debit';
+
+-- 4. Transactions above 5000
+SELECT * FROM Transactions WHERE Amount > 5000;
+
+-- 5. Transactions done via UPI
+SELECT * FROM Transactions WHERE Mode = 'UPI';
+
+-- 6. Transactions done in July 2024
+SELECT * FROM Transactions WHERE MONTH(TransactionDate) = 7 AND YEAR(TransactionDate) = 2024;
+
+-- 7. Show distinct transaction modes
+SELECT DISTINCT Mode FROM Transactions;
+
+-- 8. Count total transactions
+SELECT COUNT(*) FROM Transactions;
+
+-- 9. Find max transaction amount
+SELECT MAX(Amount) AS MaxTransaction FROM Transactions;
+
+-- 10. Find min transaction amount
+SELECT MIN(Amount) AS MinTransaction FROM Transactions;
+
+-- 11. Total credited amount
+SELECT SUM(Amount) FROM Transactions WHERE Type = 'Credit';
+
+-- 12. Total debited amount
+SELECT SUM(Amount) FROM Transactions WHERE Type = 'Debit';
+
+-- 13. Average transaction amount
+SELECT AVG(Amount) AS AvgTransaction FROM Transactions;
+
+-- 14. Count of failed transactions
+SELECT COUNT(*) FROM Transactions WHERE Status != 'Success';
+
+-- 15. Transactions for AccountID 101
+SELECT * FROM Transactions WHERE AccountID = 101;
+
+-- 16. Transactions sorted by Amount descending
+SELECT * FROM Transactions ORDER BY Amount DESC;
+
+-- 17. First 5 transactions by date
+SELECT * FROM Transactions ORDER BY TransactionDate ASC LIMIT 5;
+
+-- 18. Last 5 transactions by date
+SELECT * FROM Transactions ORDER BY TransactionDate DESC LIMIT 5;
+
+-- 19. Transactions grouped by Mode
+SELECT Mode, COUNT(*) FROM Transactions GROUP BY Mode;
+
+-- 20. Total amount per AccountID
+SELECT AccountID, SUM(Amount) AS TotalAmount FROM Transactions GROUP BY AccountID;
+
+ -- Alter Querise (10)
+ 
+ -- 1. Add a column for TransactionTime
+ALTER TABLE Transactions ADD TransactionTime TIME;
+
+-- 2. Add a column for ReferenceNumber
+ALTER TABLE Transactions ADD ReferenceNumber VARCHAR(30);
+
+-- 3. Add a column for Charges
+ALTER TABLE Transactions ADD Charges DECIMAL(8,2);
+
+-- 4. Add a column for Remarks
+ALTER TABLE Transactions ADD Remarks TEXT;
+
+-- 5. Modify Amount to allow larger amounts
+ALTER TABLE Transactions MODIFY Amount DECIMAL(15,2);
+
+-- 6. Make Description column NOT NULL
+ALTER TABLE Transactions MODIFY Description TEXT NOT NULL;
+
+-- 7. Add a unique constraint on TransactionID and AccountID
+ALTER TABLE Transactions ADD CONSTRAINT Unique_Transaction UNIQUE (TransactionID, AccountID);
+
+-- 8. Drop the Charges column
+ALTER TABLE Transactions DROP COLUMN Charges;
+
+-- 9. Change column Type to TransactionType
+ALTER TABLE Transactions CHANGE Type TransactionType VARCHAR(10);
+
+-- 10. Change column Mode to PaymentMode
+ALTER TABLE Transactions CHANGE Mode PaymentMode VARCHAR(20);
+
+-- Update Querise (10)
+
+-- 1. Update amount for TransactionID 1001
+UPDATE Transactions SET Amount = 5500.00 WHERE TransactionID = 1001;
+
+-- 2. Mark TransactionID 1005 as Failed
+UPDATE Transactions SET Status = 'Failed' WHERE TransactionID = 1005;
+
+-- 3. Update Mode for TransactionID 1009
+UPDATE Transactions SET PaymentMode = 'RTGS' WHERE TransactionID = 1009;
+
+-- 4. Add remarks for TransactionID 1012
+UPDATE Transactions SET Remarks = 'Shopping discount applied' WHERE TransactionID = 1012;
+
+-- 5. Add ReferenceNumber for TransactionID 1015
+UPDATE Transactions SET ReferenceNumber = 'REF1015XYZ' WHERE TransactionID = 1015;
+
+-- 6. Set TransactionTime for TransactionID 1020
+UPDATE Transactions SET TransactionTime = '14:30:00' WHERE TransactionID = 1020;
+
+-- 7. Increase Amount by 5% for all Credit transactions
+UPDATE Transactions SET Amount = Amount * 1.05 WHERE TransactionType = 'Credit';
+
+-- 8. Set Status to 'Reversed' for TransactionID 1017
+UPDATE Transactions SET Status = 'Reversed' WHERE TransactionID = 1017;
+
+-- 9. Update BranchCode for TransactionID 1016
+UPDATE Transactions SET BranchCode = 'SBI025' WHERE TransactionID = 1016;
+
+-- 10. Update Description for TransactionID 1018
+UPDATE Transactions SET Description = 'Updated Cash Deposit' WHERE TransactionID = 1018;
+
+-- Rename Querise 
+
+-- 1. Rename Transactions to BankTransactions
+ALTER TABLE Transactions RENAME TO BankTransactions;
+
+-- 2. Rename BankTransactions back to Transactions
+ALTER TABLE BankTransactions RENAME TO Transactions;
+
+-- 3. Rename column PaymentMode back to Mode
+ALTER TABLE Transactions CHANGE PaymentMode Mode VARCHAR(20);
+
+-- 4. Rename column TransactionType back to Type
+ALTER TABLE Transactions CHANGE TransactionType Type VARCHAR(10);
+
+-- 5. Rename column Remarks to Notes
+ALTER TABLE Transactions CHANGE Remarks Notes TEXT;
+
+-- Delete Querise (5)
+
+-- 1. Delete TransactionID 1020
+DELETE FROM Transactions WHERE TransactionID = 1020;
+
+-- 2. Delete all Failed transactions
+DELETE FROM Transactions WHERE Status = 'Failed';
+
+-- 3. Delete all Debit transactions below 1000
+DELETE FROM Transactions WHERE Type = 'Debit' AND Amount < 1000;
+
+-- 4. Delete transactions older than June 2024
+DELETE FROM Transactions WHERE TransactionDate < '2024-06-01';
+
+-- 5. Delete all transactions for AccountID 105
+DELETE FROM Transactions WHERE AccountID = 105;
+
+
+-- Table-4: Loans
+
+CREATE TABLE Loans (
+    LoanID INT PRIMARY KEY,
+    CustomerID INT,
+    LoanType VARCHAR(20),
+    Amount DECIMAL(12,2),
+    StartDate DATE,
+    TenureMonths INT,
+    InterestRate FLOAT,
+    EMI DECIMAL(10,2),
+    Status VARCHAR(10),
+    BranchCode VARCHAR(10),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+INSERT INTO Loans VALUES
+(201, 1, 'Home', 2500000.00, '2023-01-01', 240, 7.5, 22345.67, 'Active', 'SBI001'),
+(202, 2, 'Car', 800000.00, '2023-05-10', 60, 9.2, 16543.00, 'Active', 'SBI002'),
+(203, 3, 'Personal', 200000.00, '2024-01-15', 36, 11.5, 6720.45, 'Active', 'SBI003'),
+(204, 4, 'Education', 400000.00, '2022-06-01', 48, 10.0, 10450.30, 'Active', 'SBI004'),
+(205, 5, 'Home', 1500000.00, '2023-04-20', 180, 8.0, 15400.00, 'Active', 'SBI005'),
+(206, 6, 'Car', 950000.00, '2022-03-01', 60, 9.5, 17250.20, 'Active', 'SBI006'),
+(207, 7, 'Business', 1200000.00, '2023-07-10', 84, 8.9, 19300.00, 'Active', 'SBI007'),
+(208, 8, 'Education', 350000.00, '2021-08-15', 48, 10.2, 9450.00, 'Active', 'SBI008'),
+(209, 9, 'Home', 1800000.00, '2023-09-01', 240, 7.0, 19800.50, 'Active', 'SBI009'),
+(210, 10, 'Car', 600000.00, '2022-02-20', 60, 9.1, 13450.00, 'Active', 'SBI010'),
+(211, 11, 'Personal', 250000.00, '2023-11-10', 36, 11.2, 7300.00, 'Active', 'SBI011'),
+(212, 12, 'Home', 3000000.00, '2022-12-12', 240, 6.9, 24500.00, 'Active', 'SBI012'),
+(213, 13, 'Education', 420000.00, '2023-05-01', 60, 10.4, 9900.00, 'Active', 'SBI013'),
+(214, 14, 'Car', 700000.00, '2021-10-10', 48, 9.3, 15000.00, 'Active', 'SBI014'),
+(215, 15, 'Home', 2200000.00, '2022-01-05', 240, 7.2, 21400.00, 'Active', 'SBI015'),
+(216, 16, 'Business', 1000000.00, '2022-06-25', 120, 8.8, 19500.00, 'Active', 'SBI016'),
+(217, 17, 'Personal', 300000.00, '2023-04-14', 36, 11.0, 8800.00, 'Active', 'SBI017'),
+(218, 18, 'Education', 250000.00, '2022-07-07', 48, 10.5, 7800.00, 'Active', 'SBI018'),
+(219, 19, 'Car', 850000.00, '2023-03-03', 60, 9.0, 15800.00, 'Active', 'SBI019'),
+(220, 20, 'Personal', 200000.00, '2024-03-20', 36, 11.5, 6720.45, 'Active', 'SBI020');
+
+-- List all home loans above ₹20 lakhs
+SELECT * FROM Loans;
+
+-- Clear all loan records
+TRUNCATE TABLE Loans;
+
+-- Delete the Loans table from database
+DROP TABLE Loans;
+
+-- select querise (20)
+
+-- 1. Show all loans
+SELECT * FROM Loans;
+
+-- 2. List all Home loans above ₹20 lakhs
+SELECT * FROM Loans WHERE LoanType = 'Home' AND Amount > 2000000;
+
+-- 3. Show all Car loans
+SELECT * FROM Loans WHERE LoanType = 'Car';
+
+-- 4. Show all loans with tenure more than 5 years
+SELECT * FROM Loans WHERE TenureMonths > 60;
+
+-- 5. Show loans with interest rate above 10%
+SELECT * FROM Loans WHERE InterestRate > 10;
+
+-- 6. Show all active loans
+SELECT * FROM Loans WHERE Status = 'Active';
+
+-- 7. List all loans started in 2023
+SELECT * FROM Loans WHERE YEAR(StartDate) = 2023;
+
+-- 8. Get unique loan types
+SELECT DISTINCT LoanType FROM Loans;
+
+-- 9. Find max loan amount
+SELECT MAX(Amount) AS MaxLoan FROM Loans;
+
+-- 10. Find min loan amount
+SELECT MIN(Amount) AS MinLoan FROM Loans;
+
+-- 11. Total sum of all loan amounts
+SELECT SUM(Amount) AS TotalLoanAmount FROM Loans;
+
+-- 12. Average interest rate for Home loans
+SELECT AVG(InterestRate) AS AvgHomeLoanRate FROM Loans WHERE LoanType = 'Home';
+
+-- 13. Count of Personal loans
+SELECT COUNT(*) FROM Loans WHERE LoanType = 'Personal';
+
+-- 14. List loans with EMI above ₹20,000
+SELECT * FROM Loans WHERE EMI > 20000;
+
+-- 15. Loans grouped by type with count
+SELECT LoanType, COUNT(*) FROM Loans GROUP BY LoanType;
+
+-- 16. List loans for CustomerID 1
+SELECT * FROM Loans WHERE CustomerID = 1;
+
+-- 17. Show loans ordered by amount descending
+SELECT * FROM Loans ORDER BY Amount DESC;
+
+-- 18. Show top 5 highest loan amounts
+SELECT * FROM Loans ORDER BY Amount DESC LIMIT 5;
+
+-- 19. Total loan amount per branch
+SELECT BranchCode, SUM(Amount) FROM Loans GROUP BY BranchCode;
+
+-- 20. Loans with tenure exactly 36 months
+SELECT * FROM Loans WHERE TenureMonths = 36;
+
+-- Alter Querise (10)
+
+-- 1. Add a column for LoanPurpose
+ALTER TABLE Loans ADD LoanPurpose VARCHAR(100);
+
+-- 2. Add a column for Collateral
+ALTER TABLE Loans ADD Collateral VARCHAR(100);
+
+-- 3. Add a column for ProcessingFee
+ALTER TABLE Loans ADD ProcessingFee DECIMAL(10,2);
+
+-- 4. Add a column for LoanOfficer
+ALTER TABLE Loans ADD LoanOfficer VARCHAR(50);
+
+-- 5. Modify Amount column to allow larger values
+ALTER TABLE Loans MODIFY Amount DECIMAL(15,2);
+
+-- 6. Make EMI NOT NULL
+ALTER TABLE Loans MODIFY EMI DECIMAL(10,2) NOT NULL;
+
+-- 7. Add a unique constraint on LoanID and CustomerID
+ALTER TABLE Loans ADD CONSTRAINT Unique_Loan UNIQUE (LoanID, CustomerID);
+
+-- 8. Drop the Collateral column
+ALTER TABLE Loans DROP COLUMN Collateral;
+
+-- 9. Rename column Status to LoanStatus
+ALTER TABLE Loans CHANGE Status LoanStatus VARCHAR(10);
+
+-- 10. Rename column StartDate to LoanStartDate
+ALTER TABLE Loans CHANGE StartDate LoanStartDate DATE;
+
+-- Update Qerise (10)
+
+-- 1. Update loan amount for LoanID 201
+UPDATE Loans SET Amount = 2600000.00 WHERE LoanID = 201;
+
+-- 2. Mark LoanID 204 as Closed
+UPDATE Loans SET LoanStatus = 'Closed' WHERE LoanID = 204;
+
+-- 3. Change interest rate for LoanID 210
+UPDATE Loans SET InterestRate = 8.5 WHERE LoanID = 210;
+
+-- 4. Update EMI for LoanID 215
+UPDATE Loans SET EMI = 22000.00 WHERE LoanID = 215;
+
+-- 5. Add LoanPurpose for LoanID 217
+UPDATE Loans SET LoanPurpose = 'Medical Expenses' WHERE LoanID = 217;
+
+-- 6. Set LoanOfficer for LoanID 208
+UPDATE Loans SET LoanOfficer = 'Ravi Kumar' WHERE LoanID = 208;
+
+-- 7. Set ProcessingFee for all Car loans
+UPDATE Loans SET ProcessingFee = 5000.00 WHERE LoanType = 'Car';
+
+-- 8. Increase Amount by 5% for all Home loans
+UPDATE Loans SET Amount = Amount * 1.05 WHERE LoanType = 'Home';
+
+-- 9. Change BranchCode for LoanID 212
+UPDATE Loans SET BranchCode = 'SBI021' WHERE LoanID = 212;
+
+-- 10. Update tenure for LoanID 220
+UPDATE Loans SET TenureMonths = 48 WHERE LoanID = 220;
+
+-- Rename Querise (5)
+
+-- 1. Rename Loans table to BankLoans
+ALTER TABLE Loans RENAME TO BankLoans;
+
+-- 2. Rename BankLoans back to Loans
+ALTER TABLE BankLoans RENAME TO Loans;
+
+-- 3. Rename column LoanStatus back to Status
+ALTER TABLE Loans CHANGE LoanStatus Status VARCHAR(10);
+
+-- 4. Rename column LoanStartDate back to StartDate
+ALTER TABLE Loans CHANGE LoanStartDate StartDate DATE;
+
+-- 5. Rename LoanOfficer column to OfficerName
+ALTER TABLE Loans CHANGE LoanOfficer OfficerName VARCHAR(50);
+
+-- Delete Querise
+
+-- 1. Delete LoanID 220
+DELETE FROM Loans WHERE LoanID = 220;
+
+-- 2. Delete all Closed loans
+DELETE FROM Loans WHERE LoanStatus = 'Closed';
+
+-- 3. Delete all Personal loans below ₹2 lakh
+DELETE FROM Loans WHERE LoanType = 'Personal' AND Amount < 200000;
+
+-- 4. Delete all loans with tenure less than 36 months
+DELETE FROM Loans WHERE TenureMonths < 36;
+
+-- 5. Delete loans with InterestRate above 11%
+DELETE FROM Loans WHERE InterestRate > 11;
+ 
+
+--  Table-5: Branches
+
+CREATE TABLE Branches (
+    BranchCode VARCHAR(10) PRIMARY KEY,
+    BranchName VARCHAR(100),
+    IFSCCode VARCHAR(11),
+    MICRCode VARCHAR(10),
+    Address TEXT,
+    City VARCHAR(50),
+    State VARCHAR(50),
+    Contact VARCHAR(15),
+    ManagerName VARCHAR(100),
+    WorkingHours VARCHAR(50)
+);
+
+INSERT INTO Branches VALUES
+('SBI001', 'SBI Delhi Main Branch', 'SBIN000001', '110002001', 'Connaught Place, Delhi', 'Delhi', 'Delhi', '01123456789', 'Rajeev Khanna', '9 AM - 4 PM'),
+('SBI002', 'SBI Mumbai West Branch', 'SBIN000002', '400002002', 'Bandra, Mumbai', 'Mumbai', 'Maharashtra', '02245678901', 'Sonal Rane', '9 AM - 4 PM'),
+('SBI003', 'SBI Kolkata Branch', 'SBIN000003', '700002003', 'Salt Lake, Kolkata', 'Kolkata', 'West Bengal', '03312345678', 'Rakesh Roy', '9 AM - 4 PM'),
+('SBI004', 'SBI Chennai Branch', 'SBIN000004', '600002004', 'T Nagar, Chennai', 'Chennai', 'Tamil Nadu', '04423456789', 'Meena Nair', '9 AM - 4 PM'),
+('SBI005', 'SBI Bangalore Branch', 'SBIN000005', '560002005', 'MG Road, Bangalore', 'Bangalore', 'Karnataka', '08034567891', 'Anil Sinha', '9 AM - 4 PM'),
+('SBI006', 'SBI Hyderabad Branch', 'SBIN000006', '500002006', 'Banjara Hills, Hyderabad', 'Hyderabad', 'Telangana', '04067891234', 'Preeti Rao', '9 AM - 4 PM'),
+('SBI007', 'SBI Ahmedabad Branch', 'SBIN000007', '380002007', 'Navrangpura, Ahmedabad', 'Ahmedabad', 'Gujarat', '07945678912', 'Karan Patel', '9 AM - 4 PM'),
+('SBI008', 'SBI Surat Branch', 'SBIN000008', '395002008', 'Ring Road, Surat', 'Surat', 'Gujarat', '02612345678', 'Anjali Desai', '9 AM - 4 PM'),
+('SBI009', 'SBI Jaipur Branch', 'SBIN000009', '302002009', 'MI Road, Jaipur', 'Jaipur', 'Rajasthan', '01414567890', 'Ravi Sharma', '9 AM - 4 PM'),
+('SBI010', 'SBI Bhopal Branch', 'SBIN000010', '462002010', 'New Market, Bhopal', 'Bhopal', 'Madhya Pradesh', '07552678901', 'Neha Joshi', '9 AM - 4 PM'),
+('SBI011', 'SBI Lucknow Branch', 'SBIN000011', '226002011', 'Hazratganj, Lucknow', 'Lucknow', 'Uttar Pradesh', '05221234567', 'Saurabh Pandey', '9 AM - 4 PM'),
+('SBI012', 'SBI Kanpur Branch', 'SBIN000012', '208002012', 'Mall Road, Kanpur', 'Kanpur', 'Uttar Pradesh', '05122345678', 'Anita Yadav', '9 AM - 4 PM'),
+('SBI013', 'SBI Nagpur Branch', 'SBIN000013', '440002013', 'Sitabuldi, Nagpur', 'Nagpur', 'Maharashtra', '07122456789', 'Manoj Deshmukh', '9 AM - 4 PM'),
+('SBI014', 'SBI Amritsar Branch', 'SBIN000014', '143002014', 'GT Road, Amritsar', 'Amritsar', 'Punjab', '01832456789', 'Gurpreet Singh', '9 AM - 4 PM'),
+('SBI015', 'SBI Guwahati Branch', 'SBIN000015', '781002015', 'Zoo Road, Guwahati', 'Guwahati', 'Assam', '03612456789', 'Bipin Choudhary', '9 AM - 4 PM'),
+('SBI016', 'SBI Indore Branch', 'SBIN000016', '452002016', 'Rajwada, Indore', 'Indore', 'Madhya Pradesh', '07312456789', 'Isha Tripathi', '9 AM - 4 PM'),
+('SBI017', 'SBI Kota Branch', 'SBIN000017', '324002017', 'Chambal Road, Kota', 'Kota', 'Rajasthan', '07442456789', 'Deepak Verma', '9 AM - 4 PM'),
+('SBI018', 'SBI Raipur Branch', 'SBIN000018', '492002018', 'Pandri, Raipur', 'Raipur', 'Chhattisgarh', '07712456789', 'Shweta Chauhan', '9 AM - 4 PM'),
+('SBI019', 'SBI Agra Branch', 'SBIN000019', '282002019', 'Sadar Bazar, Agra', 'Agra', 'Uttar Pradesh', '05622456789', 'Abhay Dixit', '9 AM - 4 PM'),
+('SBI020', 'SBI Pune Branch', 'SBIN000020', '411002020', 'Kalyani Nagar, Pune', 'Pune', 'Maharashtra', '02024567890', 'Ajay Pawar', '9 AM - 4 PM');
+
+-- View all branches located in Maharashtra
+SELECT * FROM Branches;
+
+-- Remove all records from Branches
+TRUNCATE TABLE Branches;
+
+-- Drop the entire Branches table
+DROP TABLE Branches;
+
+SELECT * FROM Branches;
+
+SELECT BranchName, City FROM Branches;
+
+SELECT * FROM Branches WHERE State = 'Maharashtra';
+
+SELECT BranchCode, ManagerName FROM Branches WHERE City = 'Delhi';
+
+SELECT COUNT(*) FROM Branches WHERE State = 'Uttar Pradesh';
+
+SELECT DISTINCT State FROM Branches;
+
+SELECT BranchName FROM Branches WHERE WorkingHours = '9 AM - 4 PM';
+
+SELECT * FROM Branches WHERE Contact LIKE '07%';
+
+SELECT * FROM Branches ORDER BY City ASC;
+
+SELECT * FROM Branches ORDER BY BranchCode DESC;
+
+SELECT BranchName, Contact FROM Branches WHERE MICRCode LIKE '38%';
+
+SELECT * FROM Branches WHERE City IN ('Mumbai', 'Delhi', 'Kolkata');
+
+SELECT * FROM Branches WHERE State = 'Gujarat' LIMIT 2;
+
+SELECT * FROM Branches WHERE BranchName LIKE '%Main%';
+
+SELECT City, COUNT(*) AS BranchCount FROM Branches GROUP BY City;
+
+SELECT State, COUNT(*) FROM Branches GROUP BY State ORDER BY COUNT(*) DESC;
+
+SELECT * FROM Branches WHERE CHAR_LENGTH(ManagerName) > 10;
+
+SELECT BranchName, LENGTH(Address) AS AddressLength FROM Branches;
+
+SELECT * FROM Branches WHERE BranchCode BETWEEN 'SBI005' AND 'SBI010';
+
+SELECT * FROM Branches WHERE City = 'Pune' AND State = 'Maharashtra';
+
+-- ALTER Queries (10)
+ALTER TABLE Branches ADD Email VARCHAR(100);
+
+ALTER TABLE Branches ADD EstablishedYear INT;
+
+ALTER TABLE Branches MODIFY Contact VARCHAR(20);
+
+ALTER TABLE Branches DROP COLUMN WorkingHours;
+
+ALTER TABLE Branches RENAME COLUMN MICRCode TO MICR_Code;
+
+ALTER TABLE Branches ADD COLUMN IsActive BOOLEAN DEFAULT TRUE;
+
+ALTER TABLE Branches CHANGE Address BranchAddress TEXT;
+
+ALTER TABLE Branches ADD COLUMN BranchType VARCHAR(50);
+
+ALTER TABLE Branches ALTER COLUMN City SET DEFAULT 'Unknown';
+
+ALTER TABLE Branches RENAME TO BankBranches;
+
+-- UPDATE Queries (10)
+UPDATE Branches SET ManagerName = 'Rahul Mehta' WHERE BranchCode = 'SBI001';
+
+UPDATE Branches SET City = 'New Delhi' WHERE BranchCode = 'SBI001';
+
+UPDATE Branches SET WorkingHours = '10 AM - 5 PM' WHERE State = 'Gujarat';
+
+UPDATE Branches SET Contact = '01100000000' WHERE City = 'Delhi';
+
+UPDATE Branches SET State = 'MP' WHERE State = 'Madhya Pradesh';
+
+UPDATE Branches SET ManagerName = UPPER(ManagerName);
+
+UPDATE Branches SET BranchName = 'SBI Pune Kalyani Nagar Branch' WHERE BranchCode = 'SBI020';
+
+UPDATE Branches SET MICRCode = '000000000' WHERE City = 'Surat';
+
+UPDATE Branches SET Contact = NULL WHERE BranchCode = 'SBI999';
+
+UPDATE Branches SET BranchType = 'Urban' WHERE City IN ('Delhi', 'Mumbai');
+
+-- RENAME Queries (5)
+ALTER TABLE Branches RENAME COLUMN BranchName TO NameOfBranch;
+
+ALTER TABLE Branches RENAME COLUMN ManagerName TO BranchManager;
+
+ALTER TABLE Branches RENAME TO SBI_Branches;
+
+ALTER TABLE SBI_Branches RENAME TO Branches;
+
+ALTER TABLE Branches RENAME COLUMN IFSCCode TO IFSC_Code;
+
+-- DELETE Queries (5)
+DELETE FROM Branches WHERE BranchCode = 'SBI020';
+
+DELETE FROM Branches WHERE State = 'Punjab';
+
+DELETE FROM Branches WHERE City = 'Kota' AND State = 'Rajasthan';
+
+DELETE FROM Branches WHERE BranchName LIKE '%Test%';
+
+DELETE FROM Branches WHERE MICRCode IS NULL;
+
+
